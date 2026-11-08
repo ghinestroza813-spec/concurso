@@ -8,12 +8,13 @@ App de estudo e simulados para concursos de Porto Velho/RO, começando pelo carg
 - **Estudar**: assuntos do edital com aula resumida.
 - **Meus erros** e **desempenho** por matéria.
 - **Concursos**: busca de concursos de Porto Velho (dados conferidos à mão, com data de conferência).
+- **Trilha PRF** (`app/prf.html`): 118 itens originais Certo/Errado no estilo Cebraspe, com treino, simulado (+1/−1) e resumo do Edital nº 1/2021. O PRF ainda não tem edital novo; o material pode mudar.
 - Modo claro e escuro, menu lateral, funciona no celular.
 
 ## Estrutura
 | Pasta | O que é |
 |---|---|
-| `app/` | O app de estudo. Um único `index.html`, sem build. Salva o progresso no navegador (visitante). |
+| `app/` | O app de estudo: `index.html` (Porto Velho) e `prf.html` (PRF). Sem build. Salva o progresso no navegador (visitante). |
 | `backend/` | Servidor de contas (cadastro, login, recuperação de senha, painel admin). Node 22, sem dependências. Veja `backend/README.md`. |
 | `docs/` | Guia de lançamento. |
 

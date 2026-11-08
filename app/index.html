@@ -269,6 +269,7 @@ details.pol .policy{padding:0 18px 18px}
       <a href="#inicio" data-v="inicio">Início</a>
       <a href="#bancas" data-v="bancas">Bancas</a>
       <a href="#concursos" data-v="concursos">Concursos</a>
+      <a href="prf.html">PRF (Polícia Rodoviária Federal)</a>
       <a href="#estudar" data-v="estudar">Estudar</a>
       <a href="#simulado" data-v="simulado">Simulado</a>
       <a href="#treino" data-v="treino">Treino</a>
@@ -1892,6 +1893,11 @@ Object.assign(ACT, { admReload(){ ADM = null; loadAdmin(); }, admCsv(){ admCsv()
 /* ===== Buscador de concursos de Porto Velho ===== */
 /* Dados conferidos na data em "conf". Datas e valores de notícias devem ser confirmados no edital oficial antes de se inscrever. */
 const CONC = [
+  {id:'prf', nome:'Polícia Rodoviária Federal (PRF)', ref:'Sem edital novo. Último: Edital nº 1/2021', banca:'A definir', esc:['superior'], aguardando:true,
+   cargos:'Policial Rodoviário Federal (qualquer curso superior) e, no pedido em análise, Agente Administrativo', vagas:'Pedido de 533 vagas em análise (269 de policial e 264 de agente administrativo), sem autorização',
+   salario:'Noticiado: cerca de R$ 12,2 mil (policial) e R$ 5,5 mil (agente administrativo)', taxa:'A definir',
+   insc:null, prova:'A definir', estudar:true, estudarUrl:'prf.html', conf:'2026-11-08', fonte:'Dados de notícia (Aprova Concursos, página de 05/10/2026). Não há edital nem banca definidos. O material de estudo segue o Edital 1/2021 (Cebraspe).',
+   links:[{t:'Notícia com a situação', u:'https://www.aprovaconcursos.com.br/noticias/concurso-prf/'}]},
   {id:'semed', nome:'Prefeitura de Porto Velho · Educação (Semed)', ref:'Edital 24/2026 (retificado pelo Edital 27/2026)', banca:'IBGP', esc:['medio','superior'],
    cargos:'Agente de Secretaria Escolar (médio); Orientador Educacional, Supervisor Educacional e Professor Nível II (superior)', vagas:'430 vagas, entre imediatas e cadastro de reserva',
    salario:'R$ 1.820,78 a R$ 3.847,97 (Agente de Secretaria Escolar: R$ 1.820,78)', taxa:'Veja no edital',
@@ -1919,6 +1925,7 @@ const noAcc = t => String(t||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]
 const diaBR = d => d.split('-').reverse().join('/');
 function concStatus(c){
   if(c.confirmar) return {k:'conf', t:'Confirme a situação', o:3};
+  if(c.aguardando) return {k:'wait', t:'Aguardando edital', o:2};
   const ini = new Date(c.insc[0]+'T00:00:00-04:00').getTime(), fim = new Date(c.insc[1]+'T23:59:59-04:00').getTime(), agora = Date.now();
   if(agora < ini) return {k:'soon', t:'Inscrições em breve', o:1};
   if(agora <= fim){ const d = Math.ceil((fim-agora)/86400000); return {k:'open', t:'Inscrições abertas · '+(d<=1?'termina hoje ou amanhã':'faltam '+d+' dias'), o:0}; }
@@ -1931,26 +1938,26 @@ function concFiltered(){
     if(CF.esc && !c.esc.includes(CF.esc)) return false;
     if(CF.banca && c.banca!==CF.banca) return false;
     if(CF.st==='open' && st.k!=='open') return false;
-    if(CF.st==='soon' && st.k!=='soon') return false;
+    if(CF.st==='soon' && st.k!=='soon' && st.k!=='wait') return false;
     if(CF.st==='closed' && st.k!=='closed' && st.k!=='conf') return false;
     if(q && !noAcc([c.nome,c.ref,c.banca,c.cargos].join(' ')).includes(q)) return false;
     return true;
   }).sort((a,b)=>concStatus(a).o-concStatus(b).o);
 }
 function concCard(c){
-  const st = concStatus(c), cls = st.k==='open' ? 'on' : st.k==='soon' ? 'soon' : 'off';
+  const st = concStatus(c), cls = st.k==='open' ? 'on' : (st.k==='soon' || st.k==='wait') ? 'soon' : 'off';
   const links = c.links.map(l=>`<a class="btn sm" href="${esc(l.u)}" target="_blank" rel="noopener noreferrer">${esc(l.t)} ↗</a>`).join('');
   const dl = (k,v)=>`<div><dt class="eyebrow">${k}</dt><dd style="margin:2px 0 0">${v}</dd></div>`;
   return `<article class="card stack-s">
     <div class="row" style="justify-content:space-between;align-items:flex-start"><div style="min-width:0"><h3>${esc(c.nome)}</h3><p class="muted" style="font-size:14px">${esc(c.ref)} · banca <b>${esc(c.banca)}</b></p></div><span class="badge ${cls}">${esc(st.t)}</span></div>
-    <div class="row" style="gap:6px">${c.esc.map(e=>`<span class="badge soon">${ESC_N[e]}</span>`).join('')}${c.estudar?'<span class="badge on">Seu concurso</span>':''}</div>
+    <div class="row" style="gap:6px">${c.esc.map(e=>`<span class="badge soon">${ESC_N[e]}</span>`).join('')}${c.id==='semed'?'<span class="badge on">Seu concurso</span>':''}</div>
     <dl style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 20px;margin:6px 0 0">
       ${dl('Cargos',esc(c.cargos))}${dl('Vagas',esc(c.vagas))}${dl('Salário',esc(c.salario))}${dl('Taxa de inscrição',esc(c.taxa))}
-      ${dl('Inscrições',diaBR(c.insc[0])+' a '+diaBR(c.insc[1]))}${dl('Prova objetiva',esc(c.prova))}
+      ${dl('Inscrições',c.insc?diaBR(c.insc[0])+' a '+diaBR(c.insc[1]):'A definir')}${dl('Prova objetiva',esc(c.prova))}
     </dl>
     ${c.confirmar?'<div class="note"><b>Confira antes de contar com este concurso</b>As notícias divergem sobre prorrogação de inscrições e sobre a data da prova. Veja o site da banca.</div>':''}
     <p class="muted" style="font-size:13px">Conferido em ${diaBR(c.conf)}. ${esc(c.fonte)}</p>
-    <div class="row">${c.estudar?'<a class="btn pri sm" href="#estudar">Estudar para este concurso</a>':''}${links}</div>
+    <div class="row">${c.estudar?`<a class="btn pri sm" href="${esc(c.estudarUrl||'#estudar')}">Estudar para este concurso</a>`:''}${links}</div>
   </article>`;
 }
 function concList(){
@@ -1965,7 +1972,7 @@ function vConcursos(){
   <div class="card" style="margin-bottom:20px"><div class="form" style="max-width:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px">
     <div class="field"><label for="cq">Buscar</label><input class="inp" id="cq" type="search" data-cf="q" value="${esc(CF.q)}" placeholder="Ex.: secretaria, saúde, IBGP" maxlength="60" autocomplete="off"></div>
     ${sel('cesc','esc','Escolaridade',[['','Todas'],['fundamental','Fundamental'],['medio','Médio / técnico'],['superior','Superior']])}
-    ${sel('cst','st','Situação',[['','Todas'],['open','Inscrições abertas'],['soon','Em breve'],['closed','Encerradas ou a confirmar']])}
+    ${sel('cst','st','Situação',[['','Todas'],['open','Inscrições abertas'],['soon','Em breve ou aguardando edital'],['closed','Encerradas ou a confirmar']])}
     ${sel('cban','banca','Banca',[['','Todas']].concat(bancas.map(b=>[b,b])))}
   </div></div>
   <div id="clist">${concList()}</div>`;

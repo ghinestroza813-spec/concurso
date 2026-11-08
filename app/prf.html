@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Treino e simulado para a prova objetiva da Polícia Rodoviária Federal, com itens Certo ou Errado no estilo Cebraspe.">
+<title>Gabarito Mamoré · PRF</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: uma coluna de trabalho, estilo folha de respostas. Bolhas A-E como no cartão da prova, tinta azul/preta. */
+:root{
+  --bg:#f3f5f9; --surface:#ffffff; --ink:#111a33; --muted:#566079; --line:#d8deeb;
+  --accent:#2340d9; --accent-ink:#ffffff; --accent-soft:#e5e9fc;
+  --ok:#0f7a58; --ok-soft:#d9f2e8; --bad:#be301d; --bad-soft:#fbe2de; --warn:#9a5600; --warn-soft:#fcebcb;
+  --f-display:'Geist','Segoe UI',system-ui,sans-serif;
+  --f-body:'Geist','Segoe UI',system-ui,sans-serif;
+  --f-mono:'Geist Mono',ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0c1224; --surface:#151d36; --ink:#e8ecf8; --muted:#9aa5c2; --line:#27304d;
+    --accent:#8296ff; --accent-ink:#0c1224; --accent-soft:#1e2750;
+    --ok:#46d3a1; --ok-soft:#12372d; --bad:#ff8c7a; --bad-soft:#40201b; --warn:#f2b45b; --warn-soft:#3a2b10;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0c1224; --surface:#151d36; --ink:#e8ecf8; --muted:#9aa5c2; --line:#27304d;
+  --accent:#8296ff; --accent-ink:#0c1224; --accent-soft:#1e2750;
+  --ok:#46d3a1; --ok-soft:#12372d; --bad:#ff8c7a; --bad-soft:#40201b; --warn:#f2b45b; --warn-soft:#3a2b10;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);
+  padding-block:18px 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1040px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);line-height:1.15;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(28px,5vw,40px);font-weight:700}
+h2{font-size:22px;font-weight:700}
+h3{font-size:17px;font-weight:600}
+p{margin:0}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.eyebrow{font:600 12px var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:28px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand b{font:700 26px/1 var(--f-display);letter-spacing:-.045em}
+.logo{display:block;flex:none}
+.logo .st{fill:none;stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round}
+.logo .fl{fill:var(--ink);stroke:var(--ink);stroke-linejoin:round}
+.logo .ac{fill:var(--accent);stroke:var(--accent);stroke-linejoin:round}
+.logo .ck{fill:none;stroke:var(--accent-ink);stroke-linecap:round;stroke-linejoin:round}
+.brand span{font:500 12px var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.theme{gap:8px;font-size:14px}
+.theme svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.menu-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:transparent;color:var(--ink);cursor:pointer;flex:none}
+.menu-btn:hover{background:var(--line)}
+.menu-btn svg{display:block}
+.top .brand{flex:1;min-width:0}
+.tabs{position:fixed;top:0;left:0;bottom:0;width:min(280px,84vw);z-index:60;display:flex;flex-direction:column;gap:4px;padding:20px 14px;background:var(--bg);border-right:1px solid var(--line);box-shadow:4px 0 24px rgba(0,0,0,.18);overflow-y:auto;transform:translateX(-105%);visibility:hidden;transition:transform .22s ease,visibility 0s linear .22s}
+body.menu-open .tabs{transform:none;visibility:visible;transition:transform .22s ease}
+.tabs .tabs-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-weight:700}
+.scrim{position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.45)}
+.scrim[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){ .tabs{transition:none} }
+.tabs a{padding:12px 14px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:600;font-size:16px}
+.tabs a:hover{color:var(--ink)}
+.tabs a[aria-current=page]{background:var(--ink);color:var(--bg)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;border-radius:10px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:600;text-decoration:none}
+.btn:hover{border-color:var(--muted)}
+.btn.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.pri:hover{filter:brightness(1.08)}
+.btn.sm{padding:7px 12px;font-size:14px}
+.btn.danger{color:var(--bad);border-color:var(--bad)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px}
+.stack{display:flex;flex-direction:column;gap:20px}
+.stack-s{display:flex;flex-direction:column;gap:10px}
+
+/* início */
+.hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px 40px;align-items:end;margin-bottom:36px}
+.hero .lead{font-size:18px;color:var(--muted);max-width:52ch;margin-top:12px}
+.count{border-left:4px solid var(--ink);padding-left:20px}
+.count .big{font:700 clamp(64px,11vw,104px)/0.95 var(--f-display);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.count .lbl{font-weight:600;margin-top:6px}
+.count .sub{color:var(--muted);font-size:14px}
+.tbl-wrap{overflow-x:auto}
+table.tbl{width:100%;border-collapse:collapse;min-width:420px}
+.tbl th{font:600 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 12px;border-bottom:2px solid var(--ink)}
+.tbl td{padding:11px 12px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.tbl td.num,.tbl th.num{text-align:right}
+.tbl tfoot td{font-weight:700;border-bottom:0}
+.sec{margin-top:36px}
+.sec>h2{margin-bottom:14px}
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.act{display:flex;flex-direction:column;gap:6px;padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--surface);text-decoration:none;color:inherit;cursor:pointer;text-align:left}
+.act:hover{border-color:var(--ink)}
+.act b{font:600 18px var(--f-display)}
+.act span{color:var(--muted);font-size:15px}
+.note{border-left:4px solid var(--warn);background:var(--warn-soft);padding:14px 16px;border-radius:0 10px 10px 0;font-size:15px}
+.note b{display:block;margin-bottom:2px}
+
+/* questão */
+.qhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin-bottom:12px}
+.qn{font:600 13px var(--f-mono);letter-spacing:.06em;text-transform:uppercase}
+.qm{font:500 13px var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.txt-box{border-left:3px solid var(--line);padding:2px 0 2px 16px;margin:0 0 16px;color:var(--muted);font-size:17px;max-width:68ch}
+.txt-box .eyebrow{display:block;margin-bottom:4px}
+.enun{font-size:18px;font-weight:500;margin-bottom:18px;max-width:68ch}
+.alts{display:flex;flex-direction:column;gap:10px}
+.alt{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;cursor:pointer}
+.alt:hover{border-color:var(--muted)}
+.alt[data-lock]{cursor:default}
+.bub{flex:none;width:30px;height:30px;border-radius:50%;border:2px solid var(--muted);display:grid;place-items:center;font:600 13px var(--f-mono);color:var(--muted);margin-top:-1px}
+.alt .t{padding-top:2px;min-width:0}
+.alt.sel{border-color:var(--ink);background:var(--accent-soft)}
+.alt.sel .bub{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.alt.ok{border-color:var(--ok);background:var(--ok-soft)}
+.alt.ok .bub{background:var(--ok);border-color:var(--ok);color:var(--surface)}
+.alt.bad{border-color:var(--bad);background:var(--bad-soft)}
+.alt.bad .bub{background:var(--bad);border-color:var(--bad);color:var(--surface)}
+.alt.dim{opacity:.62}
+.fb{margin-top:18px;padding:14px 16px;border-radius:10px;background:var(--bg);border:1px solid var(--line);max-width:68ch}
+.fb b{display:block;margin-bottom:4px}
+.fb.good b{color:var(--ok)} .fb.wrong b{color:var(--bad)} .fb.none b{color:var(--warn)}
+.qnav{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+
+/* simulado */
+.simbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px;padding:10px 0 14px;margin-bottom:6px}
+.timer small{display:block;font:600 11px var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.timer b{font:600 30px/1.1 var(--f-mono);font-variant-numeric:tabular-nums}
+.prog{font-size:15px;color:var(--muted)} .prog b{color:var(--ink);font-family:var(--f-mono)}
+.simwrap{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:20px;align-items:start}
+.navgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(34px,1fr));gap:6px}
+.navgrid button{aspect-ratio:1;border-radius:6px;border:1px solid var(--line);background:var(--surface);font:500 12px var(--f-mono);cursor:pointer;padding:0;position:relative}
+.navgrid button.a{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.navgrid button.m::after{content:"";position:absolute;top:2px;right:2px;width:7px;height:7px;border-radius:50%;background:var(--warn)}
+.navgrid button.c{outline:3px solid var(--accent);outline-offset:1px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted);margin-top:14px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid var(--line);vertical-align:-1px;margin-right:5px}
+.legend i.a{background:var(--ink);border-color:var(--ink)} .legend i.m{background:var(--warn);border-radius:50%;border-color:var(--warn)}
+aside.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 86px)}
+.confirm{margin-top:18px;padding:16px;border:1px solid var(--warn);background:var(--warn-soft);border-radius:10px}
+.confirm p{margin-bottom:12px}
+
+/* resultado */
+.score{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px}
+.score .n{font:700 clamp(56px,10vw,88px)/1 var(--f-display);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.score .of{font:500 22px var(--f-mono);color:var(--muted)}
+.chip{display:inline-block;padding:4px 12px;border-radius:99px;font-weight:700;font-size:14px}
+.chip.ok{background:var(--ok-soft);color:var(--ok)} .chip.bad{background:var(--bad-soft);color:var(--bad)}
+.bars{display:flex;flex-direction:column;gap:14px}
+.bar .h{display:flex;justify-content:space-between;gap:12px;font-size:15px;margin-bottom:5px}
+.bar .h span:last-child{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.track{height:12px;border-radius:99px;background:var(--line);position:relative;overflow:hidden}
+.fill{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:99px}
+.fill.low{background:var(--warn)}
+.rev{display:flex;flex-direction:column;gap:8px}
+details.r{border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+details.r>summary{cursor:pointer;padding:12px 14px;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;list-style:none}
+details.r>summary::-webkit-details-marker{display:none}
+details.r[open]>summary{border-bottom:1px solid var(--line)}
+details.r .body{padding:18px 14px}
+.tag{font:600 12px var(--f-mono);padding:2px 8px;border-radius:6px}
+.tag.ok{background:var(--ok-soft);color:var(--ok)} .tag.bad{background:var(--bad-soft);color:var(--bad)} .tag.none{background:var(--warn-soft);color:var(--warn)}
+.picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.hist{display:flex;flex-direction:column}
+.hist .li{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.empty{padding:28px;border:1px dashed var(--line);border-radius:12px;color:var(--muted)}
+
+/* cadastro, conta, bancas */
+.form{display:flex;flex-direction:column;gap:18px;max-width:560px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-weight:600;font-size:15px}
+.field .hint{font-size:13px;color:var(--muted)}
+.inp{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%}
+.inp:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+textarea.inp{min-height:200px;font-family:var(--f-mono);font-size:12px}
+.chk{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45;cursor:pointer}
+.chk input{margin-top:3px;width:18px;height:18px;flex:none;accent-color:var(--accent)}
+.err{color:var(--bad);background:var(--bad-soft);border-radius:8px;padding:10px 12px;font-size:15px}
+.banner{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;padding:12px 16px;border:1px solid var(--line);border-radius:10px;background:var(--surface);margin-bottom:24px;font-size:15px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:min(92vw,520px);background:var(--ink);color:var(--bg);padding:12px 16px;border-radius:10px;font-size:15px;z-index:20}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.bcard{display:flex;flex-direction:column;gap:8px;padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--surface);text-align:left;cursor:pointer}
+.bcard:hover{border-color:var(--ink)}
+.bcard b{font:700 22px var(--f-display);letter-spacing:-.03em}
+.bcard span.s{color:var(--muted);font-size:14px}
+.chip.on{background:var(--ok-soft);color:var(--ok)}
+.chip.soon{background:var(--warn-soft);color:var(--warn)}
+.chip{align-self:flex-start;font-size:12px;padding:3px 10px}
+.rules{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.rules li{display:flex;gap:8px;align-items:center;color:var(--muted)}
+.rules li::before{content:"○";font-family:var(--f-mono)}
+.rules li.ok{color:var(--ok)} .rules li.ok::before{content:"✓"}
+.soc{display:flex;flex-direction:column;gap:10px}
+.soc .btn[disabled]{justify-content:space-between;width:100%}
+.sep{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:14px}
+.sep::before,.sep::after{content:"";height:1px;background:var(--line);flex:1}
+.badge{display:inline-block;padding:2px 9px;border-radius:99px;font:600 12px var(--f-mono);white-space:nowrap;vertical-align:1px}
+.badge.soon{background:var(--accent-soft);color:var(--accent)} .badge.off{background:var(--warn-soft);color:var(--warn)}
+.aulad{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+.aulad>summary{cursor:pointer;font-weight:600;color:var(--accent)}
+.aula{margin-top:12px;max-width:68ch;font-size:16px}
+.topic .aula p{margin:0 0 12px;color:var(--ink);font-size:16px}
+.aula ul{margin:0 0 12px;padding-left:20px}
+.aula li{margin-bottom:6px}
+.tlink{font:600 17px/1.3 var(--f-body);color:var(--ink);background:none;border:0;padding:0;text-align:left;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px}
+.tlink:hover{text-decoration-color:var(--ink)}
+.badge.on{background:var(--ok-soft);color:var(--ok)}
+.tsec{margin-top:30px}
+.tsec>h2{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.tsec .num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--ink);color:var(--bg);font:600 14px var(--f-mono)}
+.aula-p{max-width:68ch;margin-bottom:14px}
+.tsec .aula{max-width:68ch;font-size:17px}
+.tsec .aula p{margin:0 0 14px}
+.tsec .aula ul{margin:0 0 14px;padding-left:20px}
+.tsec .aula li{margin-bottom:8px}
+.topics{display:flex;flex-direction:column;gap:10px}
+.topic{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.topic.done{background:var(--ok-soft);border-color:var(--ok)}
+.topic b{font-weight:600}
+.topic p{color:var(--muted);font-size:15px;margin-top:4px;max-width:68ch}
+.tick{flex:none;width:28px;height:28px;border-radius:8px;border:2px solid var(--muted);background:var(--bg);cursor:pointer;display:grid;place-items:center;font:700 16px var(--f-mono);color:var(--surface);padding:0}
+.topic.done .tick{background:var(--ok);border-color:var(--ok)}
+.policy h2{font-size:18px;margin:26px 0 8px}
+.policy p,.policy li{max-width:68ch}
+.policy ul{margin:8px 0;padding-left:20px}
+details.pol{border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-top:20px;max-width:560px}
+details.pol>summary{cursor:pointer;padding:14px 18px;font-weight:600}
+details.pol .policy{padding:0 18px 18px}
+
+.enun,.txt-box{white-space:pre-line}
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr}
+  .acts{grid-template-columns:1fr}
+  .simwrap{grid-template-columns:1fr}
+  aside.side{position:static}
+}
+@media (prefers-reduced-motion:no-preference){ .fill{transition:width .5s ease} }
+</style>
+<style>table.tbl{min-width:0} .tbl th,.tbl td{padding-left:8px;padding-right:8px} @media (max-width:520px){.tbl th{letter-spacing:.02em;font-size:11px}}</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <button class="menu-btn" id="menu-open" type="button" data-act="menu" aria-label="Abrir menu" aria-controls="menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><circle cx="10" cy="3.5" r="2"/><circle cx="10" cy="10" r="2"/><circle cx="10" cy="16.5" r="2"/></svg></button>
+    <div class="brand">
+      
+      <b>Gabarito Mamoré</b><span>PRF</span></div>
+    <nav class="tabs" id="menu" aria-label="Seções">
+      <div class="tabs-h"><span>Menu</span><button class="menu-btn" type="button" data-act="menu" aria-label="Fechar menu">✕</button></div>
+      <a href="#inicio" data-v="inicio">Início</a>
+      <a href="#estudar" data-v="estudar">Estudar</a>
+      <a href="#treino" data-v="treino">Treino</a>
+      <a href="#simulado" data-v="simulado">Simulado</a>
+      <a href="#desempenho" data-v="desempenho">Desempenho</a>
+      <a href="./">← Gabarito Porto Velho</a>
+    </nav>
+    <button class="btn sm theme" id="theme" data-act="theme" type="button"></button>
+  </header>
+  <main id="root"></main>
+  <div class="scrim" id="scrim" data-act="menu" hidden></div>
+  <div id="toast" class="toast" role="status" hidden></div>
+</div>
+<script>
+/* ===== Matérias do edital PRF 2021 (Cebraspe), por bloco ===== */
+const BLOCOS = {1:'Bloco I', 2:'Bloco II', 3:'Bloco III'};
+const MAT = {
+  pt:{n:'Língua Portuguesa', b:1}, rl:{n:'Raciocínio Lógico-Matemático', b:1}, inf:{n:'Informática', b:1}, fis:{n:'Física', b:1},
+  etc:{n:'Ética e Cidadania', b:1}, geo:{n:'Geopolítica', b:1}, ing:{n:'Língua Inglesa', b:1},
+  tra:{n:'Legislação de Trânsito', b:2},
+  adm:{n:'Direito Administrativo', b:3}, con:{n:'Direito Constitucional', b:3}, pen:{n:'Direito Penal', b:3},
+  ppe:{n:'Direito Processual Penal', b:3}, les:{n:'Legislação Especial', b:3}, dh:{n:'Direitos Humanos', b:3}
+};
+const T = {
+  p1:'A pressa é uma das causas mais frequentes de acidentes nas rodovias brasileiras. O motorista que ultrapassa em local proibido, que não respeita a distância de segurança ou que dirige cansado raramente age por maldade; age, quase sempre, por acreditar que poupará alguns minutos. Entretanto, esses minutos, quando existem, custam caro: segundo especialistas, a velocidade excessiva aumenta tanto a probabilidade de uma colisão quanto a gravidade de suas consequências. Por isso, campanhas educativas, embora necessárias, não bastam, sendo preciso que a fiscalização seja constante e visível.',
+  i1:'Road accidents remain one of the leading causes of death among young adults worldwide. Studies indicate that most crashes are caused by human error, such as speeding, distracted driving and driving under the influence of alcohol. Governments have therefore invested in stricter enforcement and public awareness campaigns.'
+};
+/* Q(matéria, gabarito 'C'|'E', enunciado, explicação, texto?) */
+let _n = 0;
+const Q = (m, g, e, x, t) => ({id:'prf'+(++_n), m, g:g==='C'?1:0, e, x, t});
+const QB = [
+/* ---- Língua Portuguesa ---- */
+Q('pt','E','No trecho “raramente age por maldade”, o advérbio “raramente” poderia ser substituído por “nunca” sem alterar o sentido do texto.','“Raramente” admite exceções; “nunca” é absoluto. A troca muda o sentido.','p1'),
+Q('pt','C','A palavra “Entretanto” poderia ser substituída por “No entanto” sem prejuízo da correção gramatical e do sentido do texto.','Ambas são locuções ou conjunções adversativas e exprimem oposição à ideia anterior.','p1'),
+Q('pt','C','No trecho “esses minutos, quando existem, custam caro”, a oração “quando existem” traz ideia de condição, pois o texto admite que os minutos poupados podem nem existir.','“Quando existem” equivale a “se existirem”: valor condicional, não apenas temporal.','p1'),
+Q('pt','C','As vírgulas que isolam “embora necessárias” em “campanhas educativas, embora necessárias, não bastam” justificam-se por isolarem uma expressão de valor concessivo intercalada.','Orações ou expressões adverbiais intercaladas são isoladas por vírgulas. Aqui, “embora necessárias” é concessiva reduzida.','p1'),
+Q('pt','E','Depreende-se do texto que as campanhas educativas devem ser abandonadas em favor da fiscalização.','O texto diz que as campanhas são necessárias, mas não bastam. Defende somar a fiscalização, não substituir.','p1'),
+Q('pt','C','Em “a velocidade excessiva aumenta tanto a probabilidade de uma colisão”, “a velocidade excessiva” exerce a função de sujeito do verbo “aumenta”.','O verbo concorda com “velocidade” (3ª pessoa do singular), que pratica a ação.','p1'),
+Q('pt','E','Estaria gramaticalmente correta a frase “Haviam muitos veículos parados no acostamento.”','“Haver” no sentido de “existir” é impessoal e fica no singular: “Havia muitos veículos”.'),
+Q('pt','E','Estaria correto o emprego do acento indicativo de crase em “Os agentes chegaram à pé ao local.”','Não há crase antes de palavra masculina (“a pé”). Só ocorre em casos como “à moda de”, com palavra masculina subentendida.'),
+Q('pt','E','De acordo com o Manual de Redação da Presidência da República, “Atenciosamente,” é o fecho adequado às comunicações dirigidas a autoridades de hierarquia superior à do remetente.','Para autoridades superiores, usa-se “Respeitosamente,”. “Atenciosamente,” é para autoridades de mesma hierarquia ou inferiores.'),
+Q('pt','C','Segundo o Manual de Redação da Presidência da República, o memorando é a modalidade de comunicação entre unidades administrativas de um mesmo órgão.','Memorando: comunicação interna. Ofício: comunicação com outros órgãos ou com particulares.'),
+/* ---- Raciocínio Lógico-Matemático ---- */
+Q('rl','E','Um capital de R$ 2.000,00 aplicado a juros compostos de 10% ao ano gera, após 2 anos, um montante de R$ 2.400,00.','Em juros compostos, o montante é 2.000 × 1,1 × 1,1 = 2.420. O valor de R$ 2.400,00 resultaria de juros simples.'),
+Q('rl','E','Em uma progressão aritmética de primeiro termo 3 e razão 4, o décimo termo é 43.','a₁₀ = 3 + 9 × 4 = 39. O número 43 é o 11º termo.'),
+Q('rl','E','A soma dos quatro primeiros termos de uma progressão geométrica de primeiro termo 2 e razão 3 é 72.','2 + 6 + 18 + 54 = 80.'),
+Q('rl','E','Se 6 agentes fiscalizam determinado trecho em 5 dias, mantida a mesma produtividade por agente, 10 agentes fiscalizariam esse mesmo trecho em 4 dias.','Grandezas inversamente proporcionais: 6 × 5 = 30 agentes-dia; 30 ÷ 10 = 3 dias, e não 4.'),
+Q('rl','E','Um aumento de 20% seguido de um desconto de 20% sobre o novo valor resulta no valor original.','1,2 × 0,8 = 0,96. O resultado fica 4% abaixo do original. Os percentuais incidem sobre bases diferentes.'),
+Q('rl','E','As raízes da equação x² − 5x + 6 = 0 são −2 e −3.','A soma das raízes é 5 e o produto é 6. Logo, as raízes são 2 e 3, ambas positivas.'),
+Q('rl','E','A média aritmética dos números 6, 8, 10 e 14 é igual a 9.','(6 + 8 + 10 + 14) ÷ 4 = 38 ÷ 4 = 9,5.'),
+Q('rl','C','Se o conjunto A tem 12 elementos, o conjunto B tem 9 e a interseção entre eles tem 4, então a união de A e B tem 17 elementos.','n(A∪B) = 12 + 9 − 4 = 17.'),
+Q('rl','E','Ao lançar uma vez um dado honesto de seis faces, a probabilidade de sair um número par maior que 2 é igual a 1/2.','Os favoráveis são 4 e 6: 2 em 6 = 1/3. A probabilidade de sair par, sem restrição, é que seria 1/2.'),
+Q('rl','C','A função f(x) = 2x + 3 é crescente e seu gráfico intercepta o eixo das ordenadas no ponto (0, 3).','Coeficiente angular positivo (2) indica função crescente. Em x = 0, f(0) = 3.'),
+/* ---- Informática ---- */
+Q('inf','C','Phishing é uma técnica de fraude em que o atacante se passa por uma entidade confiável para induzir a vítima a fornecer dados pessoais ou financeiros.','É a “pescaria” de dados, geralmente por e-mail, mensagem ou site falso.'),
+Q('inf','E','O firewall é um programa antivírus cuja função principal é remover vírus já instalados no computador.','O firewall controla o tráfego de rede (entrada e saída) conforme regras. Remover vírus é função do antivírus.'),
+Q('inf','E','Diferentemente do vírus, o worm precisa de um arquivo hospedeiro para se propagar.','É o contrário: o vírus precisa de hospedeiro; o worm se propaga sozinho pela rede, explorando falhas.'),
+Q('inf','E','Uma VPN transmite os dados sem criptografia, limitando-se a trocar o endereço IP do usuário.','A VPN estabelece um canal (túnel) criptografado, o que protege o tráfego em redes públicas.'),
+Q('inf','C','Na computação em nuvem, o usuário pode utilizar serviços e armazenamento pela internet sem precisar manter localmente toda a infraestrutura necessária.','É a ideia central do modelo: recursos sob demanda, fornecidos remotamente.'),
+Q('inf','E','Uma intranet é uma rede pública de alcance mundial que utiliza protocolos diferentes dos da internet.','Intranet é uma rede restrita a uma organização que usa as mesmas tecnologias e protocolos da internet.'),
+/* ---- Física ---- */
+Q('fis','E','Um veículo que percorre 180 km em 2 horas tem velocidade média de 90 km/h, o que equivale a 32,4 m/s.','90 km/h ÷ 3,6 = 25 m/s. Multiplicar por 3,6 é a conversão inversa, de m/s para km/h.'),
+Q('fis','E','De acordo com a primeira lei de Newton, um corpo em movimento retilíneo uniforme está sujeito a uma força resultante diferente de zero.','Em MRU a velocidade é constante, então a força resultante é nula (inércia).'),
+Q('fis','E','A energia cinética de um veículo de 1.000 kg que se move a 20 m/s é igual a 20 kJ.','Ec = ½ · 1.000 · 20² = 200.000 J = 200 kJ.'),
+Q('fis','E','Dobrando-se a velocidade de um veículo, sua energia cinética também dobra.','Ec depende de v². Dobrar a velocidade quadruplica a energia cinética. Por isso a velocidade agrava tanto os acidentes.'),
+Q('fis','C','Em uma colisão perfeitamente inelástica, ocorre conservação da quantidade de movimento total do sistema isolado, mas não da energia cinética.','Na colisão inelástica, parte da energia cinética vira deformação e calor. O momento linear se conserva em sistema isolado.'),
+Q('fis','C','Um corpo de 2 kg submetido a uma força resultante de 10 N adquire aceleração de 5 m/s².','Segunda lei de Newton: a = F ÷ m = 10 ÷ 2 = 5 m/s².'),
+/* ---- Ética e Cidadania ---- */
+Q('etc','C','A moralidade é um dos princípios que regem a administração pública, conforme o art. 37, caput, da Constituição Federal.','Princípios expressos: legalidade, impessoalidade, moralidade, publicidade e eficiência (LIMPE).'),
+Q('etc','E','O Código de Ética Profissional do Servidor Público Civil do Poder Executivo Federal foi aprovado pelo Decreto nº 6.029/2007.','O Código foi aprovado pelo Decreto 1.171/1994. O Decreto 6.029/2007 instituiu o Sistema de Gestão da Ética.'),
+Q('etc','C','Manter conduta compatível com a moralidade administrativa é dever do servidor público federal, nos termos do art. 116, IX, da Lei nº 8.112/1990.','O inciso IX do art. 116 trata exatamente da conduta compatível com a moralidade administrativa.'),
+Q('etc','E','Segundo a Lei de Acesso à Informação (Lei nº 12.527/2011), o sigilo é a regra e o acesso à informação pública é a exceção.','A regra é a publicidade. O sigilo é a exceção, nos casos previstos em lei.'),
+Q('etc','C','O Decreto nº 6.029/2007 instituiu o Sistema de Gestão da Ética do Poder Executivo Federal.','Esse sistema integra as Comissões de Ética dos órgãos federais.'),
+Q('etc','E','O Decreto nº 7.203/2010 regulamenta o acesso à informação previsto na Lei nº 12.527/2011.','O Decreto 7.203/2010 trata da vedação do nepotismo. A regulamentação da LAI é o Decreto 7.724/2012.'),
+/* ---- Geopolítica ---- */
+Q('geo','C','Os biomas brasileiros são seis: Amazônia, Cerrado, Mata Atlântica, Caatinga, Pampa e Pantanal.','É a classificação do IBGE para a macrodivisão natural do território.'),
+Q('geo','C','O modal rodoviário é o principal meio de transporte de cargas no Brasil.','Predomina sobre o ferroviário e o hidroviário, o que torna a malha rodoviária federal estratégica.'),
+Q('geo','E','O Cerrado é o bioma de maior extensão territorial do Brasil.','É a Amazônia, com cerca de 49% do território. O Cerrado ocupa cerca de 24%.'),
+Q('geo','E','A Região Nordeste concentra a maior parte do PIB nacional.','A maior parcela é da Região Sudeste, em especial de São Paulo.'),
+Q('geo','C','A República Federativa do Brasil é formada pela união indissolúvel dos Estados, dos Municípios e do Distrito Federal, sendo União, Estados, DF e Municípios entes autônomos.','Art. 1º e art. 18 da CF: a organização político-administrativa compreende esses entes, todos autônomos.'),
+/* ---- Língua Inglesa ---- */
+Q('ing','C','The text states that most road crashes are caused by human error.','“Studies indicate that most crashes are caused by human error”.','i1'),
+Q('ing','E','According to the text, governments have reduced investment in enforcement.','The text says the opposite: governments “have invested in stricter enforcement”.','i1'),
+Q('ing','C','Driving under the influence of alcohol is mentioned in the text as one of the causes of crashes.','It appears in the list of examples of human error.','i1'),
+Q('ing','E','The text affirms that road accidents are the leading cause of death among people of all ages.','The text says “one of the leading causes” and only “among young adults”.','i1'),
+/* ---- Legislação de Trânsito ---- */
+Q('tra','C','De acordo com o Código de Trânsito Brasileiro, o trânsito de qualquer natureza nas vias terrestres do território nacional rege-se por esse código.','Art. 1º do CTB (Lei nº 9.503/1997).'),
+Q('tra','E','Nas rodovias de pista simples em que não haja sinalização regulamentar, a velocidade máxima para automóveis é de 110 km/h.','Art. 61, § 1º, II, do CTB: 110 km/h é o limite para pista dupla. Na pista simples, o limite é de 100 km/h.'),
+Q('tra','C','Dirigir sob a influência de álcool ou de outra substância psicoativa que determine dependência é infração gravíssima, com suspensão do direito de dirigir.','Art. 165 do CTB. A penalidade inclui multa e suspensão do direito de dirigir por 12 meses.'),
+Q('tra','E','Constitui crime previsto no art. 306 do CTB conduzir veículo com capacidade psicomotora alterada em razão de álcool, configurando-se, entre outras hipóteses, quando a concentração é igual ou superior a 0,6 mg de álcool por litro de ar alveolar.','Art. 306, § 1º, I, do CTB: o limite é 0,3 mg/L de ar alveolar. Os 6 decigramas se referem ao litro de sangue.'),
+Q('tra','E','Cada infração de natureza grave acrescenta 4 pontos ao prontuário do condutor.','Art. 259 do CTB: a grave vale 5 pontos. Os 4 pontos correspondem à infração média.'),
+Q('tra','C','Após a Lei nº 14.071/2020, o condutor que não tenha cometido nenhuma infração gravíssima no período de 12 meses só tem o direito de dirigir suspenso ao atingir 40 pontos.','Art. 261, § 1º: 20 pontos (duas ou mais gravíssimas), 30 pontos (uma gravíssima) e 40 pontos (nenhuma gravíssima).'),
+Q('tra','E','A categoria B da habilitação autoriza a condução de veículo motorizado cujo peso bruto total não exceda 5.000 kg e cuja lotação não exceda oito lugares, excluído o do motorista.','Art. 143, II, do CTB: o limite é 3.500 kg.'),
+Q('tra','C','Compete à PRF, no âmbito das rodovias e estradas federais, realizar o patrulhamento ostensivo, executando operações relacionadas com a segurança pública, com o objetivo de preservar a ordem, a incolumidade das pessoas e o patrimônio da União e o de terceiros.','Art. 20, II, do CTB.'),
+Q('tra','E','O Conselho Nacional de Trânsito (Contran) é o órgão máximo executivo do Sistema Nacional de Trânsito.','O Contran é o órgão máximo normativo e consultivo do SNT (art. 7º, I, do CTB), e não executivo.'),
+Q('tra','C','As placas de regulamentação com o sinal “Parada obrigatória” (R-1) têm formato octogonal e fundo vermelho.','É a placa “PARE”, octogonal e vermelha. A R-2, “Dê a preferência”, é triangular.'),
+Q('tra','C','Os veículos de polícia, de socorro de incêndio e as ambulâncias, quando em serviço de urgência e devidamente identificados por sinais sonoros e luminosos, têm prioridade de trânsito e livre circulação, estacionamento e parada.','Art. 29, VII, do CTB.'),
+/* ---- Direito Administrativo ---- */
+Q('adm','E','Desconcentração é a transferência de atribuições a outra pessoa jurídica, enquanto a descentralização distribui competências dentro de uma mesma pessoa jurídica.','Está invertido. Desconcentração: distribuição interna na mesma pessoa jurídica. Descentralização: transferência a outra pessoa.'),
+Q('adm','C','As autarquias possuem personalidade jurídica de direito público.','Já as empresas públicas e as sociedades de economia mista têm personalidade jurídica de direito privado.'),
+Q('adm','E','Imperatividade, presunção de legitimidade e autoexecutoriedade são requisitos de validade do ato administrativo.','Esses são atributos do ato. Os requisitos (elementos) são competência, finalidade, forma, motivo e objeto.'),
+Q('adm','E','A presunção de legitimidade dos atos administrativos é absoluta e não admite prova em contrário.','A presunção é relativa (juris tantum). Admite prova em contrário.'),
+Q('adm','C','O abuso de poder compreende o excesso de poder e o desvio de finalidade.','No excesso, o agente atua além de sua competência; no desvio, pratica o ato com finalidade diversa da prevista.'),
+Q('adm','C','A responsabilidade civil do Estado por ato comissivo de seus agentes é, em regra, objetiva, conforme o art. 37, § 6º, da Constituição Federal.','Adota-se a teoria do risco administrativo: não é preciso provar culpa, mas o nexo causal e o dano.'),
+Q('adm','C','Em regra, a responsabilidade do Estado por omissão genérica é subjetiva e exige a demonstração de culpa do serviço (falta do serviço).','É a posição majoritária. Na omissão específica, o tema é mais controvertido.'),
+Q('adm','C','O poder de polícia da administração tem como atributos a discricionariedade, a autoexecutoriedade e a coercibilidade.','Há exceções: nem todo ato de polícia é autoexecutório.'),
+Q('adm','E','Segundo a Lei nº 14.133/2021, as modalidades de licitação são pregão, concorrência, tomada de preços, convite e leilão.','Essa lista é da Lei 8.666/1993 (com o pregão). A Lei 14.133/2021 extinguiu tomada de preços e convite e criou o diálogo competitivo.'),
+Q('adm','E','Um dos requisitos básicos para a investidura em cargo público federal é a idade mínima de 21 anos.','Art. 5º, V, da Lei 8.112/1990: a idade mínima é de 18 anos.'),
+Q('adm','E','O servidor nomeado para cargo de provimento efetivo adquire estabilidade após dois anos de efetivo exercício, desde que aprovado em avaliação especial de desempenho.','Desde a EC 19/1998, o prazo é de três anos (art. 41 da CF).'),
+/* ---- Direito Constitucional ---- */
+Q('con','C','A Polícia Rodoviária Federal é órgão permanente, organizado e mantido pela União e estruturado em carreira, destinando-se ao patrulhamento ostensivo das rodovias federais.','Art. 144, § 2º, da CF.'),
+Q('con','C','A segurança pública é dever do Estado, direito e responsabilidade de todos, exercida para a preservação da ordem pública e da incolumidade das pessoas e do patrimônio.','Art. 144, caput, da CF.'),
+Q('con','E','A prática da tortura, o tráfico ilícito de entorpecentes, o terrorismo e os crimes hediondos são afiançáveis, embora insuscetíveis de graça ou anistia.','Art. 5º, XLIII, da CF: são inafiançáveis e insuscetíveis de graça ou anistia.'),
+Q('con','E','Ninguém será considerado culpado até a decisão condenatória proferida em segunda instância.','Art. 5º, LVII, da CF: até o trânsito em julgado de sentença penal condenatória.'),
+Q('con','C','A casa é asilo inviolável do indivíduo, podendo nela se penetrar sem consentimento do morador em caso de flagrante delito ou desastre, ou para prestar socorro, ou, durante o dia, por determinação judicial.','Art. 5º, XI, da CF.'),
+Q('con','E','Ninguém será preso senão em flagrante delito ou por ordem escrita e fundamentada de autoridade policial competente.','A ordem deve ser de autoridade judiciária competente (art. 5º, LXI, da CF), salvo transgressão militar ou crime propriamente militar.'),
+Q('con','C','O habeas corpus protege o direito de locomoção, enquanto o mandado de segurança protege direito líquido e certo não amparado por habeas corpus ou habeas data.','Art. 5º, LXVIII e LXIX, da CF.'),
+Q('con','C','O voto é facultativo para os analfabetos, os maiores de setenta anos e os maiores de dezesseis e menores de dezoito anos.','Art. 14, § 1º, II, da CF.'),
+Q('con','E','A proposta de emenda à Constituição será aprovada se obtiver, em cada Casa do Congresso Nacional, em turno único, a maioria absoluta dos votos dos respectivos membros.','Art. 60, § 2º, da CF: dois turnos e três quintos dos votos em cada Casa.'),
+Q('con','C','Compete privativamente à União legislar sobre trânsito e transporte.','Art. 22, XI, da CF. Por isso o CTB é lei federal.'),
+Q('con','E','Os direitos e garantias individuais podem ser abolidos por emenda constitucional, desde que aprovada pelo quórum de três quintos.','Os direitos e garantias individuais são cláusulas pétreas (art. 60, § 4º, IV): não podem ser objeto de proposta de emenda tendente a aboli-los.'),
+/* ---- Direito Penal ---- */
+Q('pen','C','Não há crime sem lei anterior que o defina, nem pena sem prévia cominação legal.','Princípio da legalidade ou da reserva legal (art. 1º do CP; art. 5º, XXXIX, da CF).'),
+Q('pen','E','A lei penal mais grave aplica-se aos fatos praticados antes de sua vigência, quando convier ao interesse social.','A lei mais gravosa não retroage (art. 5º, XL, da CF). Só retroage a lei posterior mais benéfica.'),
+Q('pen','C','Considera-se praticado o crime no momento da ação ou da omissão, ainda que outro seja o momento do resultado.','Art. 4º do CP: teoria da atividade, para o tempo do crime.'),
+Q('pen','E','Quanto ao lugar do crime, o Código Penal adotou a teoria do resultado.','Art. 6º do CP: teoria da ubiquidade (ou mista), que considera tanto o lugar da conduta quanto o do resultado.'),
+Q('pen','C','O crime é doloso quando o agente quis o resultado ou assumiu o risco de produzi-lo.','Art. 18, I, do CP: dolo direto e dolo eventual.'),
+Q('pen','C','O erro sobre elemento constitutivo do tipo legal que seja escusável (inevitável) exclui o dolo e também a culpa.','Art. 20 do CP. Se o erro for evitável, o agente responde por culpa, se o fato for punível como crime culposo.'),
+Q('pen','C','Quem, usando moderadamente dos meios necessários, repele injusta agressão, atual ou iminente, a direito seu ou de outrem, age em legítima defesa.','Art. 25 do CP. É causa de exclusão da ilicitude.'),
+Q('pen','E','A embriaguez voluntária ou culposa pelo álcool exclui a imputabilidade penal.','Art. 28, II, do CP: não exclui. Só a embriaguez completa e acidental (caso fortuito ou força maior) isenta de pena.'),
+Q('pen','C','Os menores de dezoito anos são penalmente inimputáveis, ficando sujeitos às normas da legislação especial.','Art. 27 do CP.'),
+Q('pen','E','Pune-se a tentativa, ainda que por ineficácia absoluta do meio ou por absoluta impropriedade do objeto seja impossível consumar-se o crime.','Art. 17 do CP: crime impossível, não se pune a tentativa.'),
+Q('pen','E','Solicitar, para si ou para outrem, vantagem indevida em razão da função pública configura o crime de concussão.','A concussão (art. 316) é exigir a vantagem. Solicitar, receber ou aceitar promessa é a corrupção passiva (art. 317).'),
+Q('pen','C','Configura o crime de furto subtrair, para si ou para outrem, coisa alheia móvel, sem violência ou grave ameaça à pessoa.','Art. 155 do CP. Com violência ou grave ameaça, passa a ser roubo (art. 157).'),
+Q('pen','C','Desobedecer a ordem legal de funcionário público é crime contra a administração pública previsto no Código Penal.','Art. 330 do CP. O desacato (art. 331) é desacatar funcionário no exercício da função ou em razão dela.'),
+Q('pen','E','O homicídio simples é punido com pena de reclusão de quatro a doze anos.','Art. 121, caput, do CP: reclusão de seis a vinte anos.'),
+/* ---- Direito Processual Penal ---- */
+Q('ppe','C','Em regra, a ação penal é pública e incondicionada.','Só é condicionada ou privada quando a lei assim dispuser (art. 100 do CP).'),
+Q('ppe','C','Considera-se em flagrante delito quem está cometendo a infração penal ou acaba de cometê-la.','Art. 302, I e II, do CPP. Há ainda o flagrante por perseguição e o presumido.'),
+Q('ppe','E','Somente as autoridades policiais e seus agentes podem prender quem for encontrado em flagrante delito, sendo vedada a prisão por qualquer do povo.','Art. 301 do CPP: qualquer do povo pode (flagrante facultativo) e as autoridades policiais e seus agentes devem (flagrante obrigatório).'),
+Q('ppe','C','São inadmissíveis, devendo ser desentranhadas do processo, as provas ilícitas, assim entendidas as obtidas em violação a normas constitucionais ou legais.','Art. 157 do CPP e art. 5º, LVI, da CF.'),
+Q('ppe','E','As buscas domiciliares poderão ser executadas de dia ou de noite, a critério dos executores do mandado.','Art. 245 do CPP: serão executadas de dia, salvo se o morador consentir que se realizem à noite. Em flagrante, a CF admite o ingresso a qualquer hora.'),
+Q('ppe','C','Compete à autoridade policial, logo que tiver conhecimento da infração penal, dirigir-se ao local e providenciar para que não se alterem o estado e a conservação das coisas até a chegada dos peritos.','Art. 6º, I, do CPP: preservação do local de crime.'),
+Q('ppe','E','A confissão do acusado constitui prova absoluta e dispensa a análise das demais provas.','Art. 197 do CPP: a confissão deve ser confrontada com as demais provas. Não tem valor absoluto.'),
+Q('ppe','C','O termo circunstanciado de ocorrência é lavrado para as infrações de menor potencial ofensivo, nos termos da Lei nº 9.099/1995.','Art. 69 da Lei 9.099/1995: autoridade policial que tomar conhecimento da ocorrência lavrará o termo e o encaminhará ao Juizado.'),
+Q('ppe','E','O civilmente identificado será sempre submetido a identificação criminal quando preso em flagrante.','Art. 5º, LVIII, da CF: o civilmente identificado não será submetido a identificação criminal, salvo hipóteses previstas em lei.'),
+/* ---- Legislação Especial ---- */
+Q('les','E','Considera-se criança, para os efeitos do Estatuto da Criança e do Adolescente, a pessoa até quatorze anos de idade incompletos.','Art. 2º do ECA: criança é a pessoa até doze anos de idade incompletos.'),
+Q('les','C','O tráfico ilícito de drogas é equiparado a crime hediondo e é insuscetível de anistia, graça, indulto e fiança.','Art. 2º da Lei 8.072/1990, e art. 5º, XLIII, da CF.'),
+Q('les','C','Constranger alguém, com emprego de violência ou grave ameaça, causando-lhe sofrimento físico ou mental, com o fim de obter informação, declaração ou confissão da vítima, é crime de tortura.','Art. 1º, I, “a”, da Lei 9.455/1997. A pena-base é de reclusão de 2 a 8 anos.'),
+Q('les','E','Considera-se infração de menor potencial ofensivo, para a Lei nº 9.099/1995, o crime a que a lei comine pena máxima não superior a quatro anos.','Art. 61 da Lei 9.099/1995: pena máxima não superior a dois anos.'),
+Q('les','C','Portar arma de fogo de uso permitido, sem autorização e em desacordo com determinação legal ou regulamentar, é crime previsto no Estatuto do Desarmamento.','Art. 14 da Lei 10.826/2003. Pena de reclusão de 2 a 4 anos e multa.'),
+Q('les','E','Para a Lei de Drogas, quem porta droga para consumo pessoal sujeita-se a pena de detenção de seis meses a dois anos.','Art. 28 da Lei 11.343/2006: não há pena privativa de liberdade. Aplicam-se advertência, prestação de serviços à comunidade ou medida educativa.'),
+Q('les','E','Considera-se organização criminosa a associação de duas ou mais pessoas, estruturalmente ordenada e com divisão de tarefas, para a prática de infrações penais.','Art. 1º, § 1º, da Lei 12.850/2013: quatro ou mais pessoas, com penas máximas superiores a quatro anos ou caráter transnacional.'),
+Q('les','C','Os crimes previstos na Lei de Abuso de Autoridade (Lei nº 13.869/2019) são de ação penal pública incondicionada.','Art. 3º da Lei 13.869/2019. Admite-se a ação penal privada subsidiária da pública (art. 3º, § 1º).'),
+Q('les','C','A Polícia Rodoviária Federal integra operacionalmente o Sistema Único de Segurança Pública (Susp), instituído pela Lei nº 13.675/2018.','Art. 9º, § 2º, da Lei 13.675/2018 lista a PRF entre os integrantes operacionais.'),
+Q('les','E','A tortura e o tráfico de drogas são crimes que admitem fiança e anistia, por serem equiparados a hediondos apenas para fins de cumprimento da pena.','São inafiançáveis e insuscetíveis de graça ou anistia (art. 5º, XLIII, da CF).'),
+/* ---- Direitos Humanos ---- */
+Q('dh','E','A Declaração Universal dos Direitos Humanos foi proclamada pela Assembleia Geral das Nações Unidas em 1966.','A DUDH é de 10 de dezembro de 1948. Os dois Pactos Internacionais (civis e políticos; econômicos, sociais e culturais) são de 1966.'),
+Q('dh','C','A Convenção Americana sobre Direitos Humanos (Pacto de San José da Costa Rica) foi promulgada no Brasil pelo Decreto nº 678/1992.','Citado no edital (item 3 de Direitos Humanos).'),
+Q('dh','E','Os tratados e convenções internacionais sobre direitos humanos aprovados pelo Congresso Nacional por maioria simples, em turno único, serão equivalentes às emendas constitucionais.','Art. 5º, § 3º, da CF: exige dois turnos e três quintos dos votos em cada Casa.'),
+Q('dh','C','Segundo a jurisprudência do STF, os tratados de direitos humanos aprovados sem o rito do art. 5º, § 3º, da CF têm status supralegal.','Entendimento firmado no RE 466.343 (prisão civil do depositário infiel).'),
+Q('dh','C','De acordo com a Convenção Americana sobre Direitos Humanos, a prisão por dívidas não é permitida, ressalvado o inadimplemento de obrigação alimentar.','Art. 7º, 7, da Convenção.')
+];
+const QM = Object.fromEntries(QB.map(q=>[q.id,q]));
+/* ===== Estudar: o que o edital pede e o que mais vale reforçar ===== */
+const EST = {
+  pt:{ed:'Interpretação e tipos de texto; ortografia; coesão (referenciação, conectores, tempos e modos verbais); morfossintaxe (classes de palavras, coordenação e subordinação, pontuação, concordância, regência, crase, colocação pronominal); reescrita de frases e parágrafos; correspondência oficial (Manual de Redação da Presidência).', dica:['A prova cobra reescrita: troque o trecho e pergunte se o sentido e a correção se mantêm. Teste sempre o sentido.','Conectores adversativos (mas, porém, contudo, entretanto, no entanto) são intercambiáveis. Atenção à pontuação ao trocá-los.','Memorize os dois fechos do Manual: “Respeitosamente,” (autoridade superior) e “Atenciosamente,” (mesma hierarquia ou inferior).']},
+  rl:{ed:'Equações do 1º e 2º graus e sistemas; funções (afim, quadrática, exponencial, logarítmica); razão, proporção, regra de três; porcentagem; sequências, PA e PG; contagem, probabilidade e estatística; leitura de tabelas e gráficos; médias e desvios; teoria dos conjuntos; figuras planas e espaciais; áreas e volumes.', dica:['Porcentagem encadeada multiplica fatores (1,2 × 0,8), não soma.','Decore as fórmulas de PA (a₁ + (n−1)r) e PG (a₁·qⁿ⁻¹), e a de união de conjuntos.','No Cebraspe, cada erro desconta ponto. Só marque quando tiver feito a conta.']},
+  inf:{ed:'Internet e intranet; navegação, correio eletrônico, busca, redes sociais e ferramentas colaborativas; Windows; acesso remoto e transferência de arquivos; transformação digital (IoT, big data, inteligência artificial); vírus, worms, phishing; antivírus, firewall, VPN; computação em nuvem.', dica:['Diferencie vírus (precisa de hospedeiro) e worm (se propaga sozinho).','Firewall filtra tráfego. Antivírus detecta e remove malware.','Nuvem: serviços sob demanda pela internet (IaaS, PaaS, SaaS).']},
+  fis:{ed:'Cinemática escalar e vetorial; movimento circular; leis de Newton; trabalho, potência, energia cinética e potencial, atrito; conservação de energia; quantidade de movimento, impulso e colisões.', dica:['Converta unidades: km/h ÷ 3,6 = m/s.','Energia cinética cresce com o quadrado da velocidade (Ec = ½mv²).','Colisões: o momento linear se conserva em sistema isolado; a energia só nas elásticas.']},
+  etc:{ed:'Ética e moral; ética e função pública; princípios da Administração (art. 37 da CF); deveres do servidor (art. 116 da Lei 8.112/1990); Decreto 9.203/2017 (governança); Decreto 1.171/1994 (Código de Ética); Decreto 6.029/2007; Código de Conduta da Alta Administração; Lei de Acesso à Informação; conflito de interesses e nepotismo.', dica:['Memorize a lista de decretos e leis do edital. As questões vêm com o número trocado.','LAI: publicidade é a regra; sigilo é exceção.','Súmula Vinculante 13 do STF trata de nepotismo.']},
+  geo:{ed:'Organização do Estado brasileiro; divisão regional do trabalho e da produção; estrutura urbana e metrópoles; população e migrações internas; indústria e agricultura; rede de transporte (modais); inserção do Brasil na economia mundial; geografia e gestão ambiental; biomas e domínios naturais.', dica:['Seis biomas: Amazônia, Cerrado, Mata Atlântica, Caatinga, Pampa e Pantanal.','Estude a malha de transportes: rodoviário predomina; ferrovias e hidrovias têm baixa participação.']},
+  ing:{ed:'Compreensão de texto escrito em língua inglesa (ou espanhola) e itens gramaticais relevantes para a compreensão do conteúdo.', dica:['Leia o item antes do texto e procure palavras como “one of”, “most”, “all”, que mudam o sentido.','Cuidado com afirmações absolutas (never, always, all): costumam ser armadilhas.']},
+  tra:{ed:'Código de Trânsito Brasileiro (Lei 9.503/1997) e alterações, inclusive Lei 14.071/2020; Lei 5.970/1973; resoluções do Contran listadas no edital.', dica:['Pontos: gravíssima 7, grave 5, média 4, leve 3. Limites de suspensão: 20, 30 e 40 pontos.','Crime do art. 306: 0,3 mg/L de ar alveolar ou 6 dg/L de sangue.','O CTB mudou várias vezes depois de 2021. Antes da prova, estude a versão atualizada.']},
+  adm:{ed:'Organização administrativa; ato administrativo; agentes públicos (Lei 8.112/1990 e carreira de PRF); poderes administrativos; licitação; controle da administração; responsabilidade civil do Estado; regime jurídico-administrativo.', dica:['Responsabilidade por ação: objetiva (art. 37, § 6º, da CF). Por omissão genérica: subjetiva.','A Lei 14.133/2021 substituiu a Lei 8.666/1993: confira a modalidade e o prazo.']},
+  con:{ed:'Poder constituinte; direitos e deveres fundamentais; remédios constitucionais; Poder Executivo; defesa do Estado e das instituições; segurança pública (art. 144); atribuições da PRF; ordem social.', dica:['Art. 144, § 2º: PRF, órgão permanente da União, estruturado em carreira, para o patrulhamento ostensivo das rodovias federais.','Decore o art. 5º: flagrante, presunção de inocência, inviolabilidade do domicílio e remédios constitucionais.']},
+  pen:{ed:'Princípios; aplicação da lei penal no tempo e no espaço; tipicidade (dolo, culpa, erro de tipo, tentativa); ilicitude; culpabilidade; crimes contra a pessoa, o patrimônio, a dignidade sexual, a incolumidade pública, a fé pública e a administração pública.', dica:['Distinga erro de tipo (exclui o dolo) de erro de proibição (afeta a culpabilidade).','Crimes contra a administração pública: peculato, corrupção, desacato, desobediência e resistência.']},
+  ppe:{ed:'Ação penal; termo circunstanciado; atos processuais; provas (ilícitas, perícia, testemunhas, reconhecimento etc.); busca e apreensão; prisão e flagrante; identificação criminal; diligências investigatórias (arts. 6º e 13 do CPP).', dica:['Flagrante: art. 302 (próprio, impróprio, presumido) e art. 301 (quem pode prender).','Preservação do local do crime é atribuição policial desde o primeiro atendimento.']},
+  les:{ed:'Leis 5.553/1968 e 12.037/2009; ECA; Lei de Crimes Hediondos; Decreto 1.655/1995; Lei 9.099/1995; Lei de Tortura; Lei 9.605/1998 (caps. III e V); Lei 10.826/2003 (cap. IV); Lei de Drogas; Lei 12.850/2013; Lei 13.675/2018; Lei de Abuso de Autoridade.', dica:['Estude os tipos penais e as penas: a prova cobra quantidade de anos e o verbo do crime.','Lei 13.869/2019: o dolo específico é elemento do crime de abuso de autoridade.']},
+  dh:{ed:'Direitos humanos na Constituição; tratados internacionais de direitos humanos; Declaração Universal dos Direitos Humanos; Convenção Americana sobre Direitos Humanos (Decreto 678/1992).', dica:['Art. 5º, § 3º, da CF: tratados aprovados com rito de emenda têm status constitucional.','Tratados de direitos humanos sem esse rito: status supralegal (STF).']}
+};
+
+/* ===== Estado e utilidades ===== */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pad = n => String(n).padStart(2,'0');
+const fmtT = s => pad(Math.floor(s/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60);
+const pct = (a,b) => b ? Math.round(100*a/b) : 0;
+const shuffle = a => { a = a.slice(); for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; };
+const KEY = 'gabarito-prf-v1';
+const DUR = 90*60;
+const SIM_N = {1:30, 2:10, 3:20};
+const fresh = () => ({q:{}, m:{}, att:[], sim:null});
+let S = fresh();
+try{ const r = localStorage.getItem(KEY); if(r) S = Object.assign(fresh(), JSON.parse(r)); }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function note(msg){ const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(note.t); note.t = setTimeout(()=>{ t.hidden = true; }, 2600); }
+function record(id, ok){
+  const q = QM[id]; if(!q) return;
+  const r = S.q[id] = S.q[id] || {ok:0,n:0,last:null}; r.n++; if(ok) r.ok++; r.last = ok;
+  const m = S.m[q.m] = S.m[q.m] || {ok:0,n:0}; m.n++; if(ok) m.ok++;
+}
+const poolBy = m => m==='all' ? QB : m==='erros' ? QB.filter(q=>S.q[q.id] && S.q[q.id].last===false) : m.startsWith('b') ? QB.filter(q=>MAT[q.m].b===+m.slice(1)) : QB.filter(q=>q.m===m);
+
+/* ===== Questão Certo/Errado ===== */
+let P = null;   // treino: {title, ids, i, sel, done}
+let R = null;   // resultado de simulado em exibição (índice em S.att)
+function qHTML(q, n, mode, sel){
+  // sel: 1 (Certo), 0 (Errado), null (em branco)
+  const show = mode==='rev' || (mode==='fb' && P && P.done);
+  let h = `<div class="qhead"><span class="qn">${n?'Item '+n:'Item'}</span><span class="qm">${esc(MAT[q.m].n)} · ${BLOCOS[MAT[q.m].b]}</span></div>`;
+  if(q.t) h += `<div class="txt-box"><span class="eyebrow">Leia o texto</span>${esc(T[q.t])}</div>`;
+  h += `<p class="enun">${esc(q.e)}</p><div class="alts">`;
+  [[1,'C','Certo'],[0,'E','Errado']].forEach(([v,l,t])=>{
+    let c = 'alt';
+    if(mode==='sim' && sel===v) c += ' sel';
+    if(show){ if(v===q.g) c += ' ok'; else if(v===sel) c += ' bad'; else c += ' dim'; }
+    h += `<button class="${c}" data-act="pick" data-v="${v}" data-q="${q.id}"${show?' data-lock':''} aria-pressed="${sel===v}"><span class="bub">${l}</span><span class="t">${t}</span></button>`;
+  });
+  h += '</div>';
+  if(show){
+    const cls = sel===q.g ? 'good' : sel==null ? 'none' : 'wrong';
+    const gab = q.g ? 'Certo' : 'Errado';
+    const ttl = sel===q.g ? 'Correto. +1 ponto.' : sel==null ? `Em branco. Gabarito: ${gab}. 0 ponto.` : `Você marcou ${sel?'Certo':'Errado'}. Gabarito: ${gab}. −1 ponto.`;
+    h += `<div class="fb ${cls}"><b>${ttl}</b>${esc(q.x)}</div>`;
+  }
+  return h;
+}
+function bars(by, keys){
+  return `<div class="bars">${keys.map(k=>{ const b = by[k]||{ok:0,n:0}, p = pct(b.ok,b.n); return `<div class="bar"><div class="h"><span>${esc(MAT[k].n)}</span><span>${b.ok}/${b.n} · ${p}%</span></div><div class="track"><div class="fill${p<50?' low':''}" style="width:${p}%"></div></div></div>`; }).join('')}</div>`;
+}
+const ALLK = Object.keys(MAT);
+
+/* ===== Telas ===== */
+function vHome(){
+  const tot = Object.values(S.m).reduce((a,m)=>({ok:a.ok+m.ok,n:a.n+m.n}), {ok:0,n:0});
+  const cnt = b => QB.filter(q=>MAT[q.m].b===b).length;
+  return `
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Polícia Rodoviária Federal · último edital: nº 1/2021 · Cebraspe</p>
+      <h1 style="margin-top:10px">Prova objetiva do PRF</h1>
+      <p class="lead">Itens Certo ou Errado, no estilo do Cebraspe. Cada acerto vale +1 ponto, cada erro tira 1 ponto e o item em branco vale zero. Por isso, só marque quando tiver base.</p>
+    </div>
+    <div class="count">
+      <div class="big">${QB.length}</div>
+      <div class="lbl">itens originais</div>
+      <div class="sub">${tot.n ? `${pct(tot.ok,tot.n)}% de acerto nas ${tot.n} respostas já dadas.` : 'Comece por um treino ou por um simulado.'}</div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="note"><b>Edital de referência, não de um concurso aberto</b>
+    Segundo o noticiário, a PRF ainda aguarda autorização do Ministério da Gestão para um novo concurso e não há edital nem banca definidos. Este material segue o <strong>Edital nº 1/2021</strong> (Cebraspe), o mais recente. Quando sair o novo edital, matérias, legislação e banca podem mudar.</div>
+  </section>
+
+  <section class="sec">
+    <h2>Como foi a prova de 2021</h2>
+    <div class="card tbl-wrap" style="padding:8px 10px 6px">
+      <table class="tbl"><thead><tr><th>Bloco</th><th>Matérias</th><th class="num">Nota mínima</th></tr></thead><tbody>
+      <tr><td>I</td><td>Português, Raciocínio Lógico-Matemático, Informática, Física, Ética e Cidadania, Geopolítica e Língua Estrangeira</td><td class="num">15</td></tr>
+      <tr><td>II</td><td>Legislação de Trânsito</td><td class="num">10</td></tr>
+      <tr><td>III</td><td>Direito Administrativo, Constitucional, Penal, Processual Penal, Legislação Especial e Direitos Humanos</td><td class="num">10</td></tr>
+      <tr><td><b>Total</b></td><td>Prova de 120 pontos</td><td class="num"><b>50</b></td></tr></tbody></table>
+    </div>
+    <p class="muted" style="margin-top:10px;font-size:15px">Quem fica abaixo da nota mínima em qualquer bloco, ou abaixo de 50 no total, é eliminado. A prova real tem 120 itens; o simulado daqui é reduzido (${SIM_N[1]+SIM_N[2]+SIM_N[3]} itens, 1h30).</p>
+  </section>
+
+  <section class="sec">
+    <h2>Por onde começar</h2>
+    <div class="acts">
+      <a class="act" href="#estudar"><b>Estudar por matéria</b><span>O que o edital pede em cada matéria, com dicas do que mais vale reforçar.</span></a>
+      <a class="act" href="#treino"><b>Treino</b><span>Responda por matéria ou bloco e veja a explicação na hora. ${cnt(1)} itens no Bloco I, ${cnt(2)} no II e ${cnt(3)} no III.</span></a>
+      <a class="act" href="#simulado"><b>Simulado</b><span>${SIM_N[1]+SIM_N[2]+SIM_N[3]} itens sorteados dos três blocos, com cronômetro e nota +1/−1.</span></a>
+      <a class="act" href="#desempenho"><b>Desempenho</b><span>Acerto por matéria e histórico dos simulados.</span></a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="note"><b>Sobre o conteúdo</b>
+    Os itens são originais e seguem o estilo Cebraspe. Não são cópias de provas. A legislação muda (CTB, leis penais, licitação); confira a versão vigente antes da prova. A Física, a Informática e o Português podem ganhar mais itens com o tempo. Ainda não há itens sobre todas as resoluções do Contran do edital.</div>
+  </section>`;
+}
+
+function vTrain(){
+  if(P) return vPractice();
+  const nErr = poolBy('erros').length;
+  const group = b => `<h2 style="margin:26px 0 12px">${BLOCOS[b]}</h2><div class="picker">${ALLK.filter(k=>MAT[k].b===b).map(k=>{ const m = S.m[k]||{ok:0,n:0}; return `<button class="act" data-act="trainStart" data-m="${k}"><b>${esc(MAT[k].n)}</b><span>${poolBy(k).length} itens${m.n?` · ${pct(m.ok,m.n)}% de acerto`:''}</span></button>`; }).join('')}</div>`;
+  return `
+  <p class="eyebrow">Treino</p>
+  <h1 style="margin:8px 0 8px">Escolha o que estudar</h1>
+  <p class="muted" style="margin-bottom:8px;max-width:62ch">Você vê a correção e a explicação logo depois de cada resposta. Para treinar a regra da prova, use o botão “Deixar em branco” quando não souber.</p>
+  <div class="picker" style="margin-top:18px">
+    <button class="act" data-act="trainStart" data-m="all"><b>Misto</b><span>12 itens sorteados de todas as matérias</span></button>
+    <button class="act" data-act="trainStart" data-m="erros"${nErr?'':' disabled'}><b>Meus erros${nErr?` (${nErr})`:''}</b><span>${nErr?'Itens em que sua última resposta foi errada':'Nenhum erro registrado ainda'}</span></button>
+  </div>${group(1)}${group(2)}${group(3)}`;
+}
+function vPractice(){
+  const q = QM[P.ids[P.i]], n = P.ids.length;
+  const last = P.i===n-1;
+  return `
+  <p class="eyebrow">${esc(P.title)} · item ${P.i+1} de ${n}</p>
+  <section class="card" style="margin-top:12px">
+    ${qHTML(q, P.i+1, 'fb', P.sel)}
+    <div class="qnav">
+      <button class="btn" data-act="trainExit">Sair do treino</button>
+      ${P.done ? `<button class="btn pri" data-act="trainNext">${last?'Ver resumo':'Próximo item →'}</button>` : `<button class="btn" data-act="blank">Deixar em branco</button>`}
+    </div>
+  </section>`;
+}
+function vTrainEnd(){
+  const ok = P.res.filter(r=>r===1).length, bad = P.res.filter(r=>r===0).length, bl = P.res.filter(r=>r==null).length;
+  return `
+  <p class="eyebrow">Fim do treino · ${esc(P.title)}</p>
+  <div class="score" style="margin:10px 0 6px"><span class="n">${ok-bad}</span><span class="of">pontos (${ok} certos, ${bad} errados, ${bl} em branco)</span></div>
+  <p class="muted">Pela regra da prova, cada erro anula um acerto.</p>
+  <div class="row" style="margin:20px 0"><button class="btn pri" data-act="trainStart" data-m="${esc(P.m)}">Treinar de novo</button><button class="btn" data-act="trainExit">Voltar</button></div>`;
+}
+
+function mkSim(){
+  const ids = [];
+  [1,2,3].forEach(b=>{ shuffle(QB.filter(q=>MAT[q.m].b===b).map(q=>q.id)).slice(0, SIM_N[b]).forEach(id=>ids.push(id)); });
+  return {start:Date.now(), ids, ans:{}, cur:0, confirm:false};
+}
+function simScore(ids, ans){
+  const by = {}, bb = {1:{ok:0,bad:0,bl:0,n:0},2:{ok:0,bad:0,bl:0,n:0},3:{ok:0,bad:0,bl:0,n:0}};
+  let ok = 0, bad = 0, bl = 0;
+  ids.forEach(id=>{
+    const q = QM[id], a = ans[id], b = bb[MAT[q.m].b], m = by[q.m] = by[q.m] || {ok:0,n:0};
+    b.n++; m.n++;
+    if(a==null){ bl++; b.bl++; } else if(a===q.g){ ok++; b.ok++; m.ok++; } else { bad++; b.bad++; }
+  });
+  return {ok, bad, bl, pts: ok-bad, by, bb};
+}
+function vSim(){
+  if(R!=null && S.att[R]) return vResult(S.att[R]);
+  if(!S.sim){
+    const last = S.att.slice(-3).reverse();
+    return `
+    <p class="eyebrow">Simulado</p>
+    <h1 style="margin:8px 0 14px">${SIM_N[1]+SIM_N[2]+SIM_N[3]} itens, 1h30</h1>
+    <p class="muted" style="max-width:62ch;margin-bottom:22px">Versão reduzida da prova: ${SIM_N[1]} itens do Bloco I, ${SIM_N[2]} do Bloco II e ${SIM_N[3]} do Bloco III, sorteados. Acerto +1, erro −1, em branco 0. A correção só aparece no fim. Se sair da página, o tempo continua correndo.</p>
+    <button class="btn pri" data-act="startSim">Iniciar simulado</button>
+    ${last.length ? `<div class="sec"><h2>Últimos simulados</h2><div class="hist">${last.map(histRow).join('')}</div></div>` : ''}`;
+  }
+  const s = S.sim, i = s.cur, ids = s.ids, N = ids.length, q = QM[ids[i]];
+  const left = Math.max(0, DUR - Math.floor((Date.now()-s.start)/1000));
+  const answered = ids.filter(id=>s.ans[id]!=null).length;
+  const grid = ids.map((id,k)=>`<button class="${s.ans[id]!=null?'a ':''}${k===i?'c':''}" data-act="goto" data-n="${k}" aria-label="Item ${k+1}${s.ans[id]!=null?', respondido':''}">${k+1}</button>`).join('');
+  const conf = s.confirm ? `<div class="confirm"><p><b>Finalizar agora?</b> Você respondeu ${answered} de ${N} itens. Os em branco valem zero.</p><div class="row"><button class="btn" data-act="cancelFinish">Continuar</button><button class="btn pri" data-act="finishSim">Finalizar</button></div></div>` : '';
+  return `
+  <div class="simbar">
+    <div class="timer"><small>Tempo restante</small><b id="timer">${fmtT(left)}</b></div>
+    <div class="prog"><b>${answered}</b> de ${N} respondidos</div>
+    <button class="btn" data-act="askFinish">Finalizar</button>
+  </div>
+  <div class="simwrap">
+    <section class="card">
+      ${qHTML(q, i+1, 'sim', s.ans[q.id]==null?null:s.ans[q.id])}
+      <p class="muted" style="font-size:14px;margin-top:12px">Toque de novo na opção marcada para deixar o item em branco.</p>
+      <div class="qnav">
+        <button class="btn" data-act="prev" ${i===0?'disabled':''}>← Anterior</button>
+        <button class="btn pri" data-act="next" ${i===N-1?'disabled':''}>Próximo →</button>
+      </div>
+      ${conf}
+    </section>
+    <aside class="side card">
+      <h3 style="margin-bottom:12px">Cartão de respostas</h3>
+      <div class="navgrid">${grid}</div>
+      <div class="legend"><span><i class="a"></i>respondido</span></div>
+    </aside>
+  </div>`;
+}
+function histRow(a){
+  const k = S.att.indexOf(a);
+  return `<div class="li"><div><b class="mono">${a.pts}</b><span class="muted mono"> / ${a.n}</span><div class="muted" style="font-size:14px">${new Date(a.d).toLocaleDateString('pt-BR')} · ${a.ok} certos, ${a.bad} errados, ${a.bl} em branco</div></div><button class="btn sm" data-act="review" data-k="${k}">Ver correção</button></div>`;
+}
+function vResult(a){
+  const items = a.ids.map((id,i)=>{
+    const q = QM[id], sel = a.ans[id]==null ? null : a.ans[id], right = sel===q.g;
+    const tag = sel==null ? '<span class="tag none">em branco</span>' : right ? '<span class="tag ok">acertou</span>' : '<span class="tag bad">errou</span>';
+    return `<details class="r"><summary><b class="mono">${i+1}</b> ${tag}<span class="muted" style="font-size:14px">${esc(MAT[q.m].n)}</span></summary><div class="body">${qHTML(q, i+1, 'rev', sel)}</div></details>`;
+  }).join('');
+  const blk = [1,2,3].map(b=>{ const x = a.bb[b]; return `<tr><td>${BLOCOS[b]}</td><td class="num">${x.ok}</td><td class="num">${x.bad}</td><td class="num">${x.bl}</td><td class="num"><b>${x.ok-x.bad}</b></td></tr>`; }).join('');
+  return `
+  <p class="eyebrow">Resultado do simulado · ${new Date(a.d).toLocaleDateString('pt-BR')}</p>
+  <div class="score" style="margin:10px 0 6px"><span class="n">${a.pts}</span><span class="of">/ ${a.n} pontos</span></div>
+  <p class="muted">${a.ok} certos, ${a.bad} errados e ${a.bl} em branco. Na prova real, a nota é a soma dos acertos menos os erros; os itens em branco não pontuam.</p>
+  <div class="row" style="margin:20px 0 26px"><button class="btn pri" data-act="startSim">Novo simulado</button><a class="btn" href="#treino">Treinar meus erros</a><button class="btn" data-act="closeResult">Fechar</button></div>
+  <section class="card tbl-wrap" style="padding:8px 6px 6px"><table class="tbl" style="font-size:14px"><thead><tr><th>Bloco</th><th class="num">Certos</th><th class="num">Erros</th><th class="num">Branco</th><th class="num">Nota</th></tr></thead><tbody>${blk}</tbody></table></section>
+  <section class="card" style="margin-top:20px"><h2 style="margin-bottom:16px">Acertos por matéria</h2>${bars(a.by, ALLK.filter(k=>a.by[k]))}</section>
+  <section class="sec"><h2>Revisão item por item</h2><div class="rev">${items}</div></section>`;
+}
+function finishSim(silent){
+  const s = S.sim; if(!s) return;
+  const sc = simScore(s.ids, s.ans);
+  s.ids.forEach(id=>{ if(s.ans[id]!=null) record(id, s.ans[id]===QM[id].g); });
+  S.att.push({d:Date.now(), n:s.ids.length, ids:s.ids, ans:s.ans, ok:sc.ok, bad:sc.bad, bl:sc.bl, pts:sc.pts, by:sc.by, bb:sc.bb});
+  S.sim = null; save(); R = S.att.length-1;
+  if(location.hash!=='#simulado') location.hash = '#simulado'; else render();
+  if(silent) note('O tempo acabou. Simulado finalizado.');
+}
+
+function vEstudar(){
+  const cards = ALLK.map(k=>{ const e = EST[k]; return `<details class="card" style="margin-bottom:12px"><summary style="cursor:pointer;font-weight:600;font-size:17px">${esc(MAT[k].n)} <span class="muted mono" style="font-size:13px">· ${BLOCOS[MAT[k].b]} · ${poolBy(k).length} itens</span></summary>
+    <div class="stack-s" style="margin-top:12px"><p><span class="eyebrow">O que o edital pede</span><br>${esc(e.ed)}</p>
+    <div><span class="eyebrow">O que vale reforçar</span><ul style="margin:6px 0 0;padding-left:20px">${e.dica.map(d=>`<li style="margin-bottom:4px">${esc(d)}</li>`).join('')}</ul></div>
+    <div><button class="btn pri sm" data-act="trainStart" data-m="${k}">Treinar esta matéria</button></div></div></details>`; }).join('');
+  return `
+  <p class="eyebrow">Estudar</p>
+  <h1 style="margin:8px 0 8px">O que cai em cada matéria</h1>
+  <p class="muted" style="max-width:62ch;margin-bottom:22px">Resumo dos objetos de avaliação do Edital nº 1/2021, com dicas de revisão. Não substitui a leitura da lei nem de um bom material. Confira sempre o texto atualizado.</p>
+  ${cards}`;
+}
+let askReset = false;
+function vStats(){
+  const keys = ALLK.filter(k=>S.m[k] && S.m[k].n);
+  const cand = keys.filter(k=>S.m[k].n>=3).sort((a,b)=>pct(S.m[a].ok,S.m[a].n)-pct(S.m[b].ok,S.m[b].n));
+  const weak = cand.length ? `<p style="margin-top:16px">Ponto mais fraco até agora: <b>${esc(MAT[cand[0]].n)}</b>, com ${pct(S.m[cand[0]].ok,S.m[cand[0]].n)}% de acerto.</p>` : '';
+  return `
+  <p class="eyebrow">Desempenho</p>
+  <h1 style="margin:8px 0 22px">Como você está indo</h1>
+  ${keys.length ? `<section class="card"><h2 style="margin-bottom:16px">Acerto por matéria</h2>${bars(S.m, ALLK)}${weak}</section>` : '<div class="empty">Ainda não há respostas registradas. Faça um treino ou um simulado.</div>'}
+  <section class="sec"><h2>Simulados feitos</h2>${S.att.length ? `<div class="hist">${S.att.slice().reverse().map(histRow).join('')}</div>` : '<p class="muted">Nenhum simulado completo ainda.</p>'}</section>
+  <section class="sec">${askReset ? `<div class="confirm"><p><b>Apagar todo o progresso?</b> Respostas e simulados deste navegador serão removidos.</p><div class="row"><button class="btn" data-act="resetNo">Cancelar</button><button class="btn danger" data-act="resetYes">Apagar tudo</button></div></div>` : '<button class="btn" data-act="resetAsk">Apagar meu progresso</button>'}
+  <p class="muted" style="font-size:14px;margin-top:10px">O progresso fica salvo só neste navegador e neste aparelho.</p></section>`;
+}
+
+/* ===== Ações ===== */
+const ACT = {
+  pick(el){
+    const id = el.dataset.q, v = +el.dataset.v;
+    if(view==='simulado' && S.sim){ S.sim.ans[id] = (S.sim.ans[id]===v) ? null : v; save(); render(); return; }
+    if(P && !P.done){ P.sel = v; P.done = true; P.res[P.i] = v===QM[id].g ? 1 : 0; record(id, v===QM[id].g); save(); render(); }
+  },
+  blank(){ if(P && !P.done){ P.sel = null; P.done = true; P.res[P.i] = null; render(); } },
+  trainStart(el){
+    const m = el.dataset.m; let ids = poolBy(m).map(q=>q.id); ids = shuffle(ids);
+    if(m==='all') ids = ids.slice(0,12);
+    if(!ids.length){ note('Não há itens para esta escolha.'); return; }
+    const title = m==='all' ? 'Treino misto' : m==='erros' ? 'Meus erros' : m.startsWith('b') ? 'Treino · '+BLOCOS[+m.slice(1)] : 'Treino · '+MAT[m].n;
+    P = {m, title, ids, i:0, sel:null, done:false, res:[], end:false};
+    if(location.hash!=='#treino') location.hash = '#treino'; else render();
+    window.scrollTo(0,0);
+  },
+  trainNext(){ if(P.i>=P.ids.length-1){ P.end = true; } else { P.i++; P.sel = null; P.done = false; } render(); window.scrollTo(0,0); },
+  trainExit(){ P = null; render(); window.scrollTo(0,0); },
+  startSim(){ S.sim = mkSim(); R = null; save(); if(location.hash!=='#simulado') location.hash = '#simulado'; else render(); window.scrollTo(0,0); },
+  goto(el){ S.sim.cur = +el.dataset.n; S.sim.confirm = false; save(); render(); window.scrollTo(0,0); },
+  prev(){ if(S.sim.cur>0){ S.sim.cur--; save(); render(); window.scrollTo(0,0); } },
+  next(){ if(S.sim.cur<S.sim.ids.length-1){ S.sim.cur++; save(); render(); window.scrollTo(0,0); } },
+  askFinish(){ S.sim.confirm = true; render(); },
+  cancelFinish(){ S.sim.confirm = false; render(); },
+  finishSim(){ finishSim(); },
+  review(el){ R = +el.dataset.k; if(location.hash!=='#simulado') location.hash = '#simulado'; else render(); window.scrollTo(0,0); },
+  closeResult(){ R = null; render(); window.scrollTo(0,0); },
+  resetAsk(){ askReset = true; render(); }, resetNo(){ askReset = false; render(); },
+  resetYes(){ S = fresh(); save(); askReset = false; P = null; R = null; render(); note('Progresso apagado.'); },
+  theme(){ THEME = THEME==='auto' ? 'light' : THEME==='light' ? 'dark' : 'auto'; try{ if(THEME==='auto') localStorage.removeItem(THEME_KEY); else localStorage.setItem(THEME_KEY, THEME); }catch(e){} paintTheme(); }
+};
+document.addEventListener('click', e=>{
+  const el = e.target.closest('[data-act]'); if(!el || el.hasAttribute('data-lock') || el.disabled) return;
+  const f = ACT[el.dataset.act]; if(f) f(el);
+});
+
+/* ===== Menu lateral ===== */
+function menuToggle(open){
+  const b = document.body; open = (open===undefined) ? !b.classList.contains('menu-open') : open;
+  b.classList.toggle('menu-open', open);
+  const sc = document.getElementById('scrim'); if(sc) sc.hidden = !open;
+  const mo = document.getElementById('menu-open'); if(mo) mo.setAttribute('aria-expanded', open ? 'true' : 'false');
+  const m = document.getElementById('menu'); if(m){ if(open){ const a = m.querySelector('a[aria-current=page]') || m.querySelector('a'); if(a) a.focus(); } else if(mo) mo.focus(); }
+}
+document.addEventListener('click', e=>{
+  if(e.target.closest('[data-act=menu]')){ menuToggle(); return; }
+  if(e.target.closest('#menu a') && document.body.classList.contains('menu-open')){ menuToggle(false); }
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && document.body.classList.contains('menu-open')) menuToggle(false); });
+
+/* ===== Tema ===== */
+const THEME_KEY = 'gabarito-tema';
+const THEMES = {
+  auto:{n:'Automático', ic:'<circle cx="12" cy="12" r="9"/><path d="M12 3v18" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/>'},
+  light:{n:'Claro', ic:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'},
+  dark:{n:'Escuro', ic:'<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>'}
+};
+let THEME = 'auto';
+try{ const t = localStorage.getItem(THEME_KEY); if(t==='light'||t==='dark') THEME = t; }catch(e){}
+function paintTheme(){
+  const r = document.documentElement;
+  if(THEME==='auto') r.removeAttribute('data-theme'); else r.setAttribute('data-theme', THEME);
+  const b = document.getElementById('theme'); if(!b) return;
+  const nxt = THEME==='auto' ? 'light' : THEME==='light' ? 'dark' : 'auto';
+  b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">'+THEMES[THEME].ic+'</svg><span>'+THEMES[THEME].n+'</span>';
+  b.setAttribute('aria-label','Tema: '+THEMES[THEME].n+'. Tocar para mudar para '+THEMES[nxt].n.toLowerCase()+'.');
+  b.title = 'Tema: '+THEMES[THEME].n;
+}
+paintTheme();
+
+/* ===== Roteamento ===== */
+const VIEWS = {inicio:vHome, treino:()=>P&&P.end?vTrainEnd():vTrain(), simulado:vSim, estudar:vEstudar, desempenho:vStats};
+let view = 'inicio';
+function render(){
+  document.querySelectorAll('.tabs a[data-v]').forEach(a=>{ if(a.dataset.v===view) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  $('#root').innerHTML = VIEWS[view]();
+}
+function route(){
+  const h = (location.hash||'#inicio').slice(1);
+  const nv = VIEWS[h] ? h : 'inicio';
+  if(nv!==view){ askReset = false; if(nv!=='simulado') R = null; if(nv!=='treino') P = null; }
+  view = nv; render(); window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', route);
+setInterval(()=>{
+  if(view!=='simulado' || !S.sim || R!=null) return;
+  const left = DUR - Math.floor((Date.now()-S.sim.start)/1000);
+  if(left<=0){ finishSim(true); return; }
+  const el = $('#timer'); if(el) el.textContent = fmtT(left);
+}, 1000);
+if(S.sim && Date.now()-S.sim.start >= DUR*1000) finishSim(true); else route();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Administração · Gabarito</title><meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="/css/app.css"></head><body>
+<div class="wrap">
+<header class="top"><div class="brand"><svg class="logo" width="56" height="42" viewBox="0 0 132 100" role="img" aria-label="Três caixas d'água de Porto Velho, a última marcada como bolha de gabarito"><path class="st" d="M4 92 H128" stroke-width="6"/><path class="st" d="M11 48 L5 90 M33 48 L39 90 M55 48 L49 90 M77 48 L83 90 M99 48 L93 90 M121 48 L127 90" stroke-width="6"/><rect class="st" x="7" y="22" width="30" height="26" rx="5" stroke-width="6"/><rect class="st" x="51" y="22" width="30" height="26" rx="5" stroke-width="6"/><path class="fl" d="M7 22 L22 9 L37 22 Z M51 22 L66 9 L81 22 Z" stroke-width="3"/><rect class="ac" x="95" y="22" width="30" height="26" rx="5" stroke-width="6"/><path class="ac" d="M95 22 L110 9 L125 22 Z" stroke-width="3"/><path class="ck" d="M102 36 L108 42 L119 29" stroke-width="6"/></svg><b>Gabarito</b></div><div class="who"><a class="btn sm" href="/painel">Meu painel</a><button id="sair" class="btn sm" type="button">Sair</button></div></header>
+<div class="stack"><div><p class="muted mono">ADMINISTRAÇÃO</p><h1>Usuários</h1></div>
+<div class="grid" id="tiles"></div>
+<div class="filters"><input class="inp" id="q" type="search" placeholder="Buscar por nome ou e-mail" aria-label="Buscar por nome ou e-mail" maxlength="80">
+<select class="inp" id="st" aria-label="Filtrar por status"><option value="">Todos os status</option><option value="ativo">Ativos</option><option value="bloqueado">Bloqueados</option></select></div>
+<div class="tbl-wrap"><table><thead><tr><th>Usuário</th><th>Tipo</th><th>Status</th><th>Cadastro</th><th>Último acesso</th><th>Ações</th></tr></thead><tbody id="rows"></tbody></table></div>
+<p id="vazio" class="muted hidden"></p>
+<div class="pager"><span id="info" class="muted"></span><button id="ant" class="btn sm" type="button">Anterior</button><button id="prox" class="btn sm" type="button">Próxima</button></div>
+</div></div>
+<div id="toast" class="toast hidden" role="status"></div>
+<script src="/js/api.js"></script>
+<script src="/js/admin.js"></script>
+</body></html>

@@ -1,0 +1,13 @@
+{
+  "name": "gabarito-backend",
+  "version": "1.0.0",
+  "description": "Autenticação e painel administrativo do Gabarito (sem dependências externas)",
+  "private": true,
+  "type": "commonjs",
+  "engines": { "node": ">=22.5" },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/server.js",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.js",
+    "make-admin": "node --disable-warning=ExperimentalWarning src/cli.js make-admin"
+  }
+}

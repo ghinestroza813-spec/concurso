@@ -9,12 +9,13 @@ App de estudo e simulados para concursos de Porto Velho/RO, começando pelo carg
 - **Meus erros** e **desempenho** por matéria.
 - **Concursos**: busca de concursos de Porto Velho (dados conferidos à mão, com data de conferência).
 - **Trilha PRF** (`app/prf.html`): 118 itens originais Certo/Errado no estilo Cebraspe, com treino, simulado (+1/−1) e resumo do Edital nº 1/2021. O PRF ainda não tem edital novo; o material pode mudar.
+- **Trilha IPAM** (`app/ipam.html`): Edital 001/2026 (IBADE), Técnico Autárquico – Administrativa (nível médio). Banco de 249 questões de múltipla escolha (5 alternativas), treino, simulado de 80 questões com pontuação de 130 pontos (conhecimentos específicos com peso 2) e resumo do Anexo III. Não cobre o cargo de Informática nem o nível superior. As leis municipais do edital não estão no banco: só há questões em nível de edital.
 - Modo claro e escuro, menu lateral, funciona no celular.
 
 ## Estrutura
 | Pasta | O que é |
 |---|---|
-| `app/` | O app de estudo: `index.html` (Porto Velho) e `prf.html` (PRF). Sem build. Salva o progresso no navegador (visitante). |
+| `app/` | O app de estudo: `index.html` (Porto Velho), `prf.html` (PRF) e `ipam.html` (IPAM). Sem build. Salva o progresso no navegador (visitante). |
 | `backend/` | Servidor de contas (cadastro, login, recuperação de senha, painel admin). Node 22, sem dependências. Veja `backend/README.md`. |
 | `docs/` | Guia de lançamento. |
 

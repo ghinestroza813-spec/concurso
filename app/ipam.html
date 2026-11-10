@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Treino e simulado para o concurso do IPAM de Porto Velho, Técnico Autárquico – Administrativa (nível médio), no estilo IBADE.">
+<title>Gabarito Mamoré · IPAM</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: uma coluna de trabalho, estilo folha de respostas. Bolhas A-E como no cartão da prova, tinta azul/preta. */
+:root{
+  --bg:#f3f5f9; --surface:#ffffff; --ink:#111a33; --muted:#566079; --line:#d8deeb;
+  --accent:#2340d9; --accent-ink:#ffffff; --accent-soft:#e5e9fc;
+  --ok:#0f7a58; --ok-soft:#d9f2e8; --bad:#be301d; --bad-soft:#fbe2de; --warn:#9a5600; --warn-soft:#fcebcb;
+  --f-display:'Geist','Segoe UI',system-ui,sans-serif;
+  --f-body:'Geist','Segoe UI',system-ui,sans-serif;
+  --f-mono:'Geist Mono',ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0c1224; --surface:#151d36; --ink:#e8ecf8; --muted:#9aa5c2; --line:#27304d;
+    --accent:#8296ff; --accent-ink:#0c1224; --accent-soft:#1e2750;
+    --ok:#46d3a1; --ok-soft:#12372d; --bad:#ff8c7a; --bad-soft:#40201b; --warn:#f2b45b; --warn-soft:#3a2b10;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0c1224; --surface:#151d36; --ink:#e8ecf8; --muted:#9aa5c2; --line:#27304d;
+  --accent:#8296ff; --accent-ink:#0c1224; --accent-soft:#1e2750;
+  --ok:#46d3a1; --ok-soft:#12372d; --bad:#ff8c7a; --bad-soft:#40201b; --warn:#f2b45b; --warn-soft:#3a2b10;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);
+  padding-block:18px 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1040px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);line-height:1.15;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(28px,5vw,40px);font-weight:700}
+h2{font-size:22px;font-weight:700}
+h3{font-size:17px;font-weight:600}
+p{margin:0}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.eyebrow{font:600 12px var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:28px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand b{font:700 26px/1 var(--f-display);letter-spacing:-.045em}
+.logo{display:block;flex:none}
+.logo .st{fill:none;stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round}
+.logo .fl{fill:var(--ink);stroke:var(--ink);stroke-linejoin:round}
+.logo .ac{fill:var(--accent);stroke:var(--accent);stroke-linejoin:round}
+.logo .ck{fill:none;stroke:var(--accent-ink);stroke-linecap:round;stroke-linejoin:round}
+.brand span{font:500 12px var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.theme{gap:8px;font-size:14px}
+.theme svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.menu-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:transparent;color:var(--ink);cursor:pointer;flex:none}
+.menu-btn:hover{background:var(--line)}
+.menu-btn svg{display:block}
+.top .brand{flex:1;min-width:0}
+.tabs{position:fixed;top:0;left:0;bottom:0;width:min(280px,84vw);z-index:60;display:flex;flex-direction:column;gap:4px;padding:20px 14px;background:var(--bg);border-right:1px solid var(--line);box-shadow:4px 0 24px rgba(0,0,0,.18);overflow-y:auto;transform:translateX(-105%);visibility:hidden;transition:transform .22s ease,visibility 0s linear .22s}
+body.menu-open .tabs{transform:none;visibility:visible;transition:transform .22s ease}
+.tabs .tabs-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-weight:700}
+.scrim{position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.45)}
+.scrim[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){ .tabs{transition:none} }
+.tabs a{padding:12px 14px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:600;font-size:16px}
+.tabs a:hover{color:var(--ink)}
+.tabs a[aria-current=page]{background:var(--ink);color:var(--bg)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;border-radius:10px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:600;text-decoration:none}
+.btn:hover{border-color:var(--muted)}
+.btn.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.pri:hover{filter:brightness(1.08)}
+.btn.sm{padding:7px 12px;font-size:14px}
+.btn.danger{color:var(--bad);border-color:var(--bad)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px}
+.stack{display:flex;flex-direction:column;gap:20px}
+.stack-s{display:flex;flex-direction:column;gap:10px}
+
+/* início */
+.hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px 40px;align-items:end;margin-bottom:36px}
+.hero .lead{font-size:18px;color:var(--muted);max-width:52ch;margin-top:12px}
+.count{border-left:4px solid var(--ink);padding-left:20px}
+.count .big{font:700 clamp(64px,11vw,104px)/0.95 var(--f-display);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.count .lbl{font-weight:600;margin-top:6px}
+.count .sub{color:var(--muted);font-size:14px}
+.tbl-wrap{overflow-x:auto}
+table.tbl{width:100%;border-collapse:collapse;min-width:420px}
+.tbl th{font:600 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 12px;border-bottom:2px solid var(--ink)}
+.tbl td{padding:11px 12px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.tbl td.num,.tbl th.num{text-align:right}
+.tbl tfoot td{font-weight:700;border-bottom:0}
+.sec{margin-top:36px}
+.sec>h2{margin-bottom:14px}
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.act{display:flex;flex-direction:column;gap:6px;padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--surface);text-decoration:none;color:inherit;cursor:pointer;text-align:left}
+.act:hover{border-color:var(--ink)}
+.act b{font:600 18px var(--f-display)}
+.act span{color:var(--muted);font-size:15px}
+.note{border-left:4px solid var(--warn);background:var(--warn-soft);padding:14px 16px;border-radius:0 10px 10px 0;font-size:15px}
+.note b{display:block;margin-bottom:2px}
+
+/* questão */
+.qhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin-bottom:12px}
+.qn{font:600 13px var(--f-mono);letter-spacing:.06em;text-transform:uppercase}
+.qm{font:500 13px var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.txt-box{border-left:3px solid var(--line);padding:2px 0 2px 16px;margin:0 0 16px;color:var(--muted);font-size:17px;max-width:68ch}
+.txt-box .eyebrow{display:block;margin-bottom:4px}
+.enun{font-size:18px;font-weight:500;margin-bottom:18px;max-width:68ch}
+.alts{display:flex;flex-direction:column;gap:10px}
+.alt{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;cursor:pointer}
+.alt:hover{border-color:var(--muted)}
+.alt[data-lock]{cursor:default}
+.bub{flex:none;width:30px;height:30px;border-radius:50%;border:2px solid var(--muted);display:grid;place-items:center;font:600 13px var(--f-mono);color:var(--muted);margin-top:-1px}
+.alt .t{padding-top:2px;min-width:0}
+.alt.sel{border-color:var(--ink);background:var(--accent-soft)}
+.alt.sel .bub{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.alt.ok{border-color:var(--ok);background:var(--ok-soft)}
+.alt.ok .bub{background:var(--ok);border-color:var(--ok);color:var(--surface)}
+.alt.bad{border-color:var(--bad);background:var(--bad-soft)}
+.alt.bad .bub{background:var(--bad);border-color:var(--bad);color:var(--surface)}
+.alt.dim{opacity:.62}
+.fb{margin-top:18px;padding:14px 16px;border-radius:10px;background:var(--bg);border:1px solid var(--line);max-width:68ch}
+.fb b{display:block;margin-bottom:4px}
+.fb.good b{color:var(--ok)} .fb.wrong b{color:var(--bad)} .fb.none b{color:var(--warn)}
+.qnav{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+
+/* simulado */
+.simbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px;padding:10px 0 14px;margin-bottom:6px}
+.timer small{display:block;font:600 11px var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.timer b{font:600 30px/1.1 var(--f-mono);font-variant-numeric:tabular-nums}
+.prog{font-size:15px;color:var(--muted)} .prog b{color:var(--ink);font-family:var(--f-mono)}
+.simwrap{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:20px;align-items:start}
+.navgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(34px,1fr));gap:6px}
+.navgrid button{aspect-ratio:1;border-radius:6px;border:1px solid var(--line);background:var(--surface);font:500 12px var(--f-mono);cursor:pointer;padding:0;position:relative}
+.navgrid button.a{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.navgrid button.m::after{content:"";position:absolute;top:2px;right:2px;width:7px;height:7px;border-radius:50%;background:var(--warn)}
+.navgrid button.c{outline:3px solid var(--accent);outline-offset:1px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted);margin-top:14px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid var(--line);vertical-align:-1px;margin-right:5px}
+.legend i.a{background:var(--ink);border-color:var(--ink)} .legend i.m{background:var(--warn);border-radius:50%;border-color:var(--warn)}
+aside.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 86px)}
+.confirm{margin-top:18px;padding:16px;border:1px solid var(--warn);background:var(--warn-soft);border-radius:10px}
+.confirm p{margin-bottom:12px}
+
+/* resultado */
+.score{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px}
+.score .n{font:700 clamp(56px,10vw,88px)/1 var(--f-display);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.score .of{font:500 22px var(--f-mono);color:var(--muted)}
+.chip{display:inline-block;padding:4px 12px;border-radius:99px;font-weight:700;font-size:14px}
+.chip.ok{background:var(--ok-soft);color:var(--ok)} .chip.bad{background:var(--bad-soft);color:var(--bad)}
+.bars{display:flex;flex-direction:column;gap:14px}
+.bar .h{display:flex;justify-content:space-between;gap:12px;font-size:15px;margin-bottom:5px}
+.bar .h span:last-child{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.track{height:12px;border-radius:99px;background:var(--line);position:relative;overflow:hidden}
+.fill{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:99px}
+.fill.low{background:var(--warn)}
+.rev{display:flex;flex-direction:column;gap:8px}
+details.r{border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+details.r>summary{cursor:pointer;padding:12px 14px;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;list-style:none}
+details.r>summary::-webkit-details-marker{display:none}
+details.r[open]>summary{border-bottom:1px solid var(--line)}
+details.r .body{padding:18px 14px}
+.tag{font:600 12px var(--f-mono);padding:2px 8px;border-radius:6px}
+.tag.ok{background:var(--ok-soft);color:var(--ok)} .tag.bad{background:var(--bad-soft);color:var(--bad)} .tag.none{background:var(--warn-soft);color:var(--warn)}
+.picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.hist{display:flex;flex-direction:column}
+.hist .li{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.empty{padding:28px;border:1px dashed var(--line);border-radius:12px;color:var(--muted)}
+
+/* cadastro, conta, bancas */
+.form{display:flex;flex-direction:column;gap:18px;max-width:560px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-weight:600;font-size:15px}
+.field .hint{font-size:13px;color:var(--muted)}
+.inp{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%}
+.inp:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+textarea.inp{min-height:200px;font-family:var(--f-mono);font-size:12px}
+.chk{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45;cursor:pointer}
+.chk input{margin-top:3px;width:18px;height:18px;flex:none;accent-color:var(--accent)}
+.err{color:var(--bad);background:var(--bad-soft);border-radius:8px;padding:10px 12px;font-size:15px}
+.banner{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;padding:12px 16px;border:1px solid var(--line);border-radius:10px;background:var(--surface);margin-bottom:24px;font-size:15px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:min(92vw,520px);background:var(--ink);color:var(--bg);padding:12px 16px;border-radius:10px;font-size:15px;z-index:20}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.bcard{display:flex;flex-direction:column;gap:8px;padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--surface);text-align:left;cursor:pointer}
+.bcard:hover{border-color:var(--ink)}
+.bcard b{font:700 22px var(--f-display);letter-spacing:-.03em}
+.bcard span.s{color:var(--muted);font-size:14px}
+.chip.on{background:var(--ok-soft);color:var(--ok)}
+.chip.soon{background:var(--warn-soft);color:var(--warn)}
+.chip{align-self:flex-start;font-size:12px;padding:3px 10px}
+.rules{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.rules li{display:flex;gap:8px;align-items:center;color:var(--muted)}
+.rules li::before{content:"○";font-family:var(--f-mono)}
+.rules li.ok{color:var(--ok)} .rules li.ok::before{content:"✓"}
+.soc{display:flex;flex-direction:column;gap:10px}
+.soc .btn[disabled]{justify-content:space-between;width:100%}
+.sep{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:14px}
+.sep::before,.sep::after{content:"";height:1px;background:var(--line);flex:1}
+.badge{display:inline-block;padding:2px 9px;border-radius:99px;font:600 12px var(--f-mono);white-space:nowrap;vertical-align:1px}
+.badge.soon{background:var(--accent-soft);color:var(--accent)} .badge.off{background:var(--warn-soft);color:var(--warn)}
+.aulad{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+.aulad>summary{cursor:pointer;font-weight:600;color:var(--accent)}
+.aula{margin-top:12px;max-width:68ch;font-size:16px}
+.topic .aula p{margin:0 0 12px;color:var(--ink);font-size:16px}
+.aula ul{margin:0 0 12px;padding-left:20px}
+.aula li{margin-bottom:6px}
+.tlink{font:600 17px/1.3 var(--f-body);color:var(--ink);background:none;border:0;padding:0;text-align:left;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px}
+.tlink:hover{text-decoration-color:var(--ink)}
+.badge.on{background:var(--ok-soft);color:var(--ok)}
+.tsec{margin-top:30px}
+.tsec>h2{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.tsec .num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--ink);color:var(--bg);font:600 14px var(--f-mono)}
+.aula-p{max-width:68ch;margin-bottom:14px}
+.tsec .aula{max-width:68ch;font-size:17px}
+.tsec .aula p{margin:0 0 14px}
+.tsec .aula ul{margin:0 0 14px;padding-left:20px}
+.tsec .aula li{margin-bottom:8px}
+.topics{display:flex;flex-direction:column;gap:10px}
+.topic{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.topic.done{background:var(--ok-soft);border-color:var(--ok)}
+.topic b{font-weight:600}
+.topic p{color:var(--muted);font-size:15px;margin-top:4px;max-width:68ch}
+.tick{flex:none;width:28px;height:28px;border-radius:8px;border:2px solid var(--muted);background:var(--bg);cursor:pointer;display:grid;place-items:center;font:700 16px var(--f-mono);color:var(--surface);padding:0}
+.topic.done .tick{background:var(--ok);border-color:var(--ok)}
+.policy h2{font-size:18px;margin:26px 0 8px}
+.policy p,.policy li{max-width:68ch}
+.policy ul{margin:8px 0;padding-left:20px}
+details.pol{border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-top:20px;max-width:560px}
+details.pol>summary{cursor:pointer;padding:14px 18px;font-weight:600}
+details.pol .policy{padding:0 18px 18px}
+
+.enun,.txt-box{white-space:pre-line}
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr}
+  .acts{grid-template-columns:1fr}
+  .simwrap{grid-template-columns:1fr}
+  aside.side{position:static}
+}
+@media (prefers-reduced-motion:no-preference){ .fill{transition:width .5s ease} }
+</style>
+<style>table.tbl{min-width:0} .tbl th,.tbl td{padding-left:8px;padding-right:8px} @media (max-width:520px){.tbl th{letter-spacing:.02em;font-size:11px}}</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <button class="menu-btn" id="menu-open" type="button" data-act="menu" aria-label="Abrir menu" aria-controls="menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><circle cx="10" cy="3.5" r="2"/><circle cx="10" cy="10" r="2"/><circle cx="10" cy="16.5" r="2"/></svg></button>
+    <div class="brand">
+      
+      <b>Gabarito Mamoré</b><span>IPAM</span></div>
+    <nav class="tabs" id="menu" aria-label="Seções">
+      <div class="tabs-h"><span>Menu</span><button class="menu-btn" type="button" data-act="menu" aria-label="Fechar menu">✕</button></div>
+      <a href="#inicio" data-v="inicio">Início</a>
+      <a href="#estudar" data-v="estudar">Estudar</a>
+      <a href="#treino" data-v="treino">Treino</a>
+      <a href="#simulado" data-v="simulado">Simulado</a>
+      <a href="#desempenho" data-v="desempenho">Desempenho</a>
+      <a href="./">← Gabarito Porto Velho</a>
+    </nav>
+    <button class="btn sm theme" id="theme" data-act="theme" type="button"></button>
+  </header>
+  <main id="root"></main>
+  <div class="scrim" id="scrim" data-act="menu" hidden></div>
+  <div id="toast" class="toast" role="status" hidden></div>
+</div>
+<script>
+/* ===== Matérias do edital IPAM 001/2026 (IBADE), Técnico Autárquico, nível médio ===== */
+const MAT = {
+  pt:{n:'Língua Portuguesa', w:1, sim:10}, rl:{n:'Raciocínio Lógico e Matemático', w:1, sim:5}, inf:{n:'Informática Básica', w:1, sim:5},
+  adm:{n:'Noções de Administração Pública, Atendimento e Ética', w:1, sim:5},
+  leg:{n:'Noções de Legislação Institucional, Previdenciária e de Assistência à Saúde', w:1, sim:5},
+  esp:{n:'Conhecimentos Específicos (Administrativa)', w:2, sim:50}
+};
+let _ip = 0;
+/* Q(matéria, enunciado, correta, [4 erradas], explicação): a posição da correta gira entre A e E */
+const Q = (m, e, ok, bad, x) => { const n = ++_ip, pos = (n*3+1)%5, a = bad.slice(); a.splice(pos, 0, ok); return {id:'ip'+n, m, e, a, g:pos, x}; };
+const NEW = [
+/* ---- Informática Básica ---- */
+Q('inf','No Windows, qual combinação de teclas copia o item selecionado para a Área de Transferência?','Ctrl + C',['Ctrl + V','Ctrl + X','Ctrl + Z','Ctrl + A'],'Ctrl+C copia; Ctrl+V cola; Ctrl+X recorta; Ctrl+Z desfaz; Ctrl+A seleciona tudo.'),
+Q('inf','No Windows 10 e 11, qual atalho abre diretamente o Gerenciador de Tarefas?','Ctrl + Shift + Esc',['Alt + F4','Windows + D','Ctrl + Esc','Windows + L'],'Alt+F4 fecha a janela ativa; Win+D mostra a área de trabalho; Ctrl+Esc abre o menu Iniciar; Win+L bloqueia o computador.'),
+Q('inf','Em uma planilha eletrônica, a fórmula =SOMA(A1:A5) tem como resultado:','a soma dos valores das células de A1 a A5',['a quantidade de células preenchidas de A1 a A5','a média dos valores das células de A1 a A5','o maior valor encontrado nas células de A1 a A5','o produto dos valores das células de A1 a A5'],'SOMA adiciona os valores do intervalo. Contar é CONT.VALORES, média é MÉDIA, maior é MÁXIMO.'),
+Q('inf','Qual notação mantém fixas a coluna e a linha da célula A1 quando a fórmula é copiada para outras células?','$A$1',['A1','$A1','A$1','#A1'],'$A$1 é referência absoluta. $A1 fixa só a coluna; A$1 fixa só a linha; A1 é relativa.'),
+Q('inf','Se a célula B2 contém o valor 6, qual o resultado da fórmula =SE(B2>=7;"Aprovado";"Reprovado")?','Reprovado',['Aprovado','6','VERDADEIRO','#VALOR!'],'6 não é maior nem igual a 7; a condição é falsa e a função devolve o terceiro argumento.'),
+Q('inf','O golpe em que o criminoso se passa por uma instituição confiável para induzir a vítima a informar dados pessoais ou a clicar em links maliciosos é chamado de:','phishing',['firewall','backup','criptografia','compactação'],'Phishing é a fraude por engenharia social. Firewall e criptografia são medidas de defesa.'),
+Q('inf','A autenticação multifator consiste em exigir:','dois ou mais tipos de prova de identidade, como senha e código no celular',['uma única senha, com mais de doze caracteres e símbolos','a mesma senha digitada duas vezes, em telas diferentes','dois antivírus instalados no mesmo computador','uma senha trocada obrigatoriamente todos os meses'],'Combina fatores diferentes: algo que se sabe (senha), algo que se tem (celular) e algo que se é (biometria).'),
+Q('inf','Em uma rotina de cópias de segurança, o backup incremental copia:','só os arquivos novos ou alterados desde o último backup de qualquer tipo',['todos os arquivos do computador, a cada execução','os arquivos alterados desde o último backup completo','apenas os arquivos do sistema operacional','somente os arquivos que foram apagados do computador'],'O diferencial copia o que mudou desde o último completo. O incremental, desde o último backup de qualquer tipo.'),
+Q('inf','A assinatura digital baseada em certificado digital tem como finalidade garantir:','autoria, integridade do documento e não repúdio',['apenas o sigilo do conteúdo do documento','a disponibilidade do documento na internet','a redução do tamanho do arquivo enviado','a remoção de vírus existentes no arquivo'],'Assinar não esconde o conteúdo (isso é criptografia). Garante quem assinou e que o documento não foi alterado.'),
+Q('inf','Um firewall tem como função principal:','controlar o tráfego de rede, bloqueando ou liberando conexões por regras',['remover vírus que já estão instalados no computador','recuperar arquivos apagados por engano do usuário','aumentar a velocidade da conexão com a internet','fazer cópias de segurança automáticas dos arquivos'],'O firewall filtra a comunicação de entrada e saída. A remoção de vírus é papel do antivírus.'),
+Q('inf','No Microsoft Word em português, qual atalho de teclado aplica negrito ao texto selecionado?','Ctrl + N',['Ctrl + I','Ctrl + B','Ctrl + P','Ctrl + J'],'Ctrl+N é negrito e Ctrl+I é itálico. Ctrl+P imprime e Ctrl+J justifica o parágrafo.'),
+Q('inf','Qual alternativa apresenta um formato de arquivo compactado?','.zip',['.docx','.xlsx','.mp3','.txt'],'.zip reúne e comprime arquivos. .docx é do Word, .xlsx do Excel, .mp3 é áudio, .txt é texto simples.'),
+/* ---- Administração Pública, Atendimento e Ética ---- */
+Q('adm','Constituem princípios expressos no caput do art. 37 da Constituição Federal:','legalidade, impessoalidade, moralidade, publicidade e eficiência',['legalidade, razoabilidade, finalidade, motivação e eficiência','impessoalidade, autotutela, publicidade, oralidade e economicidade','moralidade, continuidade, hierarquia, publicidade e legalidade','legalidade, supremacia do interesse público, eficiência e sigilo'],'É o LIMPE. Razoabilidade, finalidade e motivação são princípios implícitos ou de outras leis.'),
+Q('adm','As autarquias, como o IPAM, caracterizam-se por serem:','pessoas jurídicas de direito público, criadas por lei, para atividades típicas do Estado',['pessoas jurídicas de direito privado, criadas por escritura pública','órgãos sem personalidade jurídica, ligados ao Poder Executivo','empresas com capital majoritariamente privado e fins lucrativos','entidades sem fins lucrativos, criadas por particulares'],'A autarquia integra a Administração indireta e tem personalidade própria, de direito público.'),
+Q('adm','Integram a Administração Pública indireta:','autarquias, fundações públicas, empresas públicas e sociedades de economia mista',['ministérios, secretarias, departamentos e diretorias','apenas as empresas privadas contratadas pelo poder público','autarquias, secretarias e conselhos de classe privados','somente os órgãos do Poder Judiciário e do Legislativo'],'Ministérios e secretarias são órgãos da Administração direta.'),
+Q('adm','O poder que permite à Administração apurar infrações e punir servidores pelo descumprimento de seus deveres funcionais é o poder:','disciplinar',['regulamentar','de polícia','hierárquico','normativo'],'O hierárquico organiza e ordena; o disciplinar apura e pune; o regulamentar edita normas complementares; o de polícia limita direitos individuais em nome do interesse público.'),
+Q('adm','São elementos (requisitos) do ato administrativo:','competência, finalidade, forma, motivo e objeto',['imperatividade, presunção de legitimidade e autoexecutoriedade','legalidade, moralidade, publicidade e eficiência','hierarquia, subordinação, disciplina e controle','planejamento, execução, avaliação e arquivamento'],'A segunda alternativa lista atributos do ato; a terceira, princípios.'),
+Q('adm','O princípio da continuidade do serviço público significa que:','os serviços essenciais não devem ser interrompidos de forma indevida',['o serviço só pode ser prestado por um único servidor','o serviço público só funciona em horário comercial','o servidor não pode ser substituído durante o expediente','a Administração pode suspender o serviço sem aviso prévio'],'Por isso, por exemplo, há regras para a greve em serviços essenciais.'),
+Q('adm','Ao atender um segurado alterado, que fala em tom elevado, a postura mais adequada do servidor é:','manter a calma, ouvir sem interromper e orientar com clareza',['elevar o tom de voz para retomar o controle da conversa','encerrar o atendimento e pedir que volte outro dia','responder apenas por escrito, sem conversar com ele','passar o atendimento a um colega sem explicar o motivo'],'Postura calma e escuta reduzem o conflito. Em último caso, acione a chefia, sem expor o usuário.'),
+Q('adm','O princípio da impessoalidade exige que o servidor:','trate todos os usuários de modo igual, sem favorecimentos nem perseguições',['atenda primeiro as pessoas que ele conhece pessoalmente','deixe de se identificar nos atendimentos que realiza','evite registrar por escrito os atendimentos do dia','decida cada caso conforme as suas preferências pessoais'],'A atuação é da Administração, e não do servidor como pessoa. Isso afasta o favorecimento.'),
+Q('adm','De acordo com a Lei de Acesso à Informação (Lei nº 12.527/2011), quem solicita uma informação pública:','não precisa apresentar os motivos do pedido',['deve apresentar justificativa detalhada por escrito','precisa ser servidor público do mesmo órgão','deve pagar taxa para qualquer pedido de informação','precisa de autorização do chefe do órgão'],'O art. 10, § 3º, veda exigências sobre os motivos determinantes da solicitação.'),
+Q('adm','Na Lei de Acesso à Informação, o órgão deve responder ao pedido em até 20 dias, prazo que pode ser prorrogado por:','mais 10 dias, com justificativa expressa',['mais 5 dias, sem necessidade de justificativa','mais 60 dias, a critério do chefe do órgão','mais 20 dias, de forma automática','mais 30 dias, mediante pagamento de taxa'],'Art. 11, §§ 1º e 2º, da Lei 12.527/2011.'),
+Q('adm','Segundo a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), é dado pessoal sensível:','a informação sobre a saúde de uma pessoa',['o nome completo da pessoa','o número do CEP da residência','o e-mail institucional do servidor','a data de nascimento da pessoa'],'Dado sensível: origem racial ou étnica, convicção religiosa, opinião política, saúde, vida sexual, dado genético ou biométrico, entre outros (art. 5º, II).'),
+Q('adm','Na LGPD, o encarregado pelo tratamento de dados pessoais (DPO) é a pessoa indicada para:','servir de canal entre o controlador, os titulares e a Autoridade Nacional',['decidir sozinha todas as finalidades do tratamento de dados','aplicar as multas previstas na lei aos controladores','fiscalizar o horário de trabalho de todos os servidores','substituir o operador nas rotinas de tratamento de dados'],'Art. 5º, VIII, da Lei 13.709/2018.'),
+Q('adm','Entre os princípios da Lei nº 14.133/2021 (art. 5º) está:','o planejamento',['a oralidade','o informalismo','a subsidiariedade','a concentração'],'A Lei lista, entre outros: legalidade, impessoalidade, moralidade, publicidade, eficiência, interesse público, planejamento, transparência, segregação de funções e vinculação ao edital.'),
+/* ---- Legislação Institucional, Previdenciária e de Assistência à Saúde ---- */
+Q('leg','De acordo com o art. 40 da Constituição Federal, o regime próprio dos servidores titulares de cargo efetivo tem caráter:','contributivo e solidário, com contribuição do ente, dos ativos, dos aposentados e dos pensionistas',['facultativo e privado, administrado por instituições bancárias','gratuito, mantido apenas pelo Tesouro do ente federativo','voluntário, com adesão apenas de servidores comissionados','assistencial, sem relação com contribuição dos segurados'],'O art. 40 exige o equilíbrio financeiro e atuarial.'),
+Q('leg','Nos termos do art. 40, § 1º, II, da Constituição Federal, o servidor é aposentado compulsoriamente:','aos 75 anos de idade, com proventos proporcionais ao tempo de contribuição',['aos 65 anos de idade, sempre com proventos integrais','aos 70 anos de idade, sempre com proventos integrais','aos 80 anos de idade, somente a pedido do servidor','aos 60 anos de idade, com proventos proporcionais'],'A idade de 75 anos decorre da EC 88/2015 e da LC 152/2015.'),
+Q('leg','O servidor ocupante exclusivamente de cargo em comissão, de cargo temporário ou de emprego público fica vinculado:','ao Regime Geral de Previdência Social',['ao regime próprio de previdência do ente','a nenhum regime de previdência social','somente ao regime de previdência complementar','ao regime próprio, mas sem direito à aposentadoria'],'Art. 40, § 13, da CF. O regime próprio é destinado aos titulares de cargo efetivo.'),
+Q('leg','É vedada, no regime próprio de previdência, a contagem de tempo de contribuição:','fictício',['em órgão do mesmo município','em atividade privada urbana','em atividade privada rural','em outro ente federativo'],'Art. 40, § 10, da CF. A contagem recíproca (art. 201, § 9º) é permitida e depende da certidão de tempo de contribuição.'),
+Q('leg','O documento que comprova o tempo de contribuição de um segurado para fins de contagem recíproca entre regimes é:','a Certidão de Tempo de Contribuição (CTC)',['o atestado de residência do segurado','o termo de posse no cargo efetivo','a declaração de imposto de renda','o comprovante de matrícula em curso'],'A CTC é emitida pelo regime em que o tempo foi cumprido.'),
+Q('leg','A Lei nº 9.796/1999 dispõe sobre:','a compensação financeira entre o Regime Geral e os regimes próprios, na contagem recíproca',['a organização das polícias militares dos Estados','o regime jurídico dos servidores públicos federais','a concessão de auxílio-doença no Regime Geral','a licitação de bens e serviços de informática'],'É a base da compensação previdenciária (Comprev).'),
+Q('leg','Segundo a Lei nº 9.717/1998, a contribuição do ente federativo ao regime próprio não poderá ser inferior ao valor da contribuição do servidor ativo, nem superior:','ao dobro dessa contribuição',['à metade dessa contribuição','ao triplo dessa contribuição','a 50% dos proventos pagos','ao teto do Regime Geral'],'Art. 2º da Lei 9.717/1998.'),
+Q('leg','De acordo com o art. 40, § 20, da Constituição Federal, é vedada, em cada ente federativo, a existência:','de mais de um regime próprio e de mais de uma unidade gestora',['de regime próprio para servidores efetivos','de previdência complementar para servidores','de contribuição de aposentados e pensionistas','de unidade gestora com personalidade jurídica própria'],'Incluído pela EC 103/2019. No município, a unidade gestora do RPPS é o IPAM.'),
+Q('leg','Pela EC nº 103/2019, os entes que mantêm regime próprio devem instituir, por lei de iniciativa do Poder Executivo:','regime de previdência complementar para os servidores titulares de cargo efetivo',['regime de capitalização obrigatório para todos os aposentados','plano de saúde gratuito para todos os servidores','fundo de garantia por tempo de serviço para os efetivos','auxílio-reclusão para os dependentes dos servidores'],'Art. 40, § 14, da CF. A Lei Complementar Municipal nº 870/2021 trata do regime de previdência complementar do Município.'),
+Q('leg','Após a EC nº 103/2019, os regimes próprios concedem, como benefícios previdenciários, apenas:','aposentadorias e pensão por morte',['salário-maternidade e auxílio-doença','auxílio-reclusão e salário-família','seguro-desemprego e abono salarial','auxílio-acidente e pensão especial'],'Os demais benefícios (como o salário-maternidade) passam a ser assumidos pelo ente federativo (art. 9º, §§ 2º e 3º, da EC 103).'),
+Q('leg','Segundo o edital, a Lei Complementar Municipal nº 404/2010 trata:','do Regime Próprio de Previdência Social (RPPS/IPAM)',['do Regime Jurídico dos Servidores Municipais','do serviço de Assistência à Saúde e do FAS','do Plano de Carreira, Cargos e Remuneração','do Regime de Previdência Complementar'],'Associações do edital: LC 385/2010 (regime jurídico), LC 404/2010 (RPPS), LC 841/2021 (saúde e FAS), LC 866/2021 (carreira do IPAM), LC 870/2021 (previdência complementar) e LC 886/2022 (organização do IPAM).'),
+Q('leg','De acordo com o edital, o Regime Jurídico dos Servidores Públicos Municipais de Porto Velho é a Lei Complementar Municipal:','nº 385/2010',['nº 404/2010','nº 841/2021','nº 866/2021','nº 870/2021'],'A LC 385/2010 trata de provimento, vacância, direitos e vantagens, deveres, proibições, responsabilidades e processo disciplinar.'),
+Q('leg','Segundo o edital, a Lei Complementar Municipal nº 841/2021 trata:','do serviço de Assistência à Saúde e do Fundo de Assistência à Saúde (FAS)',['do Regime Próprio de Previdência Social do IPAM','do Plano de Carreira e Remuneração do IPAM','da organização e das competências do IPAM','do regime de previdência complementar do Município'],'O edital pede filiação, usuários, dependentes, custeio e utilização dos serviços.'),
+Q('leg','Segundo o edital, a Lei Complementar Municipal nº 866/2021 dispõe sobre:','o Plano de Carreira, Cargos e Remuneração do IPAM',['o Regime Jurídico dos Servidores Municipais','o Regime Próprio de Previdência Social','o serviço de Assistência à Saúde do IPAM','a organização e a estrutura do IPAM'],'Tem relação direta com o cargo: quadro técnico, ingresso e atribuições dos cargos.'),
+/* ---- Conhecimentos Específicos: Atendimento ---- */
+Q('esp','A escuta ativa, no atendimento ao público, consiste em:','prestar atenção ao que a pessoa diz, sem interromper, e confirmar o entendimento',['ouvir só o início da fala e responder logo, para ganhar tempo','falar mais do que o usuário, para conduzir o atendimento','anotar tudo o que ouve sem demonstrar nenhum interesse','concordar com tudo o que o usuário diz, para evitar conflito'],'Escutar com atenção reduz erros e retrabalho e melhora a relação com o usuário.'),
+Q('esp','Entre os idosos, a Lei nº 10.741/2003 (Estatuto da Pessoa Idosa) assegura prioridade especial às pessoas com idade igual ou superior a:','80 anos',['60 anos','65 anos','70 anos','75 anos'],'A prioridade geral é para quem tem 60 anos ou mais. Entre eles, os maiores de 80 têm preferência especial (art. 3º, § 2º).'),
+Q('esp','Têm direito a atendimento prioritário, nos termos da Lei nº 10.048/2000, entre outras pessoas:','gestantes, lactantes, pessoas com deficiência e pessoas com criança de colo',['apenas as pessoas com mais de 70 anos de idade','os servidores do próprio órgão onde são atendidos','os usuários que chegaram primeiro ao atendimento','as pessoas que forem indicadas pela chefia do setor'],'Também têm prioridade os idosos com idade igual ou superior a 60 anos e as pessoas obesas.'),
+Q('esp','No atendimento telefônico, a conduta adequada do servidor é:','identificar-se e avisar antes de colocar a ligação em espera',['atender sem se identificar, para ganhar tempo','deixar o telefone tocar até que outro servidor atenda','interromper a fala do usuário para agilizar a ligação','dar dados de segurados a qualquer pessoa que ligue'],'Cortesia e clareza valem tanto no atendimento remoto quanto no presencial.'),
+Q('esp','Ao orientar um usuário sobre procedimentos previdenciários, o servidor deve:','usar linguagem simples e evitar termos técnicos que o usuário não conheça',['usar o maior número possível de siglas e termos jurídicos','falar rapidamente, para não ocupar o balcão por muito tempo','repetir o texto da lei, sem nenhuma explicação adicional','indicar que ele consulte a internet, sem orientá-lo'],'Orientar é fazer o usuário entender o que precisa fazer.'),
+Q('esp','O servidor que não souber responder a uma dúvida do usuário deve:','consultar a norma ou o setor competente e informar o dado correto',['dar uma resposta aproximada, para não demonstrar desconhecimento','pedir que o usuário volte outro dia, sem dar explicações','indicar a resposta que lhe parecer mais provável no momento','encerrar o atendimento, alegando falta de tempo'],'Uma informação errada pode prejudicar o direito do segurado.'),
+Q('esp','Os dados de um segurado, como benefícios e informações de saúde, podem ser fornecidos:','ao titular ou a quem tenha autorização ou representação legal, após identificação',['a qualquer pessoa que diga ser parente do segurado','a vizinhos ou conhecidos que procurarem o servidor','a quem telefonar sabendo o nome completo do segurado','a qualquer pessoa, desde que peça com educação e cordialidade'],'O sigilo funcional e a LGPD exigem identificação e autorização.'),
+Q('esp','Em uma equipe de trabalho, a atitude que mais contribui para um ambiente colaborativo é:','compartilhar informações, respeitar diferenças e apoiar os colegas nas demandas',['reter informações importantes para se destacar perante a chefia','criticar os colegas na frente dos usuários do serviço','cumprir só a própria tarefa, sem se interessar pelo setor','evitar o diálogo com a chefia e com os colegas de outros setores'],'O trabalho em equipe é um dos pontos do edital (Administração Pública, Atendimento e Ética).'),
+Q('esp','Diante de um conflito entre dois colegas, a atitude mais adequada de um servidor é:','buscar o diálogo respeitoso e, se necessário, levar o caso à chefia',['tomar o partido de um dos colegas, para encerrar a discussão','ignorar o fato e fingir que nada aconteceu no setor','expor a situação aos usuários que aguardam atendimento','responder com ironia, para constranger quem começou'],'A solução de conflitos pressupõe respeito, escuta e, se preciso, mediação da chefia.'),
+Q('esp','A “primeira impressão” no atendimento ao público refere-se principalmente:','à postura, à cordialidade e à apresentação do servidor no início do contato',['ao número de documentos exigidos do usuário no balcão','ao tempo de espera do usuário na fila de atendimento','à quantidade de assinaturas existentes em cada processo','ao custo do serviço que está sendo prestado ao usuário'],'O primeiro contato influencia a confiança do usuário.'),
+/* ---- Protocolo e processos administrativos ---- */
+Q('esp','Autuação é a operação em que:','se forma o processo, com capa, numeração e juntada dos documentos de origem',['se arquivam definitivamente os documentos do órgão','se eliminam os documentos de pouca importância no arquivo','se devolve ao interessado o documento que ele apresentou','se assina digitalmente o documento recebido no protocolo'],'É o ato de formar o processo a partir de um documento ou requerimento.'),
+Q('esp','A juntada, em um processo administrativo, é o ato de:','anexar um documento ao processo, em ordem, com numeração e rubrica das folhas',['retirar um documento do processo, com registro da retirada','destruir documentos duplicados que estão nos autos do processo','enviar o processo ao arquivo permanente do órgão','autorizar a eliminação dos documentos já vencidos no arquivo'],'A retirada de documento é o desentranhamento.'),
+Q('esp','O desentranhamento de um documento de um processo é:','a retirada do documento dos autos, com o devido registro',['a união provisória de dois processos em tramitação','a anexação de um documento novo ao processo, em ordem','o arquivamento do processo, após a decisão final','a numeração sequencial das folhas do processo'],'Deve ser feito mediante despacho e com registro, para preservar a numeração e a integridade do processo.'),
+Q('esp','A apensação é a união:','provisória de um processo a outro, para tramitação conjunta, sem perda de identidade',['definitiva de dois processos, que passam a formar um só','de um documento ao processo, na ordem de numeração das folhas','da cópia de um processo ao respectivo processo original','de dois documentos de assuntos diferentes em um único volume'],'Na terminologia usual, a união definitiva é a anexação; a apensação é provisória.'),
+Q('esp','As atividades do setor de protocolo compreendem:','recebimento, registro, classificação, distribuição e controle da tramitação',['apenas a guarda definitiva de todos os documentos do órgão','somente a elaboração dos ofícios assinados pela chefia','a eliminação dos documentos considerados sem valor','a decisão sobre o mérito dos requerimentos recebidos'],'O protocolo é a porta de entrada e o controle de circulação dos documentos.'),
+Q('esp','O despacho, em um processo, é:','o ato que encaminha o processo ou decide questão de rotina, feito por quem tem competência',['o resumo do processo, elaborado pelo arquivo do órgão','o documento que inicia o processo, apresentado pelo interessado','a cópia autenticada do processo, entregue ao requerente','a lista de documentos que o requerente precisa apresentar'],'Despacho é o ato de encaminhamento ou de decisão de menor complexidade.'),
+Q('esp','Na numeração das folhas de um processo físico, deve-se:','numerá-las em sequência, na ordem de juntada, com rubrica de quem numerou',['numerar só a primeira e a última folha de cada volume','numerar a lápis, para poder alterar a ordem quando quiser','deixar as folhas sem número, para facilitar novas juntadas','numerar por documento, e não por folha, em cada volume'],'A numeração sequencial garante a integridade e permite verificar se houve perda de folhas.'),
+Q('esp','Na Lei nº 9.784/1999, o prazo para interposição de recurso administrativo, salvo disposição legal específica, é de:','10 dias, contados da ciência ou da divulgação oficial da decisão',['3 dias úteis, contados da data da decisão proferida','5 dias corridos, contados do protocolo do recurso','20 dias úteis, contados do recebimento da notificação','30 dias corridos, contados da data de publicação'],'Art. 59 da Lei 9.784/1999. A lei se aplica ao processo federal; em outros entes, vale a norma local e, na ausência dela, costuma ser usada por analogia.'),
+Q('esp','Na contagem de prazos em processo administrativo, em regra:','exclui-se o dia do começo e inclui-se o do vencimento',['inclui-se o dia do começo e exclui-se o do vencimento','incluem-se o dia do começo e o do vencimento','excluem-se o dia do começo e o do vencimento','contam-se apenas os sábados, domingos e feriados'],'Art. 66 da Lei 9.784/1999: os prazos começam a correr a partir da data da cientificação oficial, excluído o dia do começo e incluído o do vencimento.'),
+Q('esp','Nos processos eletrônicos, a assinatura digital com certificado digital serve para:','comprovar a autoria e a integridade do documento assinado',['impedir que o documento seja lido por outras pessoas','aumentar a velocidade de tramitação do processo no sistema','substituir a necessidade de registro do documento no sistema','eliminar a necessidade de protocolo do documento no órgão'],'Assinar digitalmente garante quem assinou e que o documento não foi alterado.'),
+/* ---- Gestão documental ---- */
+Q('esp','Conforme a Lei nº 8.159/1991, a gestão de documentos é o conjunto de procedimentos referentes:','à produção, à tramitação, ao uso, à avaliação e ao arquivamento, até a eliminação ou guarda permanente',['somente à digitalização dos documentos produzidos no órgão','apenas ao armazenamento dos documentos em serviços de nuvem','exclusivamente à eliminação dos documentos sem valor','à guarda de documentos de interesse histórico do município'],'Art. 3º da Lei 8.159/1991.'),
+Q('esp','Na teoria das três idades, o arquivo corrente é aquele que:','reúne documentos em tramitação ou de uso frequente pelo setor que os produziu',['guarda documentos sem uso, que aguardam a eliminação','guarda documentos de valor histórico, de forma definitiva','guarda as cópias de segurança dos documentos eletrônicos','reúne documentos recebidos de outros órgãos públicos'],'Fases: corrente (uso frequente), intermediária (uso eventual, aguardando prazos) e permanente (valor histórico).'),
+Q('esp','O arquivo permanente destina-se a:','guardar definitivamente os documentos de valor histórico, probatório ou informativo',['guardar os documentos até que sejam eliminados do órgão','guardar os documentos que estão em uso diário no setor','receber as cópias dos documentos já digitalizados','guardar apenas os documentos recebidos de outros órgãos'],'A guarda permanente ocorre depois da avaliação, com destinação final definida.'),
+Q('esp','A tabela de temporalidade de documentos tem como finalidade:','definir os prazos de guarda dos documentos e a sua destinação final',['numerar as folhas dos processos em tramitação no órgão','registrar o horário de entrada e saída dos servidores','classificar os documentos pela cor da pasta de arquivo','indicar quais servidores podem assinar cada documento'],'É um instrumento de avaliação: sem ela, não é adequado eliminar documentos.'),
+Q('esp','O plano de classificação de documentos serve para:','organizar os documentos conforme as funções e atividades do órgão',['definir o horário de funcionamento do arquivo do órgão','registrar a retirada de documentos do arquivo por usuários','classificar os documentos como sigilosos ou ostensivos','cadastrar os usuários que consultam o arquivo do órgão'],'A classificação define em qual assunto (código) o documento é arquivado.'),
+Q('esp','A eliminação de documentos públicos deve ocorrer:','somente após a avaliação, conforme a tabela de temporalidade e com autorização',['quando o setor precisar de mais espaço para guardar documentos','a critério do servidor responsável pelo arquivo do órgão','sempre que o documento tiver mais de um ano de existência','de acordo com a preferência da chefia imediata do setor'],'Eliminar sem autorização e sem critérios pode causar perda de provas e responsabilização.'),
+Q('esp','Entre os cuidados de conservação de documentos em papel, destaca-se:','evitar umidade, calor, luz excessiva, poeira e insetos',['guardar os documentos sempre próximos a janelas, para ventilar','consertar páginas rasgadas com fitas adesivas comuns','empilhar os documentos sem proteção, para economizar espaço','guardar os documentos no chão, para facilitar o acesso'],'Umidade e luz aceleram a deterioração do papel.'),
+Q('esp','O acesso a documentos que contenham dados pessoais de segurados deve ser:','restrito a quem tenha necessidade e autorização, com sigilo e LGPD',['livre a qualquer servidor do órgão, em qualquer setor','livre ao público externo, desde que peça com educação','permitido apenas à chefia, sem nenhum tipo de registro','dependente da vontade do usuário, sem exigir identificação'],'O acesso deve ser controlado e registrado, conforme a necessidade de cada função.'),
+/* ---- Redação oficial ---- */
+Q('esp','De acordo com o Manual de Redação da Presidência da República, são características da redação oficial:','impessoalidade, formalidade, padronização, clareza e concisão',['pessoalidade, informalidade, regionalismos e ornamentos','subjetividade, emoção, gírias e abreviações frequentes','persuasão, humor, criatividade e linguagem informal','expressividade, siglas em excesso e longas explicações'],'Texto oficial é impessoal, formal, claro e conciso, em padrão culto.'),
+Q('esp','Segundo o Manual de Redação da Presidência da República, o ofício é o tipo de documento usado para:','a comunicação entre órgãos públicos e entre estes e particulares',['a comunicação interna entre setores do mesmo órgão','o registro das decisões tomadas em uma reunião','a divulgação de normas a vários destinatários','a comprovação de um fato por quem tem competência'],'Memorando é comunicação interna; ata registra reuniões; circular é para vários destinatários.'),
+Q('esp','O memorando destina-se a:','comunicações entre unidades administrativas de um mesmo órgão',['comunicações do órgão com particulares e empresas','o registro das decisões tomadas em uma reunião','a emissão de atestados e de certidões a usuários','a transmissão de normas gerais para a população'],'O memorando é interno, mais ágil e menos formal que o ofício.'),
+Q('esp','A certidão é o documento pelo qual:','a autoridade competente atesta fatos que constam de registros ou processos do órgão',['um servidor requer um direito a uma autoridade superior','o órgão convoca os interessados para uma reunião de trabalho','a chefia encaminha um processo a outro setor do órgão','se resumem as decisões tomadas em uma reunião de equipe'],'A certidão reproduz o que está registrado. A declaração é feita sob a responsabilidade de quem declara.'),
+Q('esp','Pelo Manual de Redação da Presidência da República, o fecho “Respeitosamente,” é usado em comunicações dirigidas:','a autoridades superiores, inclusive o Presidente da República',['a autoridades da mesma hierarquia do remetente','a pessoas de hierarquia inferior à do remetente','a particulares, em qualquer comunicação oficial','apenas a colegas do mesmo setor de trabalho'],'Já “Atenciosamente,” é para as autoridades de mesma hierarquia ou de hierarquia inferior.'),
+Q('esp','O pronome de tratamento “Vossa Senhoria” é adequado para:','autoridades e particulares em geral, nas comunicações formais',['somente o Presidente da República e os governadores','somente os Ministros de Estado e os Secretários','somente os magistrados e os membros do Ministério Público','somente os parentes e os amigos dos servidores'],'“Vossa Excelência” é para autoridades de maior hierarquia. Os pronomes levam o verbo na 3ª pessoa.'),
+Q('esp','O relatório, na rotina administrativa, tem como finalidade:','expor de forma organizada e objetiva as atividades feitas ou os fatos apurados',['convocar os servidores para uma reunião no setor','pedir autorização para o afastamento de um servidor','certificar documentos que constam nos arquivos do órgão','distribuir tarefas entre os servidores de cada setor'],'Um relatório simples costuma trazer identificação, descrição dos fatos, resultados e conclusão.'),
+Q('esp','O requerimento é o documento em que:','o interessado dirige a uma autoridade um pedido de direito ou providência',['a chefia concede uma licença a um servidor do órgão','o órgão comprova um fato registrado em seus arquivos','o servidor responde a uma notificação recebida do órgão','a chefia convoca a equipe para uma reunião de trabalho'],'O requerimento inicia muitos processos administrativos e pede deferimento.'),
+/* ---- Materiais e patrimônio ---- */
+Q('esp','No método PEPS de controle de estoques:','o primeiro item a entrar é o primeiro a sair',['o último item a entrar é o primeiro a sair','o item de maior valor é o primeiro a sair','o item de menor valor é o primeiro a sair','o item de maior volume é o primeiro a sair'],'PEPS = primeiro que entra, primeiro que sai. Evita o vencimento de materiais.'),
+Q('esp','Na classificação ABC de estoques, os itens da classe A são:','os de maior valor de consumo, em pequeno número, com controle mais rigoroso',['os de menor valor e em maior quantidade, com controle simples','os que não podem ser adquiridos pelo órgão nem comprados','os itens perecíveis, que devem ser consumidos em poucos dias','os de maior volume físico, que ocupam mais espaço no almoxarifado'],'Poucos itens respondem por boa parte do valor: por isso a classe A merece mais atenção.'),
+Q('esp','O tombamento de bens patrimoniais consiste em:','registrar o bem permanente no patrimônio do órgão, com número de identificação',['dar baixa no bem, por perda, roubo ou inutilização','vender o bem em leilão público, por preço mínimo','emprestar o bem a outro órgão, por prazo determinado','destruir o bem que já não tem utilidade para o órgão'],'Tombar é incorporar e identificar o bem ao patrimônio; baixar é retirá-lo.'),
+Q('esp','O inventário físico de materiais e bens tem como objetivo:','conferir quantidade e estado dos itens, comparando com os registros',['definir o preço de venda dos itens que o órgão possui','substituir a necessidade de controle das entradas e saídas','eliminar os itens usados e os que estão sem utilização','aumentar o volume do estoque que está no almoxarifado'],'É a contagem real comparada ao que consta nos controles.'),
+Q('esp','O material de consumo, diferentemente do material permanente:','perde a identidade física ou se esgota em curto prazo, como o papel e a caneta',['tem durabilidade superior a dois anos, como mesas e armários','é sempre registrado como patrimônio, com número de tombamento','é utilizado apenas pelos servidores ocupantes de cargos em comissão','só pode ser adquirido por meio de pregão eletrônico'],'Mesa, computador e armários são, em regra, bens permanentes.'),
+Q('esp','O estoque mínimo, em um almoxarifado, é:','a quantidade de segurança que evita a falta de materiais até a chegada do reabastecimento',['a quantidade que nunca pode ser consumida pelos setores','o valor mínimo de compra que se aceita em cada pedido','a quantidade máxima que o almoxarifado consegue guardar','o conjunto de materiais que está sem uso há mais de um ano'],'Ao atingir o ponto de pedido, deve-se solicitar nova compra.'),
+/* ---- Compras e contratos ---- */
+Q('esp','Entre as modalidades da Lei nº 14.133/2021, a adequada para a aquisição de bens e serviços comuns é:','o pregão',['o concurso','o leilão','o diálogo competitivo','a tomada de preços'],'Bens e serviços comuns têm padrões de desempenho definidos objetivamente. A tomada de preços não existe mais na Lei 14.133.'),
+Q('esp','A contratação direta, sem licitação, por inexigibilidade, ocorre quando:','há inviabilidade de competição',['o valor da compra é muito alto','o órgão tem pressa em comprar','o fornecedor já foi contratado antes','a chefia prefere um fornecedor'],'Art. 74 da Lei 14.133/2021. Dispensa é diferente: a competição é possível, mas a lei a dispensa (art. 75).'),
+Q('esp','Na Lei nº 14.133/2021, a fase em que se elabora o estudo técnico preliminar e se define o objeto da contratação é a fase:','preparatória',['recursal','de homologação','de habilitação','de divulgação do edital'],'Art. 17: preparatória; divulgação do edital; apresentação de propostas e lances; julgamento; habilitação; recursal; homologação.'),
+Q('esp','O fiscal do contrato administrativo tem como atribuição:','acompanhar a execução do contrato e verificar se o objeto é cumprido como pactuado',['escolher o fornecedor da contratação sem fazer licitação','aprovar o orçamento anual do órgão contratante','assinar os contratos em nome da chefia do órgão','julgar as propostas apresentadas na licitação'],'A fiscalização do contrato é prevista no art. 117 da Lei 14.133/2021.'),
+Q('esp','A ata de registro de preços:','registra o compromisso de fornecimento, que a Administração usa conforme a necessidade',['obriga a Administração a comprar toda a quantidade registrada','é um contrato de obra de grande valor, assinado com o vencedor','dispensa o fornecimento, mas obriga o pagamento ao fornecedor','substitui o empenho da despesa no momento do pagamento'],'O registro de preços permite contratar de acordo com a demanda, sem obrigação de compra total.'),
+Q('esp','Para o controle de contratos, é uma boa prática do setor administrativo:','manter registro da vigência, dos prazos de renovação e dos pagamentos',['guardar os contratos apenas com o fornecedor contratado','contratar sem acompanhar o prazo de cada contrato','renovar os contratos sem nenhuma avaliação prévia','deixar o controle dos prazos a cargo do fornecedor'],'Controlar vigência evita contratos vencidos e serviços sem cobertura.'),
+/* ---- Previdência e assistência (nível operacional) ---- */
+Q('esp','A filiação do servidor titular de cargo efetivo ao regime próprio de previdência social:','é automática e obrigatória, a partir do exercício do cargo',['depende de pedido do servidor, que pode ser feito a qualquer tempo','é facultativa, e o servidor pode cancelá-la quando quiser','ocorre somente após cinco anos de efetivo exercício do cargo','exige o pagamento de taxa de inscrição pelo servidor'],'A filiação é compulsória. A contribuição é obrigatória para os segurados ativos.'),
+Q('esp','Na rotina previdenciária, são provas documentais usuais da condição de dependente:','a certidão de nascimento, a de casamento e documentos que comprovem a relação',['apenas uma declaração verbal feita pelo próprio segurado','somente o comprovante de residência do segurado','a carteira de identidade do servidor segurado','o contracheque de qualquer pessoa da família do segurado'],'Os documentos exigidos variam conforme o dependente e a lei do regime.'),
+Q('esp','O recadastramento (ou prova de vida) de aposentados e pensionistas tem como finalidade:','atualizar os dados e confirmar a existência do beneficiário, evitando pagamentos indevidos',['aumentar o valor do benefício pago a cada beneficiário','cobrar uma taxa anual de todos os beneficiários cadastrados','cancelar o benefício sem processo administrativo prévio','extinguir o direito à aposentadoria dos beneficiários'],'É um controle comum nos regimes previdenciários, conforme as regras de cada ente.'),
+Q('esp','A manutenção e a revisão de direitos previdenciários envolvem, na prática administrativa:','análise do pedido, conferência dos documentos, instrução e decisão da autoridade competente',['a concessão automática do pedido, sem nenhuma análise','a decisão do servidor do balcão de atendimento, sozinho','a revisão por ordem de quem protocolou o pedido','o arquivamento do pedido, sem decisão da autoridade'],'A decisão é de quem tem competência, com instrução do processo e registro.'),
+Q('esp','A compensação previdenciária (Lei nº 9.796/1999) ocorre:','entre o Regime Geral e os regimes próprios, quando há contagem recíproca de tempo',['entre dois bancos privados, em operações de crédito consignado','entre o servidor e o ente federativo, em caso de atraso salarial','entre dois municípios, para repasse de verbas da saúde','entre o segurado e o plano de saúde que ele utiliza'],'O regime que concede o benefício compensa o regime de origem do tempo, proporcionalmente.'),
+Q('esp','O servidor que atende um segurado e conhece a situação de saúde dele deve:','guardar sigilo e não divulgar a informação a quem não tenha necessidade ou autorização',['comentar o caso com os colegas, para obter opiniões sobre ele','divulgar a situação, se o assunto parecer de interesse público','comentar o caso com amigos, sem citar o nome do segurado','publicar a situação nas redes sociais, sem citar o nome dele'],'O sigilo funcional e a proteção de dados se aplicam a todos que tratam as informações.'),
+Q('esp','Ao tratar dados pessoais de segurados e dependentes, o IPAM, como órgão público, deve:','tratar apenas os dados necessários à finalidade, com segurança e transparência',['coletar o maior número possível de dados, por precaução','compartilhar os dados com empresas interessadas, mediante pagamento','manter os dados indefinidamente, mesmo sem necessidade','deixar os dados sem controle de acesso, para facilitar a consulta'],'São princípios da LGPD: finalidade, adequação, necessidade, segurança e transparência.'),
+Q('esp','O atendimento aos usuários da assistência à saúde administrada pelo IPAM envolve, em geral, orientação sobre:','quem pode usar o serviço, os dependentes, o custeio e os procedimentos de utilização',['a emissão de multas de trânsito e a cobrança de tributos','o registro de empresas e a abertura de novos negócios','a concessão de crédito consignado e o financiamento de imóveis','a matrícula em escolas e o transporte escolar municipal'],'O tema consta no edital. Confira a LC 841/2021 e as normas do FAS para os detalhes.'),
+];
+/* ===== Reaproveitadas do banco do app de Porto Velho (Português e Raciocínio) ===== */
+const REUSE = [{"id": "pt1", "m": "pt", "e": "Assinale a alternativa em que a concordância verbal está de acordo com a norma-padrão.", "a": ["Fazem dois anos que a secretaria mudou de endereço.", "Haviam muitos documentos sobre a mesa.", "Devem existir outras soluções para o problema.", "Houveram várias reclamações sobre o atendimento.", "Existe muitas pendências no arquivo."], "g": 2, "x": "“Devem existir”: o verbo auxiliar concorda com o sujeito (“soluções”). Nas demais, “fazer” e “haver” com sentido de tempo ou de existência são impessoais (“Faz dois anos”, “Havia”, “Houve”), e “existir” concorda com o sujeito (“Existem”)."}, {"id": "pt2", "m": "pt", "e": "Assinale a alternativa em que o uso do sinal indicativo de crase está CORRETO.", "a": ["Entreguei o relatório à ele.", "Referiu-se à pessoas que não conhecia.", "A diretora começou à falar.", "Os alunos foram à secretaria retirar o histórico escolar.", "Ficamos frente à frente com o diretor."], "g": 3, "x": "“Ir a” + “a secretaria” (palavra feminina com artigo) resulta em crase: “à secretaria”. Não há crase diante de pronome pessoal (“ele”), de palavra no plural sem artigo (“a pessoas”), de verbo (“a falar”) nem em expressões formadas por palavras repetidas (“frente a frente”)."}, {"id": "pt5", "m": "pt", "e": "De acordo com as regras de acentuação gráfica vigentes, está CORRETA a grafia de:", "a": ["herói", "assembléia", "vôo", "idéia", "pára (verbo parar)"], "g": 0, "x": "“Herói” é oxítona terminada em “ói” e leva acento. Depois do Acordo Ortográfico, perderam o acento “assembleia”, “ideia” (paroxítonas com ditongo aberto), “voo” (hiato “oo”) e “para” (verbo)."}, {"id": "pt6", "m": "pt", "e": "Quanto à regência verbal, a frase que está de acordo com a norma-padrão é:", "a": ["Prefiro mais estudar do que dormir.", "Aspiramos ao cargo de agente de secretaria escolar.", "Assistimos o filme ontem à noite.", "Esqueci-me os documentos em casa.", "Obedeço os horários da escola."], "g": 1, "x": "“Aspirar” no sentido de desejar exige a preposição “a”: “aspirar ao cargo”. As demais ficam assim: “prefiro estudar a dormir”, “assistimos ao filme”, “esqueci os documentos” (ou “esqueci-me dos documentos”) e “obedeço aos horários”."}, {"id": "pt7", "m": "pt", "e": "Assinale a alternativa em que a vírgula está empregada de acordo com a norma-padrão.", "a": ["Os alunos, chegaram cedo à escola.", "A secretária, que chegou cedo organizou os arquivos.", "Ele disse, que viria amanhã.", "Estudei muito mas, não passei.", "Maria, entregue o documento ao diretor."], "g": 4, "x": "A vírgula isola o vocativo (“Maria”). Nas outras: não se separa sujeito e verbo (1ª), a oração explicativa exige duas vírgulas (2ª), não se separa o verbo da oração que o completa (3ª) e a vírgula vem antes de “mas” (4ª)."}, {"id": "pt8", "m": "pt", "e": "Em “Aquela sala é um forno no verão”, ocorre a figura de linguagem denominada", "a": ["comparação.", "ironia.", "metáfora.", "eufemismo.", "antítese."], "g": 2, "x": "Há identificação direta entre “sala” e “forno”, sem conectivo comparativo (como, tal qual). Isso é metáfora."}, {"id": "pt9", "m": "pt", "e": "Assinale a alternativa em que a colocação do pronome átono está de acordo com a norma-padrão.", "a": ["Nunca me esqueci daquele dia.", "Me entregue o documento hoje.", "Ele disse que entregaria-me o documento.", "Não entregaram-me o documento.", "Quem disse-lhe isso?"], "g": 0, "x": "Palavras negativas (“nunca”, “não”), pronomes interrogativos (“quem”) e conjunções subordinativas (“que”) atraem o pronome átono (próclise). Além disso, a norma-padrão não inicia frase com pronome átono. Forma correta das demais: “Entregue-me”, “Ele disse que me entregaria”, “Não me entregaram”, “Quem lhe disse isso?”."}, {"id": "pt10", "m": "pt", "e": "Está de acordo com a norma-padrão quanto à concordância nominal a frase:", "a": ["É proibida a entrada de estranhos na secretaria.", "Seguem anexo as certidões solicitadas.", "Ela mesmo preencheu a ficha de matrícula.", "As salas estavam meias vazias.", "Ela ficou muito obrigado pelo apoio."], "g": 0, "x": "Com artigo definido (“a entrada”), “proibida” concorda com o substantivo feminino. As outras corretas seriam: “seguem anexas as certidões”, “ela mesma”, “meio vazias” (“meio” é advérbio e não varia) e “muito obrigada”."}, {"id": "rl1", "m": "rl", "e": "Uma escola tem 480 alunos, dos quais 35% estudam no turno da manhã. Quantos alunos estudam nesse turno?", "a": ["128", "148", "158", "168", "178"], "g": 3, "x": "480 × 0,35 = 168."}, {"id": "rl2", "m": "rl", "e": "Uma impressora produz 120 cópias em 6 minutos. Mantido o mesmo ritmo, quantas cópias ela produzirá em 15 minutos?", "a": ["200", "240", "300", "330", "360"], "g": 2, "x": "Ritmo de 120 ÷ 6 = 20 cópias por minuto. Em 15 minutos: 20 × 15 = 300."}, {"id": "rl3", "m": "rl", "e": "Quatro servidores arquivam certa quantidade de processos em 6 dias. Mantido o mesmo ritmo individual, em quantos dias 8 servidores arquivariam a mesma quantidade?", "a": ["2", "3", "4", "8", "12"], "g": 1, "x": "Mais servidores, menos dias: grandezas inversamente proporcionais. 4 × 6 = 8 × x, logo x = 3."}, {"id": "rl4", "m": "rl", "e": "Dois alarmes tocam juntos às 8h. Depois disso, um toca a cada 12 minutos e o outro a cada 18 minutos. Eles voltarão a tocar juntos às", "a": ["8h30.", "8h36.", "8h54.", "9h00.", "9h12."], "g": 1, "x": "O intervalo é o mínimo múltiplo comum: mmc(12, 18) = 36 minutos. 8h + 36 min = 8h36."}, {"id": "rl5", "m": "rl", "e": "Um candidato obteve as notas 6, 8 e 9, com pesos 2, 3 e 5, respectivamente. Sua média ponderada é", "a": ["7,3", "7,7", "8,0", "8,1", "8,3"], "g": 3, "x": "(6×2 + 8×3 + 9×5) ÷ (2+3+5) = (12 + 24 + 45) ÷ 10 = 8,1."}, {"id": "rl6", "m": "rl", "e": "Um número somado ao seu triplo resulta em 84. Esse número é", "a": ["18", "21", "24", "28", "42"], "g": 1, "x": "x + 3x = 84, então 4x = 84 e x = 21."}, {"id": "rl7", "m": "rl", "e": "A negação da proposição “Todos os documentos foram arquivados” é", "a": ["Pelo menos um documento não foi arquivado.", "Nenhum documento foi arquivado.", "Todos os documentos deixaram de ser arquivados.", "Algum documento foi arquivado.", "Poucos documentos foram arquivados."], "g": 0, "x": "A negação de “todo A é B” é “algum A não é B”, ou seja, pelo menos um documento não foi arquivado. “Nenhum” é mais forte do que a negação lógica."}, {"id": "rl8", "m": "rl", "e": "A proposição “Se chove, então a aula é suspensa” é logicamente equivalente a", "a": ["Se não chove, então a aula não é suspensa.", "Se a aula é suspensa, então chove.", "Chove e a aula não é suspensa.", "Não chove ou a aula não é suspensa.", "Se a aula não é suspensa, então não chove."], "g": 4, "x": "A condicional p → q equivale à contrapositiva ¬q → ¬p: “se a aula não é suspensa, então não chove”. A primeira alternativa é a inversa e a segunda é a recíproca; nenhuma delas é equivalente."}, {"id": "rl9", "m": "rl", "e": "Em um grupo de 50 servidores, 30 falam inglês, 25 falam espanhol e 10 falam os dois idiomas. Quantos servidores não falam nenhum dos dois idiomas?", "a": ["0", "3", "5", "10", "15"], "g": 2, "x": "Falam pelo menos um: 30 + 25 − 10 = 45. Não falam nenhum: 50 − 45 = 5."}, {"id": "rl10", "m": "rl", "e": "Uma urna contém 4 bolas azuis, 3 vermelhas e 5 verdes. Retirando-se uma bola ao acaso, a probabilidade de que ela seja vermelha ou verde é", "a": ["1/3", "5/12", "7/12", "2/3", "3/4"], "g": 3, "x": "Total de bolas: 4 + 3 + 5 = 12. Casos favoráveis: 3 + 5 = 8. Probabilidade: 8/12 = 2/3."}, {"id": "px3", "m": "pt", "e": "No trecho “Misture a farinha com o açúcar, acrescente os ovos e mexa até obter uma massa homogênea”, predomina o tipo textual", "a": ["narrativo.", "descritivo.", "injuntivo.", "dissertativo.", "argumentativo."], "g": 2, "x": "Os verbos no imperativo orientam o leitor sobre o que fazer. É o tipo injuntivo (instrucional), típico de receitas, manuais e bulas."}, {"id": "px4", "m": "pt", "e": "Um texto que relata um fato recente, responde a perguntas como “o quê?”, “quem?”, “quando?” e “onde?” e costuma ter título e lide pertence ao gênero", "a": ["notícia.", "crônica.", "carta pessoal.", "receita.", "poema."], "g": 0, "x": "A notícia informa fatos atuais de forma objetiva; o lide é o primeiro parágrafo, que resume as informações essenciais."}, {"id": "px5", "m": "pt", "e": "Em qual das frases a palavra “fria” está empregada em sentido CONOTATIVO?", "a": ["A água do rio estava fria.", "Coloquei a bebida fria na mesa.", "A sala fria incomodava os alunos.", "Recebeu do atendente uma resposta fria.", "O vento frio chegou no fim da tarde."], "g": 3, "x": "Em “resposta fria”, o adjetivo não indica temperatura, e sim falta de simpatia. É sentido figurado (conotativo). Nas demais, indica temperatura (sentido denotativo)."}, {"id": "px6", "m": "pt", "e": "Em “Li Machado de Assis durante todo o fim de semana”, ocorre", "a": ["metáfora.", "metonímia.", "hipérbole.", "antítese.", "eufemismo."], "g": 1, "x": "O autor é usado no lugar da obra: é metonímia (autor pela obra)."}, {"id": "px7", "m": "pt", "e": "Em “Já te disse mil vezes para fechar a porta!”, a figura de linguagem predominante é", "a": ["eufemismo.", "ironia.", "paradoxo.", "personificação.", "hipérbole."], "g": 4, "x": "“Mil vezes” é um exagero expressivo: hipérbole."}, {"id": "px8", "m": "pt", "e": "A expressão “Ele partiu desta para melhor”, usada para falar de uma morte, é exemplo de", "a": ["hipérbole.", "antítese.", "eufemismo.", "comparação.", "gradação."], "g": 2, "x": "O eufemismo suaviza uma ideia desagradável ou dolorosa."}, {"id": "px9", "m": "pt", "e": "Assinale a frase em que a palavra em destaque está empregada corretamente.", "a": ["O cumprimento das normas é obrigação de todos os servidores.", "A mesa tem dois metros de cumprimento.", "O diretor mediu o cumprimento da sala.", "Faltou ao aluno comprimento das tarefas.", "O comprimento do prazo foi respeitado pela equipe."], "g": 0, "x": "“Cumprimento” é ato de cumprir (ou saudação); “comprimento” é medida de extensão. Só a primeira frase usa corretamente “cumprimento”; nas outras trocaram-se os parônimos."}, {"id": "px10", "m": "pt", "e": "Complete: “O diretor ___ o prazo anterior, que já havia sido divulgado, e ___ o erro de digitação do documento.”", "a": ["retificou / ratificou", "retificou / retificou", "ratificou / ratificou", "ratificou / retificou", "retificou / ratifiquou"], "g": 3, "x": "Ratificar é confirmar; retificar é corrigir. O prazo foi confirmado (ratificou) e o erro foi corrigido (retificou)."}, {"id": "px11", "m": "pt", "e": "Complete: “Estudou muito; ___, não alcançou a nota mínima.”", "a": ["portanto", "contudo", "logo", "porque", "pois"], "g": 1, "x": "A segunda ideia contraria a expectativa criada pela primeira. É relação de oposição, expressa por “contudo”. “Portanto” e “logo” indicam conclusão; “porque” e “pois”, causa ou explicação."}, {"id": "px12", "m": "pt", "e": "Complete: “Ele faltou à reunião ___ estava doente.”", "a": ["embora", "todavia", "mas", "porém", "porque"], "g": 4, "x": "A segunda oração explica o motivo da ausência: “porque” (causa). Os outros conectivos são de concessão ou oposição e não cabem aqui."}, {"id": "px13", "m": "pt", "e": "Em “Os candidatos chegaram cedo. Eles aguardaram a abertura dos portões.”, o termo “Eles” estabelece coesão", "a": ["sequencial por oposição.", "lexical por antonímia.", "referencial, pois retoma “os candidatos”.", "por elipse do sujeito.", "por antecipação de um termo posterior."], "g": 2, "x": "O pronome “Eles” retoma um termo já mencionado. É coesão referencial, mais precisamente anafórica."}, {"id": "px14", "m": "pt", "e": "Em “Embora estivesse cansado, continuou estudando”, a oração iniciada por “embora” expressa ideia de", "a": ["concessão.", "causa.", "adição.", "conclusão.", "finalidade."], "g": 0, "x": "“Embora” introduz um obstáculo que não impediu o fato principal. É concessão."}, {"id": "px15", "m": "pt", "e": "A palavra “entardecer” é formada por", "a": ["composição por justaposição.", "composição por aglutinação.", "derivação regressiva.", "derivação parassintética.", "hibridismo."], "g": 3, "x": "Prefixo “en-” e sufixo “-ecer” são acrescentados ao mesmo tempo ao radical “tard(e)”. Não existem “entarde” nem “tardecer”. É parassíntese."}, {"id": "px16", "m": "pt", "e": "Assinale a alternativa em que ambas as palavras são formadas por aglutinação.", "a": ["girassol, passatempo", "planalto, aguardente", "guarda-chuva, beija-flor", "couve-flor, arco-íris", "guarda-roupa, pé de moleque"], "g": 1, "x": "Planalto (plano + alto) e aguardente (água + ardente) perdem elementos ao se unir. As demais são justaposições, em que as palavras mantêm a forma."}, {"id": "px17", "m": "pt", "e": "Em “A pesca é proibida no período de reprodução”, o substantivo “pesca” é formado por", "a": ["derivação prefixal.", "derivação imprópria.", "derivação parassintética.", "composição por justaposição.", "derivação regressiva."], "g": 4, "x": "“Pesca” vem do verbo “pescar” com a redução da terminação: derivação regressiva (como ataque, compra)."}, {"id": "px18", "m": "pt", "e": "A palavra “desleal” é formada por", "a": ["derivação parassintética.", "derivação sufixal.", "derivação prefixal.", "composição por aglutinação.", "derivação regressiva."], "g": 2, "x": "O prefixo “des-” é acrescentado ao adjetivo “leal”, que existe sozinho. Não há sufixo envolvido."}, {"id": "px19", "m": "pt", "e": "Assinale a alternativa em que todos os plurais estão corretos.", "a": ["cidadãos, órfãos, mãos, irmãos", "cidadãos, órfões, mãos, irmãos", "cidadãos, órfãos, mões, irmãos", "cidadões, órfãos, mãos, irmãos", "cidadãos, órfãos, mãos, irmões"], "g": 0, "x": "Cidadão, órfão, mão e irmão fazem plural em -ãos."}, {"id": "px20", "m": "pt", "e": "O adjetivo pátrio referente a Rondônia é", "a": ["rondonense.", "rondoniano.", "rondonês.", "rondoniense.", "rondônico."], "g": 3, "x": "O gentílico de Rondônia é “rondoniense”. (“Rondonense” se refere a Rondon.)"}, {"id": "px21", "m": "pt", "e": "A locução adjetiva “de rim” corresponde ao adjetivo", "a": ["retal.", "renal.", "cardíaco.", "ocular.", "dental."], "g": 1, "x": "De rim = renal. De olho = ocular; de dente = dental; de coração = cardíaco."}, {"id": "px22", "m": "pt", "e": "O plural de “guarda-chuva” é", "a": ["guardas-chuvas.", "guarda-chuvaes.", "guardas-chuva.", "guarda-chuvões.", "guarda-chuvas."], "g": 4, "x": "Em composto de verbo + substantivo, só o segundo elemento varia: guarda-chuvas (e, igualmente, beija-flores)."}, {"id": "px23", "m": "pt", "e": "Assinale a alternativa em que o plural do composto está correto.", "a": ["couve-flores", "couves-flor", "couves-flores", "couve-flor", "couvesflores"], "g": 2, "x": "Em substantivo + substantivo, os dois elementos variam: couves-flores."}, {"id": "px24", "m": "pt", "e": "Complete: “Não há mais segredos entre ___ e você.”", "a": ["mim", "eu", "me", "comigo", "si"], "g": 0, "x": "Depois de preposição (“entre”), usa-se o pronome oblíquo tônico: “entre mim e você”."}, {"id": "px25", "m": "pt", "e": "Complete: “O candidato ___ nome consta da lista foi chamado.”", "a": ["que", "quem", "o qual", "cujo", "onde"], "g": 3, "x": "“Cujo” indica posse (o nome do candidato) e concorda com o possuído (“nome”), sem artigo depois."}, {"id": "px26", "m": "pt", "e": "Em uma carta dirigida ao reitor de uma universidade, o tratamento adequado é", "a": ["Vossa Santidade.", "Vossa Magnificência.", "Vossa Excelência.", "Vossa Senhoria.", "Vossa Eminência."], "g": 1, "x": "Reitores de universidades recebem o tratamento “Vossa Magnificência”."}, {"id": "px27", "m": "pt", "e": "Assinale a frase em que o pronome relativo “onde” está empregado adequadamente.", "a": ["A situação onde nos encontramos é difícil.", "A reunião onde falamos foi longa.", "O projeto onde trabalho é novo.", "A lei onde isso está escrito mudou.", "A escola onde estudei fica em Porto Velho."], "g": 4, "x": "“Onde” deve indicar lugar físico, como em “a escola onde estudei”. Nos outros casos, o adequado seria “em que”, “na qual” ou “na reunião em que”."}, {"id": "px28", "m": "pt", "e": "Complete: “Este é o cargo ___ aspiro.”", "a": ["que", "o que", "a que", "cujo", "em que"], "g": 2, "x": "“Aspirar” (desejar) pede a preposição “a”, que vem antes do relativo: “o cargo a que aspiro”."}, {"id": "px29", "m": "pt", "e": "Em “Precisa-se de professores”, o “se” é", "a": ["índice de indeterminação do sujeito.", "pronome apassivador.", "pronome reflexivo.", "conjunção condicional.", "parte integrante do verbo."], "g": 0, "x": "O verbo “precisar” é transitivo indireto (precisa de algo), então “se” indetermina o sujeito e o verbo fica no singular."}, {"id": "px30", "m": "pt", "e": "Em “Vendem-se casas”, o “se” é", "a": ["índice de indeterminação do sujeito.", "pronome reflexivo.", "conjunção integrante.", "pronome apassivador.", "parte integrante do verbo."], "g": 3, "x": "“Vender” é transitivo direto, e “casas” é o sujeito paciente (“Casas são vendidas”). O “se” é partícula apassivadora, e o verbo concorda com o sujeito."}, {"id": "px31", "m": "pt", "e": "Assinale a frase em que “mal” e “mau” estão empregados corretamente.", "a": ["Ele é um mal aluno.", "Ele é um mau aluno.", "Ele passou mau durante a prova.", "Ela foi mau atendida.", "O mal funcionário foi advertido."], "g": 1, "x": "“Mau” (oposto de bom) acompanha substantivo: “mau aluno”. “Mal” (oposto de bem) acompanha verbo ou particípio: “passou mal”, “foi mal atendida”."}, {"id": "px32", "m": "pt", "e": "Em “Disse que viria à reunião”, a palavra “que” é", "a": ["pronome relativo.", "substantivo.", "advérbio de intensidade.", "conjunção causal.", "conjunção integrante."], "g": 4, "x": "O “que” introduz a oração que completa o verbo “disse” (“disse isso”). Não pode ser trocado por “o qual”. É conjunção integrante."}, {"id": "px33", "m": "pt", "e": "Complete: “Se você ___ o diretor, entregue-lhe este ofício.”", "a": ["ver", "vier", "vir", "viu", "veja"], "g": 2, "x": "Futuro do subjuntivo do verbo “ver”: se eu vir, se você vir. “Vier” é do verbo “vir” (se ele vier)."}, {"id": "px34", "m": "pt", "e": "Complete: “Se o juiz ___ no processo, tudo mudará.”", "a": ["intervier", "interviesse", "intervir", "intervém", "intervindo"], "g": 0, "x": "“Intervir” segue “vir”. O futuro do subjuntivo é “intervier”, como “se ele vier”. “Tudo mudará” (futuro do presente) combina com futuro do subjuntivo."}, {"id": "px35", "m": "pt", "e": "Complete: “Se eu ___ mais tempo, estudaria mais.”", "a": ["tenho", "tiver", "teria", "tivesse", "tinha"], "g": 3, "x": "Com futuro do pretérito (“estudaria”), usa-se o pretérito imperfeito do subjuntivo: “tivesse”."}, {"id": "px36", "m": "pt", "e": "Complete: “Os servidores ___ direito a férias.”", "a": ["tem", "têm", "tém", "teem", "tens"], "g": 1, "x": "Sujeito plural (“os servidores”), então “têm”, com circunflexo. “Tem” é singular."}, {"id": "px37", "m": "pt", "e": "Assinale a frase em que o verbo está corretamente flexionado.", "a": ["Quando eu ver o documento, aviso.", "Se ele manter a calma, tudo dará certo.", "Se eu fazer a prova, passo.", "Quando ele querer, avisa.", "Se ele mantiver a calma, tudo dará certo."], "g": 4, "x": "“Manter” segue “ter”, e o futuro do subjuntivo é “mantiver”. As demais deveriam ser: “vir”, “quiser” e “fizer”."}, {"id": "px38", "m": "pt", "e": "A voz ativa correspondente a “Os alunos foram avisados pela diretora” é", "a": ["A diretora foi avisada pelos alunos.", "Os alunos avisaram a diretora.", "A diretora avisou os alunos.", "Avisaram-se os alunos pela diretora.", "Os alunos se avisaram."], "g": 2, "x": "O agente da passiva (“pela diretora”) vira sujeito, e o sujeito paciente (“os alunos”) vira objeto direto."}, {"id": "px39", "m": "pt", "e": "Em “Os alunos chegaram cansados”, o predicado é", "a": ["verbo-nominal.", "verbal.", "nominal.", "sem predicativo.", "indeterminado."], "g": 0, "x": "“Chegaram” é verbo de ação (predicação verbal) e “cansados” é predicativo do sujeito. Há dois núcleos, e o predicado é verbo-nominal."}, {"id": "px40", "m": "pt", "e": "Em “Alugam-se salas comerciais”, a voz verbal é", "a": ["ativa.", "passiva analítica.", "reflexiva.", "passiva sintética.", "recíproca."], "g": 3, "x": "Verbo transitivo direto + pronome “se” e sujeito paciente (“salas”): passiva sintética. O verbo concorda com o sujeito."}, {"id": "px41", "m": "pt", "e": "Em “Entreguei o ofício ao diretor”, o verbo “entregar” é", "a": ["intransitivo.", "transitivo direto e indireto.", "transitivo indireto.", "transitivo direto.", "de ligação."], "g": 1, "x": "Tem objeto direto (“o ofício”) e objeto indireto (“ao diretor”)."}, {"id": "px42", "m": "pt", "e": "Assinale a frase com concordância verbal correta.", "a": ["Mais de um aluno perderam a prova.", "Existe muitas dúvidas sobre o edital.", "Houveram vários erros no documento.", "Fazem três anos que ele trabalha aqui.", "Mais de um aluno perdeu a prova."], "g": 4, "x": "“Mais de um” leva o verbo ao singular. “Houve” e “faz” são impessoais, e “existem” concordaria com “dúvidas”."}, {"id": "px43", "m": "pt", "e": "Assinale a frase com concordância verbal correta.", "a": ["Aluga-se salas comerciais.", "Alugam-se sala comercial.", "Alugam-se salas comerciais.", "Aluga-se as salas comerciais.", "Alugasse salas comerciais."], "g": 2, "x": "Na voz passiva sintética, o verbo concorda com o sujeito paciente: “salas” → “alugam-se”."}, {"id": "px44", "m": "pt", "e": "Assinale a frase com concordância verbal correta.", "a": ["Cerca de dez alunos faltaram à aula.", "Cerca de dez alunos faltou à aula.", "Cerca de dez alunos faltava à aula.", "Cerca de dez aluno faltaram à aula.", "Cerca de dez alunos falta à aula."], "g": 0, "x": "Depois de “cerca de”, o verbo concorda com o numeral/substantivo que vem em seguida: “dez alunos faltaram”."}, {"id": "px45", "m": "pt", "e": "Assinale a frase com concordância verbal correta.", "a": ["Ele é um dos candidatos que mais estuda.", "Ele é um dos candidatos que mais estudava.", "Ele é um dos candidatos que mais estudou.", "Ele é um dos candidatos que mais estudam.", "Ele é um dos candidatos que mais estudariam."], "g": 3, "x": "Em “um dos que”, o verbo da oração relativa vai ao plural (“que mais estudam”), pois o sujeito é “candidatos”."}, {"id": "px46", "m": "pt", "e": "Complete: “Seguem ___ as certidões solicitadas.”", "a": ["anexo", "anexas", "anexos", "anexa", "anexado"], "g": 1, "x": "“Anexo” concorda com o substantivo a que se refere: certidões (feminino plural) → anexas."}, {"id": "px47", "m": "pt", "e": "Assinale a frase em que a concordância nominal está correta.", "a": ["Elas estavam meias cansadas.", "Elas estava meio cansadas.", "Elas estavam meias cansada.", "Elas estavam meio cansados.", "Elas estavam meio cansadas."], "g": 4, "x": "Em “meio cansadas”, “meio” é advérbio (quer dizer “um pouco”) e fica invariável."}, {"id": "px48", "m": "pt", "e": "Assinale a frase em que a concordância nominal está correta.", "a": ["As alunas estavam bastantes cansadas.", "Há bastante alunos na sala.", "Há bastantes alunos na sala.", "As alunas estão bastantes ansiosas.", "Há bastantes alunas ansiosos."], "g": 2, "x": "“Bastantes alunos”: aqui “bastante” é pronome indefinido e varia. Em “bastante cansadas”, é advérbio e não varia."}, {"id": "px49", "m": "pt", "e": "Assinale a alternativa em que a concordância nominal está de acordo com a norma-padrão.", "a": ["É necessária a sua presença.", "É necessário a sua presença.", "Foi proibida passagem.", "Ela estava meia cansada.", "Elas ficaram só."], "g": 0, "x": "Com o sujeito determinado (“a sua presença”), o adjetivo concorda: “É necessária a sua presença”."}, {"id": "px50", "m": "pt", "e": "Assinale a frase correta quanto à regência do verbo “preferir”.", "a": ["Prefiro estudar do que dormir.", "Prefiro mais estudar que dormir.", "Prefiro estudar de dormir.", "Prefiro estudar a dormir.", "Prefiro estudar em vez a dormir."], "g": 3, "x": "“Preferir” é regido por “a”: preferir X a Y. Não se usa “mais” nem “do que” com ele."}, {"id": "px51", "m": "pt", "e": "Complete: “Os candidatos estão ansiosos ___ resultado.”", "a": ["do", "pelo", "ao", "no", "com"], "g": 1, "x": "A regência nominal consagrada é “ansioso por”: ansiosos pelo resultado."}, {"id": "px52", "m": "pt", "e": "Assinale a frase correta quanto à regência verbal.", "a": ["Esqueci-me o endereço.", "Esqueci do endereço.", "Esqueceu-se o prazo.", "Esquecemo-nos os prazos.", "Esqueci-me do endereço."], "g": 4, "x": "Quando “esquecer” é pronominal (esquecer-se), pede “de”. Sem pronome, o objeto é direto: “Esqueci o endereço”."}, {"id": "px53", "m": "pt", "e": "Assinale a frase correta quanto à regência do verbo “assistir” no sentido de “ver”.", "a": ["Assistimos o filme ontem à noite.", "Assistimos pelo filme ontem à noite.", "Assistimos ao filme ontem à noite.", "Assistimos no filme ontem à noite.", "Assistimos com o filme ontem à noite."], "g": 2, "x": "“Assistir” no sentido de “ver” é transitivo indireto e exige “a”: assistimos ao filme."}, {"id": "px54", "m": "pt", "e": "Assinale a frase em que a regência está correta.", "a": ["O regulamento a que obedecemos é rigoroso.", "A pessoa que me referi é professora.", "O cargo que aspiro é de agente.", "A prova visa o aumento da qualidade.", "O livro que gosto está na mesa."], "g": 0, "x": "“Obedecer” pede “a”, que vem antes do relativo: “o regulamento a que obedecemos”. Nas outras, falta a preposição: “de que gosto”, “a que aspiro”, “a que me referi”."}, {"id": "px55", "m": "pt", "e": "Assinale a frase em que o emprego do sinal indicativo da crase está correto.", "a": ["Viajamos à Brasília no mês passado.", "Fomos à pé até a escola.", "Chegamos à Roma no mês passado.", "Viajamos à Bahia no mês passado.", "Falei à você ontem."], "g": 3, "x": "“Bahia” aceita artigo (a Bahia): “Voltei da Bahia”, logo “fui à Bahia”. Brasília e Roma não aceitam artigo; diante de verbos, pronomes pessoais e palavras masculinas não há crase."}, {"id": "px56", "m": "pt", "e": "Complete: “Entregue o documento ___ diretora.”", "a": ["a", "à", "as", "às", "há"], "g": 1, "x": "“Entregar algo a alguém” pede “a”, e “a diretora” tem artigo: a + a = à."}, {"id": "px57", "m": "pt", "e": "Complete: “A reunião começará ___ 14 horas.”", "a": ["a", "à", "há", "as", "às"], "g": 4, "x": "Antes de horas determinadas usa-se crase: às 14 horas."}, {"id": "px58", "m": "pt", "e": "Em qual das alternativas NÃO se emprega o sinal indicativo da crase?", "a": ["Estudo à noite.", "Fomos à escola.", "Refiro-me a ele.", "Chegou às nove horas.", "Obedeço àquele regulamento."], "g": 2, "x": "Diante de pronome pessoal (“ele”) não há crase. As demais têm crase: locução adverbial, artigo feminino, horas e aquele."}, {"id": "px59", "m": "pt", "e": "Assinale a frase em que a colocação do pronome está de acordo com a norma-padrão.", "a": ["Quem me avisou?", "Quem avisou-me?", "Quem avisou me?", "Me avisou quem?", "Quem avisou-lhe?"], "g": 0, "x": "Pronomes interrogativos (“quem”) atraem o pronome átono: “Quem me avisou?”."}, {"id": "px60", "m": "pt", "e": "A mesóclise está correta em", "a": ["Entregarei-lhe o ofício amanhã.", "Entregar-lhe o ofício-ei amanhã.", "Lhe entregarei-o amanhã.", "Entregar-lhe-ei o ofício amanhã.", "Entregarei lhe o ofício amanhã."], "g": 3, "x": "No futuro do presente, sem palavra atrativa, o pronome vai no meio do verbo: entregar-lhe-ei."}, {"id": "px61", "m": "pt", "e": "Assinale a frase correta quanto à colocação pronominal.", "a": ["Tudo disseram-me.", "Tudo me disseram.", "Tudo disseram me.", "Me disseram tudo.", "Tudo disseram-lhe me."], "g": 1, "x": "O pronome indefinido “tudo” atrai o pronome átono: “Tudo me disseram”."}, {"id": "px62", "m": "pt", "e": "Assinale a frase em que há erro de colocação pronominal.", "a": ["Entregue-me o relatório.", "Não me esqueci do prazo.", "Tinha-me avisado a tempo.", "Disse-me a verdade.", "Tinha avisado-me a tempo."], "g": 4, "x": "O pronome átono não pode vir depois de verbo no particípio. O correto é “Tinha-me avisado”, com o pronome ligado ao verbo auxiliar."}, {"id": "px63", "m": "pt", "e": "Em “Choveu muito ontem”, a oração é", "a": ["de sujeito simples.", "de sujeito oculto.", "sem sujeito.", "de sujeito indeterminado.", "de sujeito composto."], "g": 2, "x": "Verbos que indicam fenômenos da natureza não têm sujeito. “Choveu” é verbo impessoal."}, {"id": "px64", "m": "pt", "e": "Em “Precisa-se de secretários”, o sujeito é", "a": ["indeterminado.", "composto.", "oculto.", "simples.", "inexistente."], "g": 0, "x": "O verbo “precisar” é transitivo indireto, e o “se” indetermina o sujeito: não se sabe quem precisa."}, {"id": "px65", "m": "pt", "e": "Em “Os alunos ficaram atentos”, “atentos” exerce a função de", "a": ["objeto direto.", "adjunto adnominal.", "complemento nominal.", "predicativo do sujeito.", "aposto."], "g": 3, "x": "“Ficar” é verbo de ligação, e “atentos” atribui uma característica ao sujeito “os alunos”: predicativo do sujeito."}, {"id": "px66", "m": "pt", "e": "Em “Porto Velho, capital de Rondônia, recebeu novos investimentos”, a expressão “capital de Rondônia” é", "a": ["vocativo.", "aposto.", "adjunto adverbial.", "predicativo do sujeito.", "objeto indireto."], "g": 1, "x": "Explica o termo “Porto Velho” e vem isolada por vírgulas. É aposto."}, {"id": "px67", "m": "pt", "e": "Em “Os alunos, que estudaram, passaram”, a oração destacada é", "a": ["adjetiva restritiva.", "coordenada aditiva.", "substantiva objetiva direta.", "adverbial causal.", "adjetiva explicativa."], "g": 4, "x": "Está entre vírgulas e apenas acrescenta uma informação sobre todos os alunos: adjetiva explicativa."}, {"id": "px68", "m": "pt", "e": "A frase que indica que somente alguns candidatos chegaram atrasados é", "a": ["Os candidatos, que chegaram atrasados, não entraram.", "Os candidatos, que chegaram, atrasados não entraram.", "Os candidatos que chegaram atrasados não entraram.", "Os candidatos chegaram atrasados, e não entraram todos.", "Os candidatos, chegaram atrasados, não entraram."], "g": 2, "x": "Sem vírgulas, a oração é restritiva e limita o grupo: só os que chegaram atrasados não entraram."}, {"id": "px69", "m": "pt", "e": "Em “Estudou muito, logo passou na prova”, a segunda oração é coordenada", "a": ["conclusiva.", "adversativa.", "alternativa.", "aditiva.", "explicativa."], "g": 0, "x": "“Logo” indica conclusão (“portanto”): coordenada sindética conclusiva."}, {"id": "px70", "m": "pt", "e": "Em “É importante que estudemos todos os dias”, a oração “que estudemos todos os dias” é", "a": ["subordinada adverbial final.", "subordinada substantiva objetiva direta.", "subordinada adjetiva restritiva.", "subordinada substantiva subjetiva.", "coordenada aditiva."], "g": 3, "x": "Equivale ao sujeito de “é importante” (“Isso é importante”). É oração subordinada substantiva subjetiva."}, {"id": "px71", "m": "pt", "e": "Assinale a alternativa em que a vírgula está empregada INCORRETAMENTE.", "a": ["Porto Velho, 31 de outubro de 2026.", "O diretor, chegou cedo à escola.", "Maria, venha até aqui.", "Estudei muito, mas não passei.", "Ontem, na reunião, o diretor apresentou o calendário."], "g": 1, "x": "Não se separa o sujeito (“o diretor”) do verbo por vírgula, a menos que haja termo intercalado."}, {"id": "px72", "m": "pt", "e": "Assinale a frase pontuada corretamente.", "a": ["Os alunos, estudaram muito.", "Quero, que você estude mais.", "Estudou e, passou.", "O candidato disse, que viria.", "Eu gosto de café; ela, de chá."], "g": 4, "x": "A vírgula indica a omissão do verbo (“gosta”). As outras separam termos que não devem ser separados."}, {"id": "px73", "m": "pt", "e": "Assinale a frase em que a vírgula está empregada de acordo com a norma-padrão.", "a": ["Fui ao mercado, e comprei pão.", "Fui ao mercado comprar, pão.", "Ele, porém, não voltou.", "O livro, que li está na mesa.", "Ele disse, que voltaria."], "g": 2, "x": "O conectivo “porém” intercalado fica entre vírgulas. As demais separam termos que não devem ser separados, como o verbo da oração que o completa."}, {"id": "px74", "m": "pt", "e": "Assinale a palavra acentuada corretamente.", "a": ["álbum", "heróico", "jibóia", "enjôo", "abençôo"], "g": 0, "x": "“Álbum” é paroxítona terminada em -um e leva acento. Perderam o acento: jiboia, heroico, enjoo, abençoo."}, {"id": "px75", "m": "pt", "e": "Segundo o Acordo Ortográfico em vigor, a alternativa em que todas as palavras estão corretas é", "a": ["idéia, voo, enjoo, heroico", "ideia, vôo, enjoo, heroico", "ideia, voo, enjôo, heroico", "ideia, voo, enjoo, heroico", "idéia, vôo, enjôo, heróico"], "g": 3, "x": "Ideia, voo, enjoo e heroico perderam o acento."}, {"id": "px76", "m": "pt", "e": "Complete: “Ontem ele não ___ comparecer à reunião.”", "a": ["pode", "pôde", "póde", "pôd", "pode-se"], "g": 1, "x": "No pretérito perfeito usa-se “pôde” (com acento circunflexo), para diferenciar de “pode” (presente)."}, {"id": "px77", "m": "pt", "e": "Assinale a palavra que DEVE receber acento gráfico.", "a": ["feiura", "juiz", "cheio", "ruim", "saude"], "g": 4, "x": "“Saúde” tem hiato com “u” tônico e leva acento. “Feiura” (depois de ditongo), “ruim” e “juiz” (seguidos de consoante na sílaba) não acentuam."}, {"id": "px78", "m": "pt", "e": "Complete: “___ você faltou à reunião?”", "a": ["Porque", "Porquê", "Por que", "Por quê", "Por quê?"], "g": 2, "x": "No início da pergunta, usa-se “por que” (por qual motivo)."}, {"id": "px79", "m": "pt", "e": "Assinale a alternativa cuja grafia está correta.", "a": ["exceção", "excessão", "escessão", "esceção", "exeção"], "g": 0, "x": "A grafia correta é “exceção”. “Excesso” é com “xc” e “ss”, e “exceção” é com “xc” e “ç”."}, {"id": "px80", "m": "pt", "e": "Segundo o Acordo Ortográfico em vigor, o hífen está corretamente empregado em", "a": ["auto-estima.", "infra-estrutura.", "extra-oficial.", "anti-inflamatório.", "contra-regra."], "g": 3, "x": "Prefixo terminado em vogal seguido de palavra com a mesma vogal pede hífen: anti-inflamatório. Nos demais casos, as vogais são diferentes: autoestima, infraestrutura, extraoficial, contrarregra."}, {"id": "px81", "m": "pt", "e": "Complete: “___ dois anos ele trabalha aqui; daqui ___ dois anos, se aposenta.”", "a": ["A / há", "Há / a", "Há / há", "A / a", "Á / há"], "g": 1, "x": "“Há” indica tempo passado ou presente; “a” indica tempo futuro."}, {"id": "px82", "m": "pt", "e": "Complete: “Não entendi o ___ da demora.”", "a": ["por que", "porque", "pôrque", "por quê", "porquê"], "g": 4, "x": "Depois do artigo “o”, trata-se de substantivo: “o porquê” (o motivo)."}, {"id": "px83", "m": "pt", "e": "Em “Eu gosto de café; ela, de chá”, ocorre", "a": ["pleonasmo.", "anacoluto.", "zeugma.", "silepse.", "polissíndeto."], "g": 2, "x": "Omite-se o verbo “gosta”, já citado antes. É zeugma."}, {"id": "px84", "m": "pt", "e": "Em “Os brasileiros somos otimistas”, ocorre silepse de", "a": ["pessoa.", "número.", "gênero.", "tempo.", "modo."], "g": 0, "x": "O verbo está na 1ª pessoa do plural (“somos”), embora o sujeito esteja na 3ª pessoa, porque o falante se inclui. É silepse de pessoa."}, {"id": "px85", "m": "pt", "e": "Assinale o exemplo de pleonasmo vicioso.", "a": ["Vi com meus próprios olhos.", "Falou em voz alta.", "Chorou lágrimas amargas.", "Subiu para cima da mesa.", "Cheguei, vi e venci."], "g": 3, "x": "“Subir para cima” repete a ideia sem acrescentar nada. As demais construções têm efeito expressivo."}, {"id": "px86", "m": "pt", "e": "Em “E chora, e ri, e grita, e se desespera”, ocorre", "a": ["assíndeto.", "polissíndeto.", "elipse.", "anacoluto.", "hipérbato."], "g": 1, "x": "A repetição da conjunção “e” é polissíndeto. O contrário é o assíndeto (ausência de conjunções)."}, {"id": "px87", "m": "pt", "e": "A variação linguística que ocorre de acordo com a região em que o falante vive é a", "a": ["diacrônica.", "estilística.", "diastrática.", "diafásica.", "diatópica."], "g": 4, "x": "Diatópica (ou regional) refere-se ao espaço geográfico. Exemplo: “mandioca” × “macaxeira”."}, {"id": "px88", "m": "pt", "e": "A mudança de “vosmecê” para “você” ao longo do tempo exemplifica variação", "a": ["diatópica.", "diastrática.", "diacrônica.", "diafásica.", "regional."], "g": 2, "x": "Variação histórica, ao longo do tempo: diacrônica."}, {"id": "px89", "m": "pt", "e": "Em um ofício enviado a um órgão público, o registro mais adequado é", "a": ["formal, impessoal e claro.", "regional, com expressões locais.", "informal, com gírias.", "coloquial, com abreviações de mensagem.", "literário, com muitas figuras de linguagem."], "g": 0, "x": "Documentos oficiais pedem linguagem formal, impessoal e clara, de acordo com a norma-padrão."}, {"id": "px90", "m": "pt", "e": "Assinale a frase que apresenta gerundismo, condenado pela norma culta.", "a": ["Enviarei o relatório amanhã.", "Vou enviar o relatório amanhã.", "Estou enviando o relatório agora.", "Vou estar enviando o relatório amanhã.", "Enviei o relatório ontem."], "g": 3, "x": "“Vou estar enviando” é construção desnecessária de gerúndio. Prefira “enviarei” ou “vou enviar”."}, {"id": "px91", "m": "pt", "e": "A expressão “ao invés de” é usada adequadamente em", "a": ["Ao invés de estudar, foi ao cinema.", "Ao invés de chover, o dia amanheceu ensolarado.", "Ao invés de sair, resolveu trabalhar.", "Ao invés de ligar, enviou uma mensagem.", "Ao invés de usar o computador, usou o celular."], "g": 1, "x": "“Ao invés de” significa “ao contrário de” e exige ideias opostas (chover × amanhecer ensolarado). Para simples substituição, use “em vez de”."}, {"id": "rx1", "m": "rl", "e": "Dois rolos de fita medem 24 m e 36 m. Eles serão cortados em pedaços de mesmo comprimento, o maior possível, sem sobras. Cada pedaço medirá", "a": ["6 m.", "8 m.", "12 m.", "18 m.", "24 m."], "g": 2, "x": "É o MDC de 24 e 36. Fatorando, 24 = 2³ · 3 e 36 = 2² · 3². Fatores comuns com menor expoente: 2² · 3 = 12."}, {"id": "rx2", "m": "rl", "e": "O número de divisores positivos de 60 é", "a": ["12.", "10.", "8.", "14.", "15."], "g": 0, "x": "60 = 2² · 3 · 5. Número de divisores = (2+1)(1+1)(1+1) = 12."}, {"id": "rx3", "m": "rl", "e": "O valor da expressão 3 + 2 × (10 − 4)² ÷ 6 é", "a": ["9.", "27.", "21.", "15.", "45."], "g": 3, "x": "Parênteses: 10 − 4 = 6. Potência: 6² = 36. Depois: 2 × 36 ÷ 6 = 12. Soma: 3 + 12 = 15."}, {"id": "rx4", "m": "rl", "e": "O menor número natural diferente de zero que é divisível ao mesmo tempo por 6, 8 e 10 é", "a": ["60.", "120.", "80.", "240.", "480."], "g": 1, "x": "É o MMC. 6 = 2·3, 8 = 2³, 10 = 2·5. Fatores com maior expoente: 2³ · 3 · 5 = 120."}, {"id": "rx5", "m": "rl", "e": "Cinco máquinas iguais produzem 600 peças em 6 dias. Mantido o ritmo, 8 dessas máquinas produzirão em 9 dias", "a": ["960 peças.", "1.080 peças.", "1.200 peças.", "1.600 peças.", "1.440 peças."], "g": 4, "x": "Regra de três composta, com grandezas diretas: 600 × (8/5) × (9/6) = 600 × 1,6 × 1,5 = 1.440."}, {"id": "rx6", "m": "rl", "e": "Três pedreiros constroem um muro em 12 dias. Mantido o mesmo ritmo individual, 4 pedreiros construiriam o mesmo muro em", "a": ["6 dias.", "8 dias.", "9 dias.", "10 dias.", "16 dias."], "g": 2, "x": "Mais pedreiros, menos dias (inversa). 3 × 12 = 4 × x, então x = 9."}, {"id": "rx7", "m": "rl", "e": "Um valor de R$ 1.200 será dividido em partes proporcionais a 1, 2 e 3. A maior parte será de", "a": ["R$ 600.", "R$ 500.", "R$ 400.", "R$ 700.", "R$ 800."], "g": 0, "x": "Soma das partes: 1 + 2 + 3 = 6. Cada parte vale 1.200 ÷ 6 = 200. A maior é 3 × 200 = 600."}, {"id": "rx8", "m": "rl", "e": "Em um mapa na escala 1:200.000, a distância entre duas cidades é de 5 cm. A distância real é de", "a": ["1 km.", "2 km.", "5 km.", "10 km.", "20 km."], "g": 3, "x": "5 × 200.000 = 1.000.000 cm = 10.000 m = 10 km."}, {"id": "rx9", "m": "rl", "e": "Um produto custava R$ 250 e recebeu desconto de 20%. O novo preço é", "a": ["R$ 150.", "R$ 200.", "R$ 180.", "R$ 210.", "R$ 230."], "g": 1, "x": "250 × 0,80 = 200. (Desconto de 20% = R$ 50.)"}, {"id": "rx10", "m": "rl", "e": "O preço de um produto sofreu aumento de 10% e, em seguida, um desconto de 10% sobre o novo preço. Em relação ao preço inicial, houve", "a": ["aumento de 1%.", "nenhuma variação.", "queda de 10%.", "aumento de 10%.", "queda de 1%."], "g": 4, "x": "Fator: 1,10 × 0,90 = 0,99. O preço final é 99% do inicial, uma queda de 1%."}, {"id": "rx11", "m": "rl", "e": "Em uma turma de 40 alunos, 14 são meninos. As meninas representam", "a": ["35% da turma.", "55% da turma.", "65% da turma.", "60% da turma.", "70% da turma."], "g": 2, "x": "Meninas: 40 − 14 = 26. 26 ÷ 40 = 0,65 = 65%."}, {"id": "rx12", "m": "rl", "e": "Depois de um aumento de 25%, o desconto que devolve o preço ao valor original é de", "a": ["20%.", "15%.", "25%.", "30%.", "80%."], "g": 0, "x": "O fator do aumento é 1,25. Para voltar, multiplica-se por 1/1,25 = 0,80, ou seja, desconto de 20%."}, {"id": "rx13", "m": "rl", "e": "Duas horas e quarenta e cinco minutos equivalem a", "a": ["145 minutos.", "155 minutos.", "175 minutos.", "165 minutos.", "185 minutos."], "g": 3, "x": "2 × 60 + 45 = 165 minutos."}, {"id": "rx14", "m": "rl", "e": "Uma velocidade de 54 km/h equivale a", "a": ["10 m/s.", "15 m/s.", "12 m/s.", "18 m/s.", "20 m/s."], "g": 1, "x": "Para passar de km/h para m/s, divide-se por 3,6: 54 ÷ 3,6 = 15."}, {"id": "rx15", "m": "rl", "e": "Um reservatório tem capacidade de 2,4 m³. Em litros, isso corresponde a", "a": ["24 L.", "240 L.", "240.000 L.", "24.000 L.", "2.400 L."], "g": 4, "x": "1 m³ = 1.000 L. Logo 2,4 m³ = 2.400 L."}, {"id": "rx16", "m": "rl", "e": "Uma reunião começou às 8h50min e durou 1h35min. Ela terminou às", "a": ["10h15min.", "10h35min.", "10h25min.", "10h45min.", "11h25min."], "g": 2, "x": "8h50 + 1h35 = 9h85 = 10h25."}, {"id": "rx17", "m": "rl", "e": "Se 3x + 5 = 20, então x vale", "a": ["5.", "4.", "3.", "6.", "15."], "g": 0, "x": "3x = 20 − 5 = 15, logo x = 5."}, {"id": "rx18", "m": "rl", "e": "Se x + y = 10 e x − y = 2, o produto x · y vale", "a": ["16.", "20.", "25.", "24.", "30."], "g": 3, "x": "Somando as equações: 2x = 12, x = 6 e y = 4. Produto: 24."}, {"id": "rx19", "m": "rl", "e": "Uma corrida de táxi custa R$ 5 de bandeirada mais R$ 2 por quilômetro rodado. Uma corrida de 12 km custa", "a": ["R$ 17.", "R$ 29.", "R$ 26.", "R$ 24.", "R$ 34."], "g": 1, "x": "f(x) = 2x + 5. Para x = 12: 24 + 5 = 29."}, {"id": "rx20", "m": "rl", "e": "A soma de três números inteiros consecutivos é 63. O menor deles é", "a": ["19.", "23.", "21.", "22.", "20."], "g": 4, "x": "x + (x+1) + (x+2) = 63 → 3x + 3 = 63 → x = 20. (20 + 21 + 22 = 63.)"}, {"id": "rx21", "m": "rl", "e": "A média de cinco números é 8. Incluindo o número 14 ao grupo, a nova média passa a ser", "a": ["8.", "10.", "9.", "11.", "12."], "g": 2, "x": "Soma inicial: 5 × 8 = 40. Nova soma: 54, com 6 números. Média: 54 ÷ 6 = 9."}, {"id": "rx22", "m": "rl", "e": "Um candidato obteve as notas 6, 8 e 10, com pesos 2, 3 e 5, respectivamente. Sua média ponderada é", "a": ["8,6.", "8,0.", "8,2.", "7,0.", "9,0."], "g": 0, "x": "(6·2 + 8·3 + 10·5) ÷ (2 + 3 + 5) = (12 + 24 + 50) ÷ 10 = 8,6."}, {"id": "rx23", "m": "rl", "e": "A média das idades de 4 pessoas é 30 anos. Uma delas, de 18 anos, deixa o grupo. A média das idades das outras 3 passa a ser", "a": ["30 anos.", "32 anos.", "36 anos.", "34 anos.", "38 anos."], "g": 3, "x": "Soma inicial: 120. Sem a de 18: 102. Média: 102 ÷ 3 = 34."}, {"id": "rx24", "m": "rl", "e": "A média aritmética de três números é 12. Se cada um deles for aumentado em 4 unidades, a nova média será", "a": ["12.", "16.", "15.", "14.", "48."], "g": 1, "x": "Somar 4 a todos os números soma 4 à média: 12 + 4 = 16."}, {"id": "rx25", "m": "rl", "e": "A negação da proposição “Se chove, então a rua fica molhada” é", "a": ["Se não chove, então a rua não fica molhada.", "Chove ou a rua fica molhada.", "Não chove e a rua fica molhada.", "Se a rua não fica molhada, então não chove.", "Chove e a rua não fica molhada."], "g": 4, "x": "A negação de p → q é p ∧ ¬q: “chove e a rua não fica molhada”. A quarta alternativa é a contrapositiva, que é equivalente à original, não a sua negação."}, {"id": "rx26", "m": "rl", "e": "A proposição condicional “p → q” é FALSA somente quando", "a": ["p é falsa e q é falsa.", "p é falsa e q é verdadeira.", "p é verdadeira e q é falsa.", "p é verdadeira e q é verdadeira.", "p e q têm valores diferentes."], "g": 2, "x": "A condicional só é falsa quando o antecedente é verdadeiro e o consequente é falso."}, {"id": "rx27", "m": "rl", "e": "A negação de “Maria é professora e João é médico” é", "a": ["Maria não é professora ou João não é médico.", "Maria não é professora e João não é médico.", "Maria é professora ou João é médico.", "Se Maria é professora, João é médico.", "Maria é professora e João não é médico."], "g": 0, "x": "Pela lei de De Morgan, ¬(p ∧ q) ≡ ¬p ∨ ¬q."}, {"id": "rx28", "m": "rl", "e": "A proposição “Se estudo, então passo” é equivalente a", "a": ["Se passo, então estudo.", "Se não estudo, então não passo.", "Estudo e não passo.", "Se não passo, então não estudo.", "Não estudo e passo."], "g": 3, "x": "A equivalente é a contrapositiva: ¬q → ¬p. A primeira é a recíproca e a segunda é a inversa, e nenhuma delas é equivalente."}, {"id": "rx29", "m": "rl", "e": "A negação de “Algum aluno faltou” é", "a": ["Todos os alunos faltaram.", "Nenhum aluno faltou.", "Algum aluno não faltou.", "Todos os alunos compareceram, exceto um.", "Poucos alunos faltaram."], "g": 1, "x": "A negação de “algum A é B” é “nenhum A é B”."}, {"id": "rx30", "m": "rl", "e": "A negação de “Nenhum servidor chegou atrasado” é", "a": ["Todos os servidores chegaram atrasados.", "Pelo menos um servidor chegou no horário.", "Algum servidor não chegou atrasado.", "Todos chegaram no horário.", "Algum servidor chegou atrasado."], "g": 4, "x": "A negação de “nenhum A é B” é “algum A é B”."}, {"id": "rx31", "m": "rl", "e": "Considere as premissas: “Todos os agentes são pontuais” e “Todos os pontuais são organizados”. Uma conclusão válida é", "a": ["Todo organizado é agente.", "Algum organizado não é pontual.", "Todo agente é organizado.", "Nenhum agente é organizado.", "Todo pontual é agente."], "g": 2, "x": "Pelo silogismo: se A está em B e B está em C, então A está em C. Todo agente é organizado."}, {"id": "rx32", "m": "rl", "e": "O argumento “Se chove, a rua molha. A rua está molhada. Logo, choveu.” é", "a": ["inválido, pois afirma o consequente.", "válido, por modus tollens.", "válido, por silogismo hipotético.", "válido, por modus ponens.", "inválido, pois nega o antecedente."], "g": 0, "x": "Saber que o consequente (a rua molhada) é verdadeiro não garante o antecedente: a rua pode ter sido molhada por outra causa. É a falácia da afirmação do consequente."}, {"id": "rx33", "m": "rl", "e": "Em um grupo de 100 alunos, 60 estudam inglês, 50 estudam espanhol e 20 estudam os dois idiomas. Quantos não estudam nenhum dos dois?", "a": ["5.", "20.", "15.", "10.", "30."], "g": 3, "x": "Estudam ao menos um: 60 + 50 − 20 = 90. Não estudam nenhum: 100 − 90 = 10."}, {"id": "rx34", "m": "rl", "e": "Um conjunto com 4 elementos possui quantos subconjuntos?", "a": ["8.", "16.", "12.", "32.", "64."], "g": 1, "x": "Um conjunto com n elementos tem 2ⁿ subconjuntos: 2⁴ = 16."}, {"id": "rx35", "m": "rl", "e": "Sejam A e B conjuntos com n(A) = 12, n(B) = 9 e n(A ∪ B) = 15. O número de elementos de A ∩ B é", "a": ["3.", "4.", "5.", "7.", "6."], "g": 4, "x": "n(A ∪ B) = n(A) + n(B) − n(A ∩ B). 15 = 12 + 9 − n(A ∩ B), logo n(A ∩ B) = 6."}, {"id": "rx36", "m": "rl", "e": "Em uma pesquisa com 80 pessoas, todas leem pelo menos um de dois jornais. 50 leem o jornal A e 40 leem o jornal B. O número de pessoas que leem os dois é", "a": ["5.", "20.", "10.", "30.", "40."], "g": 2, "x": "80 = 50 + 40 − x, logo x = 10."}, {"id": "rx37", "m": "rl", "e": "Na sequência 3, 7, 11, 15, …, o 20º termo é", "a": ["79.", "77.", "75.", "81.", "83."], "g": 0, "x": "É uma PA de razão 4. a₂₀ = 3 + 19 · 4 = 79."}, {"id": "rx38", "m": "rl", "e": "Na sequência 2, 6, 18, 54, …, o termo seguinte é", "a": ["108.", "126.", "180.", "162.", "216."], "g": 3, "x": "Cada termo é o anterior multiplicado por 3. 54 × 3 = 162."}, {"id": "rx39", "m": "rl", "e": "Na sequência 1, 1, 2, 3, 5, 8, 13, …, em que cada termo é a soma dos dois anteriores, o décimo termo é", "a": ["34.", "55.", "44.", "65.", "89."], "g": 1, "x": "A sequência é 1, 1, 2, 3, 5, 8, 13, 21, 34, 55. O décimo termo é 55."}, {"id": "rx40", "m": "rl", "e": "Ana diz: “Bia mente”. Bia diz: “Caio mente”. Caio diz: “Ana e Bia mentem”. Dizem a verdade apenas", "a": ["Ana.", "ninguém.", "Caio.", "Ana e Caio.", "Bia."], "g": 4, "x": "Se Ana falasse a verdade, Bia mentiria, então Caio falaria a verdade, e Ana teria de mentir: contradição. Logo Ana mente, Bia fala a verdade e Caio mente (e a frase de Caio, “Ana e Bia mentem”, é de fato falsa)."}, {"id": "rx41", "m": "rl", "e": "Ao lançar dois dados comuns, a probabilidade de a soma dos resultados ser 7 é", "a": ["1/12.", "1/9.", "1/6.", "1/4.", "1/3."], "g": 2, "x": "São 36 resultados possíveis. Somam 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1), ou seja, 6 casos. 6/36 = 1/6."}, {"id": "rx42", "m": "rl", "e": "O número de anagramas da palavra ARARA é", "a": ["10.", "5.", "20.", "60.", "120."], "g": 0, "x": "Permutação com repetição: 5! ÷ (3! · 2!) = 120 ÷ 12 = 10."}, {"id": "rx43", "m": "rl", "e": "De quantas maneiras é possível escolher uma comissão de 2 pessoas entre 6 candidatos?", "a": ["12.", "30.", "20.", "15.", "36."], "g": 3, "x": "A ordem não importa: C(6, 2) = 6! ÷ (2! · 4!) = 15."}, {"id": "rx44", "m": "rl", "e": "Uma senha tem 3 dígitos, escolhidos entre 0 e 9, sem repetição. O número de senhas possíveis é", "a": ["504.", "720.", "648.", "900.", "1.000."], "g": 1, "x": "10 · 9 · 8 = 720."}, {"id": "nxp11", "m": "pt", "e": "Considere as frases quanto à concordância verbal:\n\nI. Fazem dez anos que a escola foi inaugurada.\nII. Devem haver soluções para o problema.\nIII. Existem dúvidas sobre o calendário.\nIV. Houve problemas na entrega dos documentos.\n\nEstão de acordo com a norma-padrão, apenas:", "a": ["I e II.", "I e III.", "II e III.", "III e IV.", "II, III e IV."], "g": 3, "x": "I: “Faz dez anos” (fazer, indicando tempo, é impessoal). II: “Deve haver” (o auxiliar de “haver” impessoal também fica no singular). III: “existir” concorda com o sujeito “dúvidas”. IV: “Houve” é correto, pois “haver” com sentido de existir é impessoal e não concorda com “problemas” (que é objeto)."}, {"id": "nxp12", "m": "pt", "e": "Quanto ao emprego do sinal indicativo de crase, considere:\n\nI. Refiro-me à servidora que atendeu o público.\nII. O expediente começa às 8 horas.\nIII. Encaminhei o requerimento à Vossa Senhoria.\nIV. Os alunos chegaram à pé.\n\nEstão corretos, apenas:", "a": ["I e II.", "I e III.", "II e IV.", "III e IV.", "I, II e III."], "g": 0, "x": "I: “referir-se a” + “a servidora” = “à servidora”. II: horas determinadas pedem “às”. III: não se usa crase diante de pronome de tratamento como “Vossa Senhoria”. IV: não há crase em “a pé”, pois “pé” é masculino."}, {"id": "nxp13", "m": "pt", "e": "Assinale a alternativa em que todas as palavras estão grafadas de acordo com a norma-padrão.", "a": ["excessão, concessão, obsessão", "exceção, ascenção, obsessão", "exceção, ascensão, obseção", "exceção, ascensão, obsessão", "excessão, ascenção, obsessão"], "g": 3, "x": "A grafia correta é “exceção” (de excetuar), “ascensão” (ascender, com “-ensão”) e “obsessão” (com “-essão”). As outras alternativas trazem “excessão”, “ascenção” ou “obseção”, que estão erradas."}];
+const QB = REUSE.concat(NEW);
+const QM = Object.fromEntries(QB.map(q=>[q.id,q]));
+/* ===== Estudar ===== */
+const EST = {
+  pt:{ed:'Leitura e interpretação de textos; tipologia e gêneros; coerência, coesão e conectores; relações semânticas; figuras de linguagem; ortografia, acentuação e hífen; classes de palavras; flexão; termos da oração; período simples e composto; concordância; regência; crase; colocação pronominal; pontuação; reescrita de frases; variação linguística.', dica:['No IBADE, as questões de reescrita pedem que o sentido e a correção sejam mantidos. Teste cada alternativa trocando o trecho.','Revise crase, concordância e regência: são cobradas com frequência.','Leia o texto antes de ler as alternativas e sublinhe o que é afirmado e o que é inferido.']},
+  rl:{ed:'Lógica proposicional (conectivos, negações, equivalências, tabelas-verdade); argumentação; conjuntos; operações; razão, proporção e regra de três; porcentagem; equações e sistemas do 1º grau; sequências; contagem e probabilidade; média; tabelas e gráficos.', dica:['Porcentagem encadeada multiplica fatores.','Negue “todo A é B” como “algum A não é B”.','Regra de três: identifique se as grandezas são direta ou inversamente proporcionais.']},
+  inf:{ed:'Hardware, software e periféricos; Windows 10 e 11; noções de Linux; Microsoft Office/365 e LibreOffice (texto, planilhas e apresentações); internet e intranet; navegadores e e-mail; nuvem; compactação; segurança da informação (senhas, MFA, malware, phishing, antivírus, firewall, backup); certificado e assinatura digital; proteção de dados.', dica:['Decore atalhos do Windows e do Word e as funções básicas do Excel (SOMA, MÉDIA, SE, PROCV).','Diferencie backup completo, incremental e diferencial.','Assinatura digital garante autoria e integridade, não sigilo.']},
+  adm:{ed:'Princípios constitucionais; Administração direta e indireta; autarquias; agentes públicos; atos e poderes administrativos; serviços públicos e atendimento; comunicação; qualidade e eficiência; trabalho em equipe; processos e rotinas; protocolo e tramitação; ética e integridade; LAI (Lei 12.527/2011); LGPD (Lei 13.709/2018); noções da Lei 14.133/2021; redação oficial.', dica:['Memorize os prazos da LAI: 20 dias, prorrogáveis por 10.','Dado sensível (LGPD) inclui saúde, origem racial, religião, opinião política, biometria e genética.','A Lei 14.133 extinguiu o convite e a tomada de preços.']},
+  leg:{ed:'CF arts. 37 a 41 (destaque para o art. 40) e art. 149; EC 103/2019; Lei 9.717/1998; Lei 10.887/2004; Portaria MTP 1.467/2022; LC Municipal 385/2010 (servidores), 404/2010 (RPPS/IPAM), 841/2021 (saúde e FAS), 866/2021 (carreira do IPAM), 870/2021 (previdência complementar) e 886/2022 (organização do IPAM).', dica:['Aprenda o que cada Lei Complementar Municipal regula: é cobrança certa de “ligação” entre lei e assunto.','Aposentadoria compulsória: 75 anos. Cargo em comissão: Regime Geral.','Este app ainda não traz o texto das leis municipais. Estude-as direto nas leis, com o edital em mãos.']},
+  esp:{ed:'Rotinas administrativas e atendimento em entidade previdenciária e de saúde; cadastro e conferência de dados; protocolo, autuação, instrução, tramitação e arquivamento; gestão documental (temporalidade, classificação, sigilo); redação oficial; planilhas e controles; gestão de materiais, patrimônio, almoxarifado e inventário; compras e contratos; princípios de atendimento; previdência do servidor (filiação, dependentes, benefícios, CTC, compensação – Lei 9.796/1999); assistência à saúde do IPAM; proteção de dados e sigilo.', dica:['É a prova de maior peso: 50 questões, de 2 pontos cada (100 dos 130 pontos).','Treine protocolo e gestão documental com os termos exatos: autuar, juntar, apensar, desentranhar, tabela de temporalidade.','Leia a Lei 9.784/1999 (processo administrativo) e o Manual de Redação da Presidência.']}
+};
+
+/* ===== Estado e utilidades ===== */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pad = n => String(n).padStart(2,'0');
+const fmtT = s => pad(Math.floor(s/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60);
+const pct = (a,b) => b ? Math.round(100*a/b) : 0;
+const shuffle = a => { a = a.slice(); for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; };
+const L = 'ABCDE';
+const KEY = 'gabarito-ipam-v1';
+const DUR = 4*3600;              // o edital não informa a duração: 4 horas como referência
+const ALLK = Object.keys(MAT);
+const MAXPTS = ALLK.reduce((t,k)=>t+MAT[k].sim*MAT[k].w, 0);   // 130
+const fresh = () => ({q:{}, m:{}, att:[], sim:null});
+let S = fresh();
+try{ const r = localStorage.getItem(KEY); if(r) S = Object.assign(fresh(), JSON.parse(r)); }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function note(msg){ const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(note.t); note.t = setTimeout(()=>{ t.hidden = true; }, 2600); }
+function record(id, ok){
+  const q = QM[id]; if(!q) return;
+  const r = S.q[id] = S.q[id] || {ok:0,n:0,last:null}; r.n++; if(ok) r.ok++; r.last = ok;
+  const m = S.m[q.m] = S.m[q.m] || {ok:0,n:0}; m.n++; if(ok) m.ok++;
+}
+const poolBy = m => m==='all' ? QB : m==='erros' ? QB.filter(q=>S.q[q.id] && S.q[q.id].last===false) : QB.filter(q=>q.m===m);
+let P = null;   // treino
+let R = null;   // simulado em revisão
+
+/* ===== Questão de múltipla escolha ===== */
+function qHTML(q, n, mode, sel){
+  const show = mode==='rev' || (mode==='fb' && P && P.done);
+  let h = `<div class="qhead"><span class="qn">${n?'Questão '+n:'Questão'}</span><span class="qm">${esc(MAT[q.m].n)}</span></div>`;
+  h += `<p class="enun">${esc(q.e)}</p><div class="alts">`;
+  q.a.forEach((t,i)=>{
+    let c = 'alt';
+    if(mode==='sim' && sel===i) c += ' sel';
+    if(show){ if(i===q.g) c += ' ok'; else if(i===sel) c += ' bad'; else c += ' dim'; }
+    h += `<button class="${c}" data-act="pick" data-i="${i}" data-q="${q.id}"${show?' data-lock':''} aria-pressed="${sel===i}"><span class="bub">${L[i]}</span><span class="t">${esc(t)}</span></button>`;
+  });
+  h += '</div>';
+  if(show){
+    const cls = sel===q.g ? 'good' : sel==null ? 'none' : 'wrong';
+    const ttl = sel===q.g ? 'Correto.' : sel==null ? `Sem resposta. Gabarito: ${L[q.g]}.` : `Você marcou ${L[sel]}. Gabarito: ${L[q.g]}.`;
+    h += `<div class="fb ${cls}"><b>${ttl}</b>${esc(q.x||'')}</div>`;
+  }
+  return h;
+}
+function bars(by, keys){
+  return `<div class="bars">${keys.map(k=>{ const b = by[k]||{ok:0,n:0}, p = pct(b.ok,b.n); return `<div class="bar"><div class="h"><span>${esc(MAT[k].n)}</span><span>${b.ok}/${b.n} · ${p}%</span></div><div class="track"><div class="fill${p<50?' low':''}" style="width:${p}%"></div></div></div>`; }).join('')}</div>`;
+}
+
+/* ===== Telas ===== */
+function vHome(){
+  const tot = Object.values(S.m).reduce((a,m)=>({ok:a.ok+m.ok,n:a.n+m.n}), {ok:0,n:0});
+  const rows = ALLK.map(k=>`<tr><td>${esc(MAT[k].n)}</td><td class="num">${MAT[k].sim}</td><td class="num">${MAT[k].w}</td><td class="num">${MAT[k].sim*MAT[k].w}</td></tr>`).join('');
+  return `
+  <section class="hero">
+    <div>
+      <p class="eyebrow">IPAM · Porto Velho · Edital 001/2026 · IBADE</p>
+      <h1 style="margin-top:10px">Técnico Autárquico – Administrativa</h1>
+      <p class="lead">Nível médio, 30 vagas, vencimento de R$ 3.000,00. Prova objetiva em 21/02/2027, com 80 questões de 5 alternativas.</p>
+    </div>
+    <div class="count">
+      <div class="big">${QB.length}</div>
+      <div class="lbl">questões</div>
+      <div class="sub">${tot.n ? `${pct(tot.ok,tot.n)}% de acerto nas ${tot.n} respostas já dadas.` : 'Comece por um treino ou por um simulado.'}</div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Como é a prova (nível médio)</h2>
+    <div class="card tbl-wrap" style="padding:8px 10px 6px">
+      <table class="tbl"><thead><tr><th>Disciplina</th><th class="num">Quest.</th><th class="num">Peso</th><th class="num">Pontos</th></tr></thead><tbody>${rows}
+      <tr><td><b>Total</b></td><td class="num"><b>80</b></td><td class="num">—</td><td class="num"><b>${MAXPTS}</b></td></tr></tbody></table>
+    </div>
+    <p class="muted" style="margin-top:10px;font-size:15px">É eliminado quem não obtiver pelo menos 50% dos pontos (${MAXPTS/2} de ${MAXPTS}), quem zerar qualquer disciplina e quem ficar fora da colocação mínima do cargo (195º na ampla concorrência para Técnico Autárquico – Administrativa). Não há desconto por erro.</p>
+  </section>
+
+  <section class="sec">
+    <h2>Por onde começar</h2>
+    <div class="acts">
+      <a class="act" href="#estudar"><b>Estudar por matéria</b><span>O que o edital pede em cada disciplina, com dicas do que reforçar.</span></a>
+      <a class="act" href="#treino"><b>Treino</b><span>Responda por disciplina e veja a explicação na hora.</span></a>
+      <a class="act" href="#simulado"><b>Simulado</b><span>80 questões no formato da prova, com cronômetro e nota ponderada.</span></a>
+      <a class="act" href="#desempenho"><b>Desempenho</b><span>Acerto por disciplina e histórico dos simulados.</span></a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="note"><b>O que este material cobre e o que não cobre</b>
+    São questões originais, no estilo do IBADE, feitas a partir do Anexo III do edital. Não são cópias de provas. As leis municipais (LC 385, 404, 841, 866, 870 e 886) aparecem só no que o edital informa sobre elas; o texto das leis não está aqui, então leia-as direto. O cargo de Técnico Autárquico – Informática tem Conhecimentos Específicos diferentes e ainda não está neste app. O edital não informa a duração da prova; o simulado usa 4 horas como referência. Confirme tudo no edital e na convocação.</div>
+  </section>`;
+}
+
+function vTrain(){
+  if(P) return P.end ? vTrainEnd() : vPractice();
+  const nErr = poolBy('erros').length;
+  return `
+  <p class="eyebrow">Treino</p>
+  <h1 style="margin:8px 0 8px">Escolha o que estudar</h1>
+  <p class="muted" style="margin-bottom:18px;max-width:62ch">Você vê a correção e a explicação logo depois de cada resposta.</p>
+  <div class="picker">
+    <button class="act" data-act="trainStart" data-m="all"><b>Misto</b><span>15 questões sorteadas de todas as disciplinas</span></button>
+    <button class="act" data-act="trainStart" data-m="erros"${nErr?'':' disabled'}><b>Meus erros${nErr?` (${nErr})`:''}</b><span>${nErr?'Questões em que sua última resposta foi errada':'Nenhum erro registrado ainda'}</span></button>
+  </div>
+  <h2 style="margin:26px 0 12px">Por disciplina</h2>
+  <div class="picker">${ALLK.map(k=>{ const m = S.m[k]||{ok:0,n:0}; return `<button class="act" data-act="trainStart" data-m="${k}"><b>${esc(MAT[k].n)}</b><span>${poolBy(k).length} questões${m.n?` · ${pct(m.ok,m.n)}% de acerto`:''}</span></button>`; }).join('')}</div>`;
+}
+function vPractice(){
+  const q = QM[P.ids[P.i]], n = P.ids.length, last = P.i===n-1;
+  return `
+  <p class="eyebrow">${esc(P.title)} · questão ${P.i+1} de ${n}</p>
+  <section class="card" style="margin-top:12px">
+    ${qHTML(q, P.i+1, 'fb', P.sel)}
+    <div class="qnav">
+      <button class="btn" data-act="trainExit">Sair do treino</button>
+      ${P.done ? `<button class="btn pri" data-act="trainNext">${last?'Ver resumo':'Próxima →'}</button>` : ''}
+    </div>
+  </section>`;
+}
+function vTrainEnd(){
+  const ok = P.res.filter(Boolean).length, n = P.ids.length;
+  return `
+  <p class="eyebrow">Fim do treino · ${esc(P.title)}</p>
+  <div class="score" style="margin:10px 0 6px"><span class="n">${ok}</span><span class="of">/ ${n} acertos (${pct(ok,n)}%)</span></div>
+  <div class="row" style="margin:20px 0"><button class="btn pri" data-act="trainStart" data-m="${esc(P.m)}">Treinar de novo</button><button class="btn" data-act="trainExit">Voltar</button></div>`;
+}
+
+function mkSim(){
+  const ids = [];
+  ALLK.forEach(k=>{ shuffle(QB.filter(q=>q.m===k).map(q=>q.id)).slice(0, MAT[k].sim).forEach(id=>ids.push(id)); });
+  return {start:Date.now(), ids, ans:{}, cur:0, confirm:false};
+}
+function simScore(ids, ans){
+  const by = {}; let pts = 0, ok = 0, max = 0;
+  ids.forEach(id=>{
+    const q = QM[id], w = MAT[q.m].w, m = by[q.m] = by[q.m] || {ok:0,n:0,pts:0,max:0};
+    m.n++; m.max += w; max += w;
+    if(ans[id]===q.g){ m.ok++; m.pts += w; pts += w; ok++; }
+  });
+  return {pts, ok, max, by};
+}
+function vSim(){
+  if(R!=null && S.att[R]) return vResult(S.att[R]);
+  if(!S.sim){
+    const last = S.att.slice(-3).reverse();
+    return `
+    <p class="eyebrow">Simulado</p>
+    <h1 style="margin:8px 0 14px">80 questões, ${MAXPTS} pontos</h1>
+    <p class="muted" style="max-width:62ch;margin-bottom:22px">Segue a distribuição do edital: Português 10, Raciocínio 5, Informática 5, Administração Pública 5, Legislação 5 e Conhecimentos Específicos 50 (peso 2). Não há desconto por erro. A correção só aparece no fim. O edital não informa a duração, e o cronômetro usa 4 horas. Se sair da página, o tempo continua correndo.</p>
+    <button class="btn pri" data-act="startSim">Iniciar simulado</button>
+    ${last.length ? `<div class="sec"><h2>Últimos simulados</h2><div class="hist">${last.map(histRow).join('')}</div></div>` : ''}`;
+  }
+  const s = S.sim, i = s.cur, ids = s.ids, N = ids.length, q = QM[ids[i]];
+  const left = Math.max(0, DUR - Math.floor((Date.now()-s.start)/1000));
+  const answered = ids.filter(id=>s.ans[id]!=null).length;
+  const grid = ids.map((id,k)=>`<button class="${s.ans[id]!=null?'a ':''}${k===i?'c':''}" data-act="goto" data-n="${k}" aria-label="Questão ${k+1}${s.ans[id]!=null?', respondida':''}">${k+1}</button>`).join('');
+  const conf = s.confirm ? `<div class="confirm"><p><b>Finalizar agora?</b> Você respondeu ${answered} de ${N} questões. As sem resposta valem zero.</p><div class="row"><button class="btn" data-act="cancelFinish">Continuar</button><button class="btn pri" data-act="finishSim">Finalizar</button></div></div>` : '';
+  return `
+  <div class="simbar">
+    <div class="timer"><small>Tempo restante</small><b id="timer">${fmtT(left)}</b></div>
+    <div class="prog"><b>${answered}</b> de ${N} respondidas</div>
+    <button class="btn" data-act="askFinish">Finalizar</button>
+  </div>
+  <div class="simwrap">
+    <section class="card">
+      ${qHTML(q, i+1, 'sim', s.ans[q.id]==null?null:s.ans[q.id])}
+      <p class="muted" style="font-size:14px;margin-top:12px">Toque de novo na alternativa marcada para limpar a resposta.</p>
+      <div class="qnav">
+        <button class="btn" data-act="prev" ${i===0?'disabled':''}>← Anterior</button>
+        <button class="btn pri" data-act="next" ${i===N-1?'disabled':''}>Próxima →</button>
+      </div>
+      ${conf}
+    </section>
+    <aside class="side card">
+      <h3 style="margin-bottom:12px">Cartão de respostas</h3>
+      <div class="navgrid">${grid}</div>
+      <div class="legend"><span><i class="a"></i>respondida</span></div>
+    </aside>
+  </div>`;
+}
+function histRow(a){
+  const k = S.att.indexOf(a);
+  return `<div class="li"><div><b class="mono">${a.pts}</b><span class="muted mono"> / ${a.max}</span><div class="muted" style="font-size:14px">${new Date(a.d).toLocaleDateString('pt-BR')} · ${a.ok} de ${a.n} acertos</div></div><button class="btn sm" data-act="review" data-k="${k}">Ver correção</button></div>`;
+}
+function vResult(a){
+  const items = a.ids.map((id,i)=>{
+    const q = QM[id], sel = a.ans[id]==null ? null : a.ans[id];
+    const tag = sel==null ? '<span class="tag none">sem resposta</span>' : sel===q.g ? '<span class="tag ok">acertou</span>' : '<span class="tag bad">errou</span>';
+    return `<details class="r"><summary><b class="mono">${i+1}</b> ${tag}<span class="muted" style="font-size:14px">${esc(MAT[q.m].n)}</span></summary><div class="body">${qHTML(q, i+1, 'rev', sel)}</div></details>`;
+  }).join('');
+  const rows = ALLK.filter(k=>a.by[k]).map(k=>{ const m = a.by[k]; return `<tr><td>${esc(MAT[k].n)}</td><td class="num">${m.ok}/${m.n}</td><td class="num"><b>${m.pts}</b>/${m.max}</td></tr>`; }).join('');
+  const zero = ALLK.filter(k=>a.by[k] && a.by[k].pts===0);
+  const okmin = a.pts >= a.max/2;
+  return `
+  <p class="eyebrow">Resultado do simulado · ${new Date(a.d).toLocaleDateString('pt-BR')}</p>
+  <div class="score" style="margin:10px 0 6px"><span class="n">${a.pts}</span><span class="of">/ ${a.max} pontos</span></div>
+  <p class="muted">${a.ok} acertos em ${a.n} questões. ${okmin ? 'Você passou de 50% dos pontos, o mínimo do edital.' : 'Abaixo de 50% dos pontos, o mínimo do edital.'}${zero.length ? ' Atenção: nota zero em '+zero.map(k=>esc(MAT[k].n)).join(', ')+' elimina o candidato.' : ''}</p>
+  <div class="row" style="margin:20px 0 26px"><button class="btn pri" data-act="startSim">Novo simulado</button><a class="btn" href="#treino">Treinar meus erros</a><button class="btn" data-act="closeResult">Fechar</button></div>
+  <section class="card tbl-wrap" style="padding:8px 6px 6px"><table class="tbl" style="font-size:14px"><thead><tr><th>Disciplina</th><th class="num">Acertos</th><th class="num">Pontos</th></tr></thead><tbody>${rows}</tbody></table></section>
+  <section class="sec"><h2>Revisão questão por questão</h2><div class="rev">${items}</div></section>`;
+}
+function finishSim(silent){
+  const s = S.sim; if(!s) return;
+  const sc = simScore(s.ids, s.ans);
+  s.ids.forEach(id=>{ if(s.ans[id]!=null) record(id, s.ans[id]===QM[id].g); });
+  S.att.push({d:Date.now(), n:s.ids.length, ids:s.ids, ans:s.ans, ok:sc.ok, pts:sc.pts, max:sc.max, by:sc.by});
+  S.sim = null; save(); R = S.att.length-1;
+  if(location.hash!=='#simulado') location.hash = '#simulado'; else render();
+  if(silent) note('O tempo acabou. Simulado finalizado.');
+}
+
+function vEstudar(){
+  const cards = ALLK.map(k=>{ const e = EST[k]; return `<details class="card" style="margin-bottom:12px"><summary style="cursor:pointer;font-weight:600;font-size:17px">${esc(MAT[k].n)} <span class="muted mono" style="font-size:13px">· ${MAT[k].sim} questões${MAT[k].w>1?' (peso '+MAT[k].w+')':''} · ${poolBy(k).length} no banco</span></summary>
+    <div class="stack-s" style="margin-top:12px"><p><span class="eyebrow">O que o edital pede</span><br>${esc(e.ed)}</p>
+    <div><span class="eyebrow">O que vale reforçar</span><ul style="margin:6px 0 0;padding-left:20px">${e.dica.map(d=>`<li style="margin-bottom:4px">${esc(d)}</li>`).join('')}</ul></div>
+    <div><button class="btn pri sm" data-act="trainStart" data-m="${k}">Treinar esta disciplina</button></div></div></details>`; }).join('');
+  return `
+  <p class="eyebrow">Estudar</p>
+  <h1 style="margin:8px 0 8px">O que cai em cada disciplina</h1>
+  <p class="muted" style="max-width:62ch;margin-bottom:22px">Resumo do Anexo III do Edital 001/2026 (nível médio), com dicas de revisão. Não substitui a leitura das leis. A legislação citada vale com as atualizações até a data de publicação do edital (28/10/2026).</p>
+  ${cards}`;
+}
+let askReset = false;
+function vStats(){
+  const keys = ALLK.filter(k=>S.m[k] && S.m[k].n);
+  const cand = keys.filter(k=>S.m[k].n>=3).sort((a,b)=>pct(S.m[a].ok,S.m[a].n)-pct(S.m[b].ok,S.m[b].n));
+  const weak = cand.length ? `<p style="margin-top:16px">Ponto mais fraco até agora: <b>${esc(MAT[cand[0]].n)}</b>, com ${pct(S.m[cand[0]].ok,S.m[cand[0]].n)}% de acerto.</p>` : '';
+  return `
+  <p class="eyebrow">Desempenho</p>
+  <h1 style="margin:8px 0 22px">Como você está indo</h1>
+  ${keys.length ? `<section class="card"><h2 style="margin-bottom:16px">Acerto por disciplina</h2>${bars(S.m, ALLK)}${weak}</section>` : '<div class="empty">Ainda não há respostas registradas. Faça um treino ou um simulado.</div>'}
+  <section class="sec"><h2>Simulados feitos</h2>${S.att.length ? `<div class="hist">${S.att.slice().reverse().map(histRow).join('')}</div>` : '<p class="muted">Nenhum simulado completo ainda.</p>'}</section>
+  <section class="sec">${askReset ? `<div class="confirm"><p><b>Apagar todo o progresso?</b> Respostas e simulados deste navegador serão removidos.</p><div class="row"><button class="btn" data-act="resetNo">Cancelar</button><button class="btn danger" data-act="resetYes">Apagar tudo</button></div></div>` : '<button class="btn" data-act="resetAsk">Apagar meu progresso</button>'}
+  <p class="muted" style="font-size:14px;margin-top:10px">O progresso fica salvo só neste navegador e neste aparelho.</p></section>`;
+}
+
+/* ===== Ações ===== */
+const ACT = {
+  pick(el){
+    const id = el.dataset.q, v = +el.dataset.i;
+    if(view==='simulado' && S.sim){ S.sim.ans[id] = (S.sim.ans[id]===v) ? null : v; save(); render(); return; }
+    if(P && !P.done){ P.sel = v; P.done = true; const ok = v===QM[id].g; P.res[P.i] = ok; record(id, ok); save(); render(); }
+  },
+  trainStart(el){
+    const m = el.dataset.m; let ids = shuffle(poolBy(m).map(q=>q.id));
+    if(m==='all') ids = ids.slice(0,15);
+    if(!ids.length){ note('Não há questões para esta escolha.'); return; }
+    if(m!=='all' && m!=='erros') ids = ids.slice(0,20);
+    const title = m==='all' ? 'Treino misto' : m==='erros' ? 'Meus erros' : 'Treino · '+MAT[m].n;
+    P = {m, title, ids, i:0, sel:null, done:false, res:[], end:false};
+    if(location.hash!=='#treino') location.hash = '#treino'; else render();
+    window.scrollTo(0,0);
+  },
+  trainNext(){ if(P.i>=P.ids.length-1){ P.end = true; } else { P.i++; P.sel = null; P.done = false; } render(); window.scrollTo(0,0); },
+  trainExit(){ P = null; render(); window.scrollTo(0,0); },
+  startSim(){ S.sim = mkSim(); R = null; save(); if(location.hash!=='#simulado') location.hash = '#simulado'; else render(); window.scrollTo(0,0); },
+  goto(el){ S.sim.cur = +el.dataset.n; S.sim.confirm = false; save(); render(); window.scrollTo(0,0); },
+  prev(){ if(S.sim.cur>0){ S.sim.cur--; save(); render(); window.scrollTo(0,0); } },
+  next(){ if(S.sim.cur<S.sim.ids.length-1){ S.sim.cur++; save(); render(); window.scrollTo(0,0); } },
+  askFinish(){ S.sim.confirm = true; render(); },
+  cancelFinish(){ S.sim.confirm = false; render(); },
+  finishSim(){ finishSim(); },
+  review(el){ R = +el.dataset.k; if(location.hash!=='#simulado') location.hash = '#simulado'; else render(); window.scrollTo(0,0); },
+  closeResult(){ R = null; render(); window.scrollTo(0,0); },
+  resetAsk(){ askReset = true; render(); }, resetNo(){ askReset = false; render(); },
+  resetYes(){ S = fresh(); save(); askReset = false; P = null; R = null; render(); note('Progresso apagado.'); },
+  theme(){ THEME = THEME==='auto' ? 'light' : THEME==='light' ? 'dark' : 'auto'; try{ if(THEME==='auto') localStorage.removeItem(THEME_KEY); else localStorage.setItem(THEME_KEY, THEME); }catch(e){} paintTheme(); }
+};
+document.addEventListener('click', e=>{
+  const el = e.target.closest('[data-act]'); if(!el || el.hasAttribute('data-lock') || el.disabled) return;
+  const f = ACT[el.dataset.act]; if(f) f(el);
+});
+
+/* ===== Menu lateral ===== */
+function menuToggle(open){
+  const b = document.body; open = (open===undefined) ? !b.classList.contains('menu-open') : open;
+  b.classList.toggle('menu-open', open);
+  const sc = document.getElementById('scrim'); if(sc) sc.hidden = !open;
+  const mo = document.getElementById('menu-open'); if(mo) mo.setAttribute('aria-expanded', open ? 'true' : 'false');
+  const m = document.getElementById('menu'); if(m){ if(open){ const a = m.querySelector('a[aria-current=page]') || m.querySelector('a'); if(a) a.focus(); } else if(mo) mo.focus(); }
+}
+document.addEventListener('click', e=>{
+  if(e.target.closest('[data-act=menu]')){ menuToggle(); return; }
+  if(e.target.closest('#menu a') && document.body.classList.contains('menu-open')){ menuToggle(false); }
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && document.body.classList.contains('menu-open')) menuToggle(false); });
+
+/* ===== Tema ===== */
+const THEME_KEY = 'gabarito-tema';
+const THEMES = {
+  auto:{n:'Automático', ic:'<circle cx="12" cy="12" r="9"/><path d="M12 3v18" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/>'},
+  light:{n:'Claro', ic:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'},
+  dark:{n:'Escuro', ic:'<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>'}
+};
+let THEME = 'auto';
+try{ const t = localStorage.getItem(THEME_KEY); if(t==='light'||t==='dark') THEME = t; }catch(e){}
+function paintTheme(){
+  const r = document.documentElement;
+  if(THEME==='auto') r.removeAttribute('data-theme'); else r.setAttribute('data-theme', THEME);
+  const b = document.getElementById('theme'); if(!b) return;
+  const nxt = THEME==='auto' ? 'light' : THEME==='light' ? 'dark' : 'auto';
+  b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">'+THEMES[THEME].ic+'</svg><span>'+THEMES[THEME].n+'</span>';
+  b.setAttribute('aria-label','Tema: '+THEMES[THEME].n+'. Tocar para mudar para '+THEMES[nxt].n.toLowerCase()+'.');
+  b.title = 'Tema: '+THEMES[THEME].n;
+}
+paintTheme();
+
+/* ===== Roteamento ===== */
+const VIEWS = {inicio:vHome, treino:vTrain, simulado:vSim, estudar:vEstudar, desempenho:vStats};
+let view = 'inicio';
+function render(){
+  document.querySelectorAll('.tabs a[data-v]').forEach(a=>{ if(a.dataset.v===view) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  $('#root').innerHTML = VIEWS[view]();
+}
+function route(){
+  const h = (location.hash||'#inicio').slice(1);
+  const nv = VIEWS[h] ? h : 'inicio';
+  if(nv!==view){ askReset = false; if(nv!=='simulado') R = null; if(nv!=='treino') P = null; }
+  view = nv; render(); window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', route);
+setInterval(()=>{
+  if(view!=='simulado' || !S.sim || R!=null) return;
+  const left = DUR - Math.floor((Date.now()-S.sim.start)/1000);
+  if(left<=0){ finishSim(true); return; }
+  const el = $('#timer'); if(el) el.textContent = fmtT(left);
+}, 1000);
+if(S.sim && Date.now()-S.sim.start >= DUR*1000) finishSim(true); else route();
+
+</script>
+</body>
+</html>
